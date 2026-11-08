@@ -1,0 +1,3360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>考研英语大作文 · 逐句拼装模板（AI归来 27版）</title>
+<style>
+
+/* ===== 大作文模板 · 单文件交互版 ===== */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+:root{
+  --ink:#1b2a41; --ink2:#33475f; --paper:#fbf9f5; --line:#e3ddd2;
+  --accent:#0f6b5c; --accent2:#128a76; --gold:#b7791f; --red:#b4342b;
+  --slot:#eef6f4; --slotb:#9ccdc2; --filled:#e7f3ef;
+  --shadow:0 1px 2px rgba(27,42,65,.06),0 8px 24px rgba(27,42,65,.08);
+  --mono:"Cascadia Mono",Consolas,monospace;
+  --serif:Georgia,"Times New Roman",serif;
+}
+body{
+  font:14px/1.65 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:var(--ink); background:
+    radial-gradient(1200px 600px at 10% -10%,#f2efe6 0%,transparent 60%),
+    radial-gradient(900px 500px at 100% 0%,#eaf2ef 0%,transparent 55%),
+    var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+/* ---------- 顶栏 ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(251,249,245,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1480px;margin:0 auto;padding:10px 18px 8px}
+.brand{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand h1{font-size:16px;margin:0;letter-spacing:.4px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(15,107,92,.12)}
+.brand .sub{font-size:12px;color:#6b7a8d;letter-spacing:.2px}
+.brand .spacer{flex:1}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.mode-btn{border:1px solid var(--line);background:#fff;color:var(--ink2);
+  padding:5px 11px;border-radius:999px;font-size:12.5px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.mode-btn:hover{border-color:var(--accent);color:var(--accent)}
+.mode-btn .tag{font-size:10px;color:#8a97a6;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.mode-btn.on{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 4px 12px rgba(27,42,65,.22)}
+.mode-btn.on .tag{color:#c9d4e0;border-color:#4a5b70}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;
+  font-size:12.5px;color:var(--ink2)}
+.tb-group{display:flex;align-items:center;gap:6px}
+.tb-group>label{color:#7b8794;font-size:12px}
+select,input[type=text],input[type=search]{
+  font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);
+  border-radius:7px;padding:5px 8px;outline:none}
+select:focus,input:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(18,138,118,.12)}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink2);border-radius:7px;
+  padding:5px 10px;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent2);color:#fff}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.switch{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none;
+  border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px 4px 6px}
+.switch input{display:none}
+.switch i{width:14px;height:14px;border-radius:50%;background:#cbd3dd;position:relative;transition:.18s;display:inline-block}
+.switch input:checked+i{background:var(--accent2);box-shadow:inset 0 0 0 3px #fff}
+.switch span{font-size:12px}
+.switch input:checked~span{color:var(--accent)}
+/* ---------- 布局 ---------- */
+.layout{max-width:1480px;margin:0 auto;padding:16px 18px 80px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:18px;align-items:start}
+@media (max-width:1080px){.layout{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.panel-h{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);
+  background:#fff;border-radius:14px 14px 0 0;z-index:12}
+.panel-h h2{margin:0;font-size:13.5px;letter-spacing:.5px}
+.panel-h .meta{font-size:12px;color:#7b8794}
+.panel-h .spacer{flex:1}
+/* ---------- 建造区 ---------- */
+.builder{padding:6px 0 14px}
+.para-h{display:flex;align-items:center;gap:8px;padding:12px 16px 4px}
+.para-h .pill{font-size:11.5px;background:var(--ink);color:#fff;border-radius:999px;padding:2px 9px;letter-spacing:.5px}
+.para-h .tip{font-size:12px;color:#7b8794}
+.card{margin:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;
+  transition:.15s;overflow:hidden}
+.card:hover{border-color:#cfd8e3}
+.card.off{opacity:.5}
+.card-h{display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fcfbf8;border-bottom:1px solid transparent;cursor:default}
+.card.open .card-h{border-bottom-color:var(--line)}
+.card-h .no{width:22px;height:22px;border-radius:7px;background:var(--ink);color:#fff;font-size:11.5px;
+  display:grid;place-items:center;flex:none;font-family:var(--mono)}
+.card-h .ttl{font-size:13px;font-weight:600;letter-spacing:.3px}
+.card-h .hint{font-size:11.5px;color:#8a97a6;font-weight:400}
+.card-h .spacer{flex:1}
+.card-h .count{font-size:11px;color:#8a97a6;font-family:var(--mono)}
+.mini{border:1px solid var(--line);background:#fff;border-radius:6px;font-size:11.5px;
+  color:#6b7a8d;padding:2px 7px;cursor:pointer}
+.mini:hover{color:var(--accent);border-color:var(--accent)}
+.card-b{padding:10px 12px 12px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.ctl select{font-size:12.5px;max-width:100%}
+.ctl .lab{font-size:11.5px;color:#7b8794}
+.sent{font-family:var(--serif);font-size:16.5px;line-height:1.95;color:#1c2836;
+  background:#fffdf8;border:1px dashed #e6dfd2;border-radius:9px;padding:10px 12px;word-break:break-word}
+.slot{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:12.5px;
+  border-radius:6px;padding:1px 6px;margin:0 1px;cursor:pointer;border:1px dashed var(--slotb);
+  background:var(--slot);color:#2a6b60;transition:.12s;display:inline;white-space:normal}
+.slot:hover{background:#dcefe9;border-color:var(--accent2)}
+.slot.empty{color:#8b6d3a;border-color:#d8c294;background:#fdf6e6}
+.slot.empty:hover{background:#fbeecf}
+.slot.on{background:var(--filled);border-style:solid;border-color:#8bc7b8;color:#0f5a4d;font-weight:600}
+.note{font-size:12px;color:#7b8794;margin-top:8px;line-height:1.6;border-left:2px solid #e6dfd2;padding-left:8px}
+.zh-line{font-size:12.5px;color:#6b7a8d;margin-top:6px;line-height:1.6}
+/* ---------- 预览 ---------- */
+.preview{position:sticky;top:calc(var(--topH,120px) + 12px);max-height:calc(100vh - var(--topH,120px) - 28px);
+  display:flex;flex-direction:column}
+@media (max-width:1080px){.preview{position:static;max-height:none}}
+.preview .panel-b{overflow:auto;padding:4px 0 10px}
+.paper{padding:14px 16px 6px}
+.para{margin-bottom:6px;padding-bottom:10px;border-bottom:1px dashed #ece6da}
+.para:last-child{border-bottom:none}
+.para-t{font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;
+  display:flex;align-items:center;gap:8px}
+.para-t .spacer{flex:1}
+.para-t .wc{color:#9aa5b1;letter-spacing:0;text-transform:none;font-size:11px}
+.en{font-family:var(--serif);font-size:16px;line-height:1.9;color:#16202c;text-align:justify;white-space:pre-wrap}
+.en .ph{color:#b4342b;background:#fbeeec;border-radius:4px;padding:0 4px;font-size:12.5px;
+  font-family:-apple-system,"PingFang SC",sans-serif}
+.zh{font-size:12.5px;color:#7b8794;line-height:1.7;margin-top:5px;padding-left:2px}
+.zh .ph{color:#b4342b}
+.empty-tip{color:#a6b0bb;font-size:13px;padding:20px 6px;text-align:center}
+.tagline{font-size:11px;color:#9aa5b1;padding:0 16px 10px}
+/* ---------- 槽位面板 ---------- */
+.mask{position:fixed;inset:0;background:rgba(20,28,40,.28);z-index:60;display:none}
+.mask.on{display:block}
+.pop{position:fixed;z-index:70;width:420px;max-width:calc(100vw - 24px);max-height:min(70vh,560px);
+  background:#fff;border:1px solid #d8e0ea;border-radius:14px;box-shadow:0 20px 50px rgba(20,28,40,.24);
+  display:none;flex-direction:column;overflow:hidden}
+.pop.on{display:flex}
+.pop.wide{width:680px;max-height:min(82vh,660px);left:50%!important;top:50%!important;transform:translate(-50%,-50%)}
+.h-sec{padding:10px 14px;border-bottom:1px dashed #ece6da}
+.h-sec:last-child{border-bottom:none}
+.h-sec h3{margin:0 0 6px;font-size:13px;color:var(--ink);letter-spacing:.5px}
+.h-sec p,.h-sec li{font-size:12.5px;color:#5c6b7a;line-height:1.75;margin:3px 0}
+.h-sec ul{margin:4px 0;padding-left:18px}
+.h-sec table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
+.h-sec th,.h-sec td{border:1px solid #ece6da;padding:3px 6px;text-align:center;color:#5c6b7a}
+.h-sec th{background:#faf8f3;color:var(--ink2)}
+.h-sec b{color:var(--accent)}
+.pop-h{padding:10px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.pop-h .t{font-size:13px;font-weight:600}
+.pop-h .l{font-size:11.5px;color:#8a97a6}
+.pop-h .x{margin-left:auto;border:none;background:transparent;font-size:18px;color:#9aa5b1;cursor:pointer;line-height:1}
+.pop-in{padding:8px 12px;border-bottom:1px solid var(--line);display:flex;gap:6px}
+.pop-in input{flex:1;font-size:13px}
+.pop-list{overflow:auto;padding:6px 6px 10px}
+.pop-g{font-size:11px;color:var(--gold);letter-spacing:1px;padding:8px 8px 3px}
+.opt{display:block;width:100%;text-align:left;border:1px solid transparent;background:transparent;
+  border-radius:8px;padding:6px 8px;cursor:pointer;font-size:13px}
+.opt:hover{background:#f2f8f6;border-color:#d5e9e3}
+.opt.sel{background:#e7f3ef;border-color:#8bc7b8}
+.opt .e{font-family:var(--serif);font-size:14.5px;color:#16202c;display:block}
+.opt .z{font-size:11.5px;color:#7b8794;display:block;margin-top:1px}
+.pop-f{padding:8px 12px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:space-between;background:#fcfbf8}
+kbd{font-family:var(--mono);font-size:11px;border:1px solid #d5dde5;border-bottom-width:2px;
+  border-radius:4px;padding:0 4px;background:#fff;color:#5a6b7d}
+/* ---------- 状态条 ---------- */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;
+  padding:9px 16px;border-radius:999px;font-size:12.5px;opacity:0;pointer-events:none;transition:.25s;z-index:90}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* ---------- 考场精简 / 打印 ---------- */
+body.exam .card .note,body.exam .card .zh-line,body.exam .card .hint{display:none}
+body.exam .card{margin:6px 12px}
+body.exam .sent{font-size:15.5px;line-height:1.8;padding:8px 10px}
+body.exam .zh{display:none}
+body.exam .en{font-size:15.5px;line-height:1.85}
+body.exam .tagline{display:none}
+@media print{
+  .top,.builder,.toast,.pop,.mask{display:none!important}
+  .layout{display:block;padding:0}
+  .preview{position:static;max-height:none;border:none;box-shadow:none}
+  .en{font-size:12pt}
+}
+/* 滚动条 */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#d7dee6;border-radius:8px;border:3px solid #fff}
+::-webkit-scrollbar-thumb:hover{background:#c3ccd6}
+
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <span class="dot"></span>
+      <h1>大作文 · 逐句拼装模板</h1>
+      <span class="sub">AI归来 27版讲义｜图表 / 双图表 / 图画 / 图画+图表 / 文字 · 10 句成篇</span>
+      <span class="spacer"></span>
+      <span class="sub" id="stat">—</span>
+    </div>
+    <div class="modes" id="modes"></div>
+    <div class="toolbar">
+      <div class="tb-group">
+        <label for="preset">真题预设</label>
+        <select id="preset" style="max-width:260px"></select>
+      </div>
+      <div class="tb-group">
+        <label class="switch" title="预览区显示每句中文译文"><input type="checkbox" id="tZh" checked><i></i><span>中英对照</span></label>
+        <label class="switch" title="隐藏注释、只留英文，模拟考场默写"><input type="checkbox" id="tExam"><i></i><span>考场精简</span></label>
+        <label class="switch" title="自动处理主谓一致、句首大写、逗号后小写"><input type="checkbox" id="tPolish" checked><i></i><span>英文自动细节</span></label>
+        <label class="switch" title="显示每个用法的适用语境说明"><input type="checkbox" id="tNote" checked><i></i><span>注释</span></label>
+        <label class="switch" title="预览区标出每句用了哪个待选句/公式（讲义套用标注）"><input type="checkbox" id="tTag"><i></i><span>套用标注</span></label>
+      </div>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn" id="help" title="讲义要点：大纲、时间分配、学习路径">讲义要点</button>
+      <button class="btn" id="undo" title="Ctrl+Z">↶ 撤销</button>
+      <button class="btn" id="clear">清空槽位</button>
+      <button class="btn primary" id="copy">复制全文</button>
+    </div>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel">
+    <div class="panel-h">
+      <h2>逐句拼装</h2>
+      <span class="meta" id="modeDesc"></span>
+      <span class="spacer"></span>
+      <span class="meta">点击 <span style="color:#8b6d3a">【金色】</span> 槽位填词 · 下拉切换句型方案</span>
+    </div>
+    <div class="builder" id="builder"></div>
+  </section>
+
+  <aside class="panel preview">
+    <div class="panel-h">
+      <h2>全文预览</h2>
+      <span class="meta" id="wc">0 词</span>
+      <span class="spacer"></span>
+      <button class="mini" id="copy2">复制</button>
+    </div>
+    <div class="panel-b"><div class="paper" id="paper"></div></div>
+    <div class="tagline">英一 160–200 词 / 英二约 150 词；蓝色【】为未填槽位。</div>
+  </aside>
+</main>
+
+<div class="mask" id="mask"></div>
+<div class="pop" id="pop" role="dialog" aria-label="词库">
+  <div class="pop-h">
+    <span class="t" id="popTitle">词库</span>
+    <span class="l" id="popHint"></span>
+    <button class="x" id="popX" aria-label="关闭">×</button>
+  </div>
+  <div class="pop-in">
+    <input type="text" id="popInput" placeholder="输入自定义内容，回车确定">
+    <button class="btn" id="popSet">确定</button>
+  </div>
+  <div class="pop-list" id="popList"></div>
+  <div class="pop-f">
+    <span style="font-size:11.5px;color:#8a97a6">Esc 关闭 · ↑↓ 选择 · Enter 确认</span>
+    <button class="btn" id="popClear">清空此槽</button>
+  </div>
+</div>
+<div class="pop wide" id="helpPop" role="dialog" aria-label="讲义要点">
+  <div class="pop-h"><span class="t">讲义要点 · 一页速查</span><button class="x" id="helpX">×</button></div>
+  <div class="pop-list" id="helpBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==== data_banks.js ==== */
+/* ================= 词库 ================= */
+var BANKS = {
+  /* ---------- 图表 ---------- */
+  chart: [
+    {en:"line chart", zh:"线状图（折线图）", g:"图表类型"},
+    {en:"bar chart", zh:"柱状图", g:"图表类型"},
+    {en:"pie chart", zh:"饼状图", g:"图表类型"},
+    {en:"table", zh:"表格（25英一、2012英二）", g:"图表类型"},
+    {en:"chart", zh:"图表（统称，最保险）", g:"图表类型"},
+    {en:"two charts", zh:"两幅图（双图表专用）", g:"图表类型"}
+  ],
+  metric: [
+    {en:"proportion", zh:"比例（占比首选）", g:"指标"},
+    {en:"percentage", zh:"百分比（占比首选）", g:"指标"},
+    {en:"share", zh:"份额（占比）", g:"指标"},
+    {en:"ratio", zh:"比率（对比大小用，非占比）", g:"指标"},
+    {en:"number", zh:"数量（可数）", g:"指标"},
+    {en:"level", zh:"水平（素养、满意度）", g:"指标"},
+    {en:"rate", zh:"率（参与率、满意率）", g:"指标"},
+    {en:"volume", zh:"业务量、体量", g:"指标"},
+    {en:"ownership", zh:"拥有量（家电、车辆）", g:"指标"},
+    {en:"participation rate", zh:"参与率（休闲活动调查）", g:"指标"}
+  ],
+  verb: [
+    {en:"increased", zh:"增加（increase）", g:"增加"},
+    {en:"rose", zh:"上升（rise）", g:"增加"},
+    {en:"grew", zh:"增长（grow）", g:"增加"},
+    {en:"expanded", zh:"扩大（expand）", g:"增加"},
+    {en:"climbed", zh:"攀升（climb）", g:"增加"},
+    {en:"jumped", zh:"跃升（jump）", g:"增加"},
+    {en:"surged", zh:"激增（surge）", g:"增加"},
+    {en:"soared", zh:"猛涨（soar）", g:"增加"},
+    {en:"decreased", zh:"减少（decrease）", g:"减少"},
+    {en:"declined", zh:"下降（decline）", g:"减少"},
+    {en:"diminished", zh:"减小（diminish）", g:"减少"},
+    {en:"shrunk", zh:"收缩（shrink）", g:"减少"},
+    {en:"dropped", zh:"下落（drop）", g:"减少"},
+    {en:"fell", zh:"下降（fall）", g:"减少"},
+    {en:"remained flat", zh:"持平（remain flat）", g:"持平"},
+    {en:"stayed", zh:"保持在（stay at）", g:"持平"},
+    {en:"stood", zh:"处于（stand at）", g:"持平"},
+    {en:"stabilized", zh:"趋于稳定（stabilize）", g:"持平"},
+    {en:"varied", zh:"变化（vary）", g:"波动"},
+    {en:"fluctuated", zh:"波动（fluctuate）", g:"波动"},
+    {en:"rose and fell", zh:"起伏（rise and fall）", g:"波动"}
+  ],
+  speed: [
+    {en:"sharply", zh:"迅速地（急剧）", g:"迅速"},
+    {en:"markedly", zh:"显著地", g:"迅速"},
+    {en:"notably", zh:"明显地", g:"迅速"},
+    {en:"remarkably", zh:"显著地", g:"迅速"},
+    {en:"significantly", zh:"大幅地", g:"迅速"},
+    {en:"dramatically", zh:"急剧地", g:"迅速"},
+    {en:"slightly", zh:"轻微地", g:"缓慢"},
+    {en:"gradually", zh:"逐渐地", g:"缓慢"},
+    {en:"steadily", zh:"稳步地", g:"缓慢"},
+    {en:"modestly", zh:"小幅地", g:"缓慢"},
+    {en:"marginally", zh:"略微地", g:"缓慢"},
+    {en:"at a modest pace", zh:"以温和的速度", g:"缓慢"}
+  ],
+  trendV: [
+    {en:"rose steadily", zh:"稳步上升（动态单方向·最稳）"},
+    {en:"increased gradually", zh:"逐步上升（缓慢·折线图）"},
+    {en:"climbed remarkably", zh:"显著攀升（迅速）"},
+    {en:"soared dramatically", zh:"急剧飙升（爆发式）"},
+    {en:"declined steadily", zh:"稳步下降"},
+    {en:"fell sharply", zh:"急剧下降"},
+    {en:"dropped significantly", zh:"大幅下降"},
+    {en:"fluctuated noticeably", zh:"明显波动"},
+    {en:"remained largely stable", zh:"基本持平"},
+    {en:"kept rising year after year", zh:"逐年上升"}
+  ],
+  trendN: [
+    {en:"steady rise", zh:"稳步上升（名词短语）"},
+    {en:"sharp increase", zh:"急剧上升"},
+    {en:"dramatic surge", zh:"显著增长"},
+    {en:"gradual decline", zh:"逐步下降"},
+    {en:"steady decline", zh:"稳步下降"},
+    {en:"sharp drop", zh:"急剧下跌"},
+    {en:"notable fluctuation", zh:"明显波动"},
+    {en:"modest growth", zh:"小幅增长"},
+    {en:"visible change", zh:"明显变化"},
+    {en:"marked shift", zh:"显著转变"}
+  ],
+  multiple: [
+    {en:"twice", zh:"两倍（2 倍）"},
+    {en:"three times", zh:"三倍"},
+    {en:"almost three times", zh:"几乎三倍（2023英二）"},
+    {en:"nearly twice", zh:"近乎两倍（2025英一）"},
+    {en:"about 1.8 times", zh:"约 1.8 倍（2019英二）"},
+    {en:"four times", zh:"四倍（三倍以上）"},
+    {en:"more than twice", zh:"两倍多（翻番）"}
+  ],
+  unit: [
+    {en:"percentage points", zh:"个百分点（占比变化）"},
+    {en:"units", zh:"台/件（拥有量）"},
+    {en:"billion parcels", zh:"十亿件（快递量）"},
+    {en:"million", zh:"百万"},
+    {en:"percent", zh:"百分比"}
+  ],
+  num: [
+    {en:"8.8%", zh:"2012 健康素养起点", g:"真题数据"},
+    {en:"11.58%", zh:"2016 健康素养中间值", g:"真题数据"},
+    {en:"25.4%", zh:"2021 健康素养终点", g:"真题数据"},
+    {en:"68.1%", zh:"2013 就业比例", g:"真题数据"},
+    {en:"60.7%", zh:"2018 就业比例", g:"真题数据"},
+    {en:"26.3%", zh:"2013 深造比例", g:"真题数据"},
+    {en:"34.0%", zh:"2018 深造比例", g:"真题数据"},
+    {en:"91.3%", zh:"劳动实践·获得知识", g:"真题数据"},
+    {en:"84.8%", zh:"劳动实践·动手能力", g:"真题数据"},
+    {en:"54.4%", zh:"劳动实践·心情舒畅", g:"真题数据"},
+    {en:"32.6%", zh:"劳动实践·合作能力", g:"真题数据"},
+    {en:"39.3%", zh:"养老机器人·完全接受", g:"真题数据"},
+    {en:"32.8%", zh:"养老机器人·部分接受", g:"真题数据"},
+    {en:"27.9%", zh:"养老机器人·不接受", g:"真题数据"},
+    {en:"46.3%", zh:"关注点·安全", g:"真题数据"},
+    {en:"24.9%", zh:"关注点·价格", g:"真题数据"},
+    {en:"54.6%", zh:"户外活动·好奇心", g:"真题数据"},
+    {en:"90.8%", zh:"老人休闲·看电视", g:"真题数据"},
+    {en:"75.2 units", zh:"2014 每百户空调", g:"真题数据"},
+    {en:"145.9 units", zh:"2023 每百户空调", g:"真题数据"}
+  ],
+  year: [
+    {en:"2012", zh:"起点年"},{en:"2013", zh:"起点年"},{en:"2014", zh:"起点年"},
+    {en:"2018", zh:"中间年"},{en:"2019", zh:"中间年"},{en:"2020", zh:"中间年"},
+    {en:"2021", zh:"终点年"},{en:"2022", zh:"终点年"},{en:"2023", zh:"终点年"},
+    {en:"2026", zh:"最新真题"}
+  ],
+  item: [
+    {en:"acquiring relevant knowledge", zh:"获得相关知识（2024英二）"},
+    {en:"improving practical skills", zh:"提高动手能力（2024英二）"},
+    {en:"feeling comfortable", zh:"感觉心情舒畅（2024英二）"},
+    {en:"enhancing cooperation capacity", zh:"增强合作能力（2024英二）"},
+    {en:"watching TV", zh:"看电视（2025英二）"},
+    {en:"walking", zh:"散步（2025英二）"},
+    {en:"gardening", zh:"养花（2025英二）"},
+    {en:"reading", zh:"阅读（2025英二）"},
+    {en:"playing chess", zh:"下棋（2025英二）"},
+    {en:"fully accepting them", zh:"完全接受（2026英一）"},
+    {en:"partially accepting them", zh:"部分接受（2026英一）"},
+    {en:"rejecting them", zh:"不接受（2026英一）"},
+    {en:"safety", zh:"安全（2026英一首要关切）"},
+    {en:"price", zh:"价格（2026英一）"},
+    {en:"satisfying curiosity", zh:"满足好奇心（2026英二）"},
+    {en:"developing observational skills", zh:"促进观察力（2026英二）"},
+    {en:"strengthening physical fitness", zh:"强身健体（2026英二）"},
+    {en:"enhancing parent-child interaction", zh:"增强亲子互动（2026英二）"}
+  ],
+  minmax: [
+    {en:"32.6%", zh:"最低值示例"},{en:"91.3%", zh:"最高值示例"},
+    {en:"27.9%", zh:"最低值示例"},{en:"39.3%", zh:"最高值示例"},
+    {en:"18.4%", zh:"最低值示例（下棋）"},{en:"90.8%", zh:"最高值示例（看电视）"}
+  ],
+  /* ---------- 社会现象 ---------- */
+  group: [
+    {en:"people", zh:"泛指（可换具体对象）", g:"泛指/全体"},
+    {en:"the public", zh:"公众", g:"泛指/全体"},
+    {en:"human beings", zh:"人类", g:"泛指/全体"},
+    {en:"children and adults", zh:"孩子和大人", g:"泛指/全体"},
+    {en:"the whole society", zh:"整个社会", g:"社会"},
+    {en:"urban residents", zh:"城市居民（24英一）", g:"人群"},
+    {en:"rural residents", zh:"乡村居民（23英一）", g:"人群"},
+    {en:"residents", zh:"居民（23英二）", g:"人群"},
+    {en:"undergraduates", zh:"大学生（22英一）", g:"人群"},
+    {en:"youngsters on campus", zh:"在校年轻人", g:"人群"},
+    {en:"teenagers and youngsters", zh:"青少年", g:"人群"},
+    {en:"elderly residents", zh:"老年居民（2025英二）", g:"人群"},
+    {en:"consumers", zh:"消费者（2026英一）", g:"人群"},
+    {en:"parents", zh:"家长（2026英二）", g:"人群"},
+    {en:"employees", zh:"员工", g:"人群"},
+    {en:"experts", zh:"专家", g:"人群"},
+    {en:"professors", zh:"教授", g:"人群"},
+    {en:"offspring", zh:"子孙后代", g:"后代"},
+    {en:"descendants", zh:"后代", g:"后代"},
+    {en:"children and kids", zh:"子孙后代（口语）", g:"后代"}
+  ],
+  act: [
+    {en:"choose a healthy lifestyle", zh:"选择健康生活方式（23英二）"},
+    {en:"engage in accessible and low-intensity leisure activities", zh:"参加容易参与、强度低的休闲活动（25英二）"},
+    {en:"pursue further education", zh:"继续深造（19英二）"},
+    {en:"take part in outdoor activities", zh:"参加户外活动（26英二）"},
+    {en:"adopt elderly-care robots", zh:"采用养老机器人（26英一）"},
+    {en:"read on mobile phones", zh:"用手机阅读（20英二）"},
+    {en:"work out alone or with companions", zh:"独自或结伴锻炼（21英二）"},
+    {en:"buy domestic brands", zh:"购买国产品牌（11英二）"}
+  ],
+  doing: [
+    {en:"pursuing further education", zh:"继续深造（动名词作主语）"},
+    {en:"attending lectures", zh:"听讲座"},
+    {en:"taking part in outdoor activities", zh:"参加户外活动"},
+    {en:"working part-time", zh:"做兼职"},
+    {en:"reading widely", zh:"广泛阅读"},
+    {en:"using elderly-care robots", zh:"使用养老机器人"},
+    {en:"protecting the environment", zh:"保护环境"},
+    {en:"inheriting traditional culture", zh:"传承传统文化"}
+  ],
+  cond: [
+    {en:"they are able", zh:"他们有条件时（23英二）"},
+    {en:"they have free time", zh:"他们有闲暇时（25英二）"},
+    {en:"they are under pressure", zh:"他们压力大时"},
+    {en:"they face choices", zh:"他们面临选择时"},
+    {en:"they grow older", zh:"他们变老时"}
+  ],
+  /* ---------- 图画 ---------- */
+  pic: [
+    {en:"picture", zh:"图画（通用）", g:"图画类型"},
+    {en:"drawing", zh:"图画（手绘）", g:"图画类型"},
+    {en:"cartoon", zh:"漫画（讽刺/对话）", g:"图画类型"},
+    {en:"painting", zh:"绘画", g:"图画类型"},
+    {en:"photograph", zh:"照片", g:"图画类型"},
+    {en:"cartoons", zh:"漫画（两幅图，复数）", g:"图画类型"}
+  ],
+  env: [
+    {en:"on the playground", zh:"在操场上（2004）", g:"具体环境"},
+    {en:"in front of us", zh:"在我们面前（万能环境）", g:"万能环境"},
+    {en:"in the middle of the picture", zh:"在图画中间（万能环境）", g:"万能环境"},
+    {en:"in front of the board", zh:"在公告栏前（2022）", g:"具体环境"},
+    {en:"in a park", zh:"在公园里（2024英一）", g:"具体环境"},
+    {en:"on the sofa", zh:"在沙发上（2020）", g:"具体环境"},
+    {en:"at the desk", zh:"在书桌前", g:"具体环境"},
+    {en:"on the stage", zh:"在舞台上（2023龙舟）", g:"具体环境"}
+  ],
+  basicV: [
+    {en:"runs", zh:"跑（rush 冲线用）", g:"基本动作"},
+    {en:"stands", zh:"站", g:"基本动作"},
+    {en:"sits", zh:"坐", g:"基本动作"},
+    {en:"lies", zh:"躺", g:"基本动作"},
+    {en:"stays", zh:"停留（静物用）", g:"基本动作"},
+    {en:"stand", zh:"站着（复数主语）", g:"基本动作"},
+    {en:"are sitting", zh:"正坐着（进行时）", g:"基本动作"}
+  ],
+  subject: [
+    {en:"a young man", zh:"一个年轻人（2004）"},
+    {en:"two girls", zh:"两位女生（2022）"},
+    {en:"an oil lamp", zh:"一盏小油灯（2001）"},
+    {en:"a boy and a girl", zh:"一男一女（2020）"},
+    {en:"several urban residents", zh:"几位城市居民（2024英一）"},
+    {en:"a group of youngsters", zh:"一群年轻人（2023龙舟）"},
+    {en:"an old man", zh:"一位老人（2005）"},
+    {en:"a little girl", zh:"一个小女孩（2010）"}
+  ],
+  adjPair: [
+    {en:"active as well as vigorous", zh:"活跃又有精力", g:"正面"},
+    {en:"lovely as well as cute", zh:"可爱", g:"正面"},
+    {en:"graceful as well as elegant", zh:"优雅", g:"正面"},
+    {en:"amiable as well as friendly", zh:"友好", g:"正面"},
+    {en:"aspiring as well as ambitious", zh:"有抱负又有野心", g:"正面"},
+    {en:"passionate as well as aggressive", zh:"激情又有进取心", g:"正面"},
+    {en:"confident as well as optimistic", zh:"自信又乐观", g:"正面"},
+    {en:"cruel as well as vicious", zh:"残忍又恶毒", g:"负面"},
+    {en:"negative as well as passive", zh:"消极又被动", g:"负面"},
+    {en:"disgraceful as well as dishonorable", zh:"不光彩又可耻", g:"负面"},
+    {en:"ugly as well as disgusting", zh:"丑陋又恶心", g:"负面"},
+    {en:"terrible as well as horrible", zh:"可怕", g:"负面"},
+    {en:"unconfident as well as pessimistic", zh:"不自信又悲观", g:"负面"}
+  ],
+  mainAct: [
+    {en:"rushing to the finishing line", zh:"冲向终点（2004）"},
+    {en:"talking about campus lectures", zh:"谈论校园讲座（2022）"},
+    {en:"lighting up the darkness", zh:"照亮黑暗（2001）"},
+    {en:"doing his homework", zh:"做作业（2020）"},
+    {en:"exercising in a park", zh:"在公园锻炼（2024英一）"},
+    {en:"rowing a dragon boat", zh:"划龙舟（2023英一）"},
+    {en:"reading a book attentively", zh:"专心读书（2017）"},
+    {en:"staring at the mobile phone", zh:"盯着手机（2015）"}
+  ],
+  detail: [
+    {en:"with a sweet smile on his face", zh:"脸上带着甜蜜的微笑"},
+    {en:"with a confident smile on his face", zh:"自信的微笑（2007）"},
+    {en:"with determination in his eyes", zh:"眼神中的决心（2019）"},
+    {en:"with an excited expression on her face", zh:"兴奋的表情（2023龙舟）"},
+    {en:"with curiosity in his eyes", zh:"眼中的好奇（2018）"},
+    {en:"with confusion on her face", zh:"脸上的困惑（2022）"},
+    {en:"with a worried look on his face", zh:"担忧的表情（2020）"},
+    {en:"with tears in her eyes", zh:"眼含泪水（2005）"}
+  ],
+  evokeV: [
+    {en:"argues", zh:"认为（议论）", g:"转述动词"},
+    {en:"maintains", zh:"坚持认为", g:"转述动词"},
+    {en:"believes", zh:"相信", g:"转述动词"},
+    {en:"contends", zh:"主张", g:"转述动词"},
+    {en:"asserts", zh:"断言", g:"转述动词"},
+    {en:"claims", zh:"声称", g:"转述动词"},
+    {en:"declares", zh:"宣称", g:"转述动词"},
+    {en:"states", zh:"陈述", g:"转述动词"},
+    {en:"points out", zh:"指出", g:"转述动词"},
+    {en:"is convinced", zh:"确信", g:"转述动词"},
+    {en:"holds the view", zh:"持有观点", g:"转述动词"},
+    {en:"says", zh:"说（直述，不推荐）", g:"直述动词"}
+  ],
+  quote: [
+    {en:"the lecture is not related to our major, which is a waste of time", zh:"讲座与专业无关，是浪费时间（2022）"},
+    {en:"it will be beneficial nonetheless", zh:"但仍然会有收获（2022）"},
+    {en:"I will feel relieved when I finish my work", zh:"完成作业就轻松了（2020）"},
+    {en:"I will not start until the deadline", zh:"不到最后期限不开始（2020）"},
+    {en:"the new park is fantastic", zh:"新公园太棒了（2024英一）"}
+  ],
+  elements: [
+    {en:"cultural elements", zh:"文化元素（2010）"},
+    {en:"traditional symbols", zh:"传统符号"},
+    {en:"distinctive images", zh:"独特意象"}
+  ],
+  container: [
+    {en:"hotpot", zh:"火锅（2010）"},
+    {en:"pot", zh:"锅"},
+    {en:"bowl", zh:"碗"}
+  ],
+  caption: [
+    {en:"Cultural hot pot, nutritious and delicious", zh:"文化火锅，既美味又营养（2010）"},
+    {en:"Love is a lamp. The darker the place, the brighter it shines", zh:"爱是一盏灯，越黑越亮（2001）"},
+    {en:"The new park is fantastic", zh:"新公园真棒（2024英一）"}
+  ],
+  /* ---------- 第二段 ---------- */
+  quant: [
+    {en:"innumerable", zh:"无数的", g:"数量词"},
+    {en:"countless", zh:"数不清的", g:"数量词"},
+    {en:"abundant", zh:"大量的", g:"数量词"},
+    {en:"adequate", zh:"足够的", g:"数量词"},
+    {en:"sufficient", zh:"充足的", g:"数量词"},
+    {en:"a host of", zh:"许多", g:"数量词"},
+    {en:"a variety of", zh:"各种各样的", g:"数量词"},
+    {en:"plenty of", zh:"很多", g:"数量词"}
+  ],
+  reasonN: [
+    {en:"reasons", zh:"原因（原句）"},{en:"factors", zh:"因素"},{en:"causes", zh:"成因"}
+  ],
+  explainV: [
+    {en:"explain", zh:"解释（原句）"},{en:"contribute to", zh:"促成"},
+    {en:"give rise to", zh:"引起"},{en:"account for", zh:"解释/说明"}
+  ],
+  ideaN: [
+    {en:"idea", zh:"观点（原句）"},{en:"standpoint", zh:"立场"},
+    {en:"perspective", zh:"视角"},{en:"viewpoint", zh:"观点"},{en:"opinion", zh:"意见"}
+  ],
+  believeV: [
+    {en:"believe", zh:"认为（原句）"},{en:"maintain", zh:"坚持认为"},
+    {en:"hold", zh:"持有（hold the view that）"},{en:"are convinced", zh:"深信不疑"}
+  ],
+  provideVP: [
+    {en:"provide them with a broader platform", zh:"提供一个更广阔的平台"},
+    {en:"present them with a unique chance", zh:"提供一个独特的机会"},
+    {en:"create more opportunities for them", zh:"创造更多的机会"},
+    {en:"bring them enormous benefits", zh:"带来巨大好处"},
+    {en:"offer them a powerful tool", zh:"提供一个有力的工具"}
+  ],
+  benefit: [
+    {en:"develop themselves", zh:"发展自己（25 英一例）"},
+    {en:"broaden their horizons", zh:"开拓眼界"},
+    {en:"improve the quality of life for the elderly", zh:"提高老人生活质量（26英一）"},
+    {en:"develop observation skills and physical fitness", zh:"培养观察力和体质（26英二）"},
+    {en:"satisfy children's curiosity and interact with nature", zh:"满足好奇心、亲近自然（26英二）"},
+    {en:"reduce the risk of falls and accidents among the elderly", zh:"降低老人跌倒风险（26英一）"},
+    {en:"cultivate practical skills and a spirit of cooperation", zh:"培养实践技能与合作精神（24英二）"},
+    {en:"improve the comfort and competitiveness of cities", zh:"提高城市舒适性与竞争力（24英一）"},
+    {en:"follow current affairs", zh:"紧跟时事（25英二）"},
+    {en:"provide them with great convenience", zh:"提供极大便利（25英一）"}
+  ],
+  result: [
+    {en:"which may put them in a beneficial position in the future", zh:"让他们未来处于有利位置", g:"结果从句"},
+    {en:"which is likely to secure a competitive edge in the future", zh:"有望在未来获得竞争优势", g:"结果从句"},
+    {en:"which is indispensable in their daily lives", zh:"在日常生活中不可或缺", g:"结果从句"},
+    {en:"which may relieve the pressure of aging on families and society", zh:"减轻老龄化给家庭和社会的压力", g:"结果从句"},
+    {en:"which is indispensable to their healthy growth", zh:"对其健康成长不可或缺", g:"结果从句"},
+    {en:"which may contribute significantly to social progress", zh:"对社会进步大有贡献", g:"结果从句"},
+    {en:"which helps him develop sharp observation skills and a strong body", zh:"帮他养成敏锐观察力和强壮身体", g:"结果从句"}
+  ],
+  increaseV: [
+    {en:"improve", zh:"改善"},{en:"enhance", zh:"提高"},{en:"promote", zh:"促进"},
+    {en:"boost", zh:"提升"},{en:"cultivate", zh:"培养"},{en:"facilitate", zh:"促进"},
+    {en:"indicate", zh:"表明"},{en:"demonstrate", zh:"表明"},{en:"increase", zh:"增加"}
+  ],
+  enableV: [
+    {en:"enable them to", zh:"使他们能够"},{en:"help them", zh:"帮助他们"},
+    {en:"allow them to", zh:"允许他们"},{en:"encourage them to", zh:"鼓励他们"},
+    {en:"deepen their", zh:"加深他们的"},{en:"promote their", zh:"促进他们的"},
+    {en:"relieve their", zh:"缓解他们的"}
+  ],
+  smallAsp: [
+    {en:"develop students' critical thinking skills", zh:"培养学生批判性思维（2018）"},
+    {en:"provide 24-hour assistance", zh:"提供 24 小时协助（26英一）"},
+    {en:"better cultivate children's curiosity and observational skills", zh:"更好培养好奇心和观察力（26英二）"},
+    {en:"significantly improve the living environment for residents", zh:"显著改善居民居住环境（24英一）"},
+    {en:"expand their horizons", zh:"开阔他们的视野（19英二）"}
+  ],
+  bigAsp: [
+    {en:"expand their horizons", zh:"开拓眼界"},
+    {en:"promoting all-round development", zh:"促进全面发展"},
+    {en:"relieving the burden on families and caregivers", zh:"减轻家庭和照护者负担"},
+    {en:"promoting their physical and mental well-being", zh:"促进身心健康"},
+    {en:"enhancing academic competence", zh:"提高学术能力"}
+  ],
+  compB: [
+    {en:"simple lessons", zh:"简单的课程（2018）"},
+    {en:"employment", zh:"就业（19英二）"},
+    {en:"commercial projects", zh:"商业项目（24英一·创造对比）"},
+    {en:"traditional human care", zh:"传统人工照护（26英一）"},
+    {en:"indoor activities", zh:"室内活动（26英二）"},
+    {en:"working part-time", zh:"做兼职（13英二）"}
+  ],
+  compA: [
+    {en:"difficult courses", zh:"困难的课程（2018）"},
+    {en:"pursuing further education", zh:"继续深造（19英二）"},
+    {en:"building more parks", zh:"建设更多公园（24英一）"},
+    {en:"elderly-care robots", zh:"养老机器人（26英一）"},
+    {en:"outdoor activities", zh:"户外活动（26英二）"},
+    {en:"studying full-time", zh:"全职学习（13英二）"}
+  ],
+  metaphor: [
+    {en:"as important as a lighthouse, providing guidance in difficult times", zh:"像灯塔一样重要（心态类）", g:"明喻"},
+    {en:"as essential as a compass, helping us navigate through life's challenges", zh:"像指南针一样不可或缺（思维类）", g:"明喻"},
+    {en:"the key that unlocks the door to success", zh:"开启成功之门的钥匙", g:"暗喻"},
+    {en:"the engine that propels personal growth and social progress", zh:"推动个人成长与社会进步的引擎", g:"暗喻"},
+    {en:"the bridge between goals and accomplishments", zh:"连接目标与成就的桥梁（人际类）", g:"暗喻"},
+    {en:"the foundation upon which we build a sustainable future", zh:"构建可持续未来的基石（品德类）", g:"暗喻"}
+  ],
+  ignored: [
+    {en:"ignored the importance of", zh:"忽视……的重要性（个人/国家层）"},
+    {en:"failed to do", zh:"没能做某事（社会层）"},
+    {en:"underestimated the importance of", zh:"低估……的重要性（国家层）"}
+  ],
+  catastrophe: [
+    {en:"we would never become a better version of ourselves", zh:"我们永远无法成为更好的自己（个人）", g:"个人层"},
+    {en:"we would never discover our true potential and strength", zh:"永远无法发现真正的潜力（个人）", g:"个人层"},
+    {en:"our society would be confronted with an unpromising and fruitless future", zh:"社会将没有未来（社会层）", g:"社会层"},
+    {en:"our society would become less compassionate and inclusive", zh:"社会将变得缺乏同情与包容（社会层）", g:"社会层"},
+    {en:"our nation would permanently lag behind in the new era of rapid development", zh:"国家将永远落后（国家层）", g:"国家层"},
+    {en:"our cities would be confronted with an unpromising and fruitless future", zh:"城市将没有未来（城市层）", g:"社会层"}
+  ],
+  person: [
+    {en:"my hometown, a livable city,", zh:"我的家乡，一座宜居城市（24英一）", g:"带同位语（保留末尾逗号）"},
+    {en:"my roommate, Kevin,", zh:"我的室友凯文（2015/2017）", g:"带同位语（保留末尾逗号）"},
+    {en:"my grandfather", zh:"我的爷爷（25英二）", g:"简单主语"},
+    {en:"a nursing home in my city", zh:"我所在城市的一家养老院（26英一）", g:"简单主语"},
+    {en:"my neighbor's son", zh:"我邻居的儿子（26英二）", g:"简单主语"},
+    {en:"a student in my class", zh:"我班上的同学", g:"简单主语"}
+  ],
+  attV: [
+    {en:"is interested in", zh:"感兴趣", g:"兴趣热爱"},
+    {en:"is passionate about", zh:"有激情", g:"兴趣热爱"},
+    {en:"is enthusiastic about", zh:"热衷于", g:"兴趣热爱"},
+    {en:"is addicted to", zh:"沉迷于", g:"兴趣热爱"},
+    {en:"is committed to", zh:"致力于", g:"致力投入"},
+    {en:"dedicates oneself to", zh:"致力于", g:"致力投入"},
+    {en:"is occupied with", zh:"忙于", g:"致力投入"},
+    {en:"is engaged in", zh:"从事", g:"致力投入"},
+    {en:"places a high priority on", zh:"高度重视", g:"高度重视"},
+    {en:"attaches importance to", zh:"重视", g:"高度重视"},
+    {en:"places a high value on", zh:"高度重视", g:"高度重视"},
+    {en:"is tired of", zh:"厌烦", g:"负面倦怠"},
+    {en:"is bored with", zh:"厌烦", g:"负面倦怠"},
+    {en:"is indifferent to", zh:"漠不关心", g:"负面倦怠"}
+  ],
+  obj: [
+    {en:"infrastructure construction", zh:"基础设施建设（24英一）"},
+    {en:"reading", zh:"读书（2017）"},
+    {en:"watching television and reading newspapers", zh:"看电视和读报（25英二）"},
+    {en:"attending labor practice classes", zh:"参加劳动实践课（24英二）"},
+    {en:"outdoor activities", zh:"户外活动（26英二）"},
+    {en:"the Internet", zh:"互联网（2015）"},
+    {en:"improving elderly care by introducing robots", zh:"引入机器人改善养老（26英一）"}
+  ],
+  timeWord: [
+    {en:"During this period,", zh:"在此期间（原句）"},
+    {en:"Consequently,", zh:"因此"},
+    {en:"As a result,", zh:"结果"},
+    {en:"Gradually,", zh:"逐渐地"},
+    {en:"Thanks to these efforts,", zh:"得益于这些努力"},
+    {en:"During that period,", zh:"在那段时间（过去时）"}
+  ],
+  outcome: [
+    {en:"citizen satisfaction has improved", zh:"市民满意度提高了（24英一）"},
+    {en:"he regretted everything he had done", zh:"他后悔所做的一切（2015）"},
+    {en:"all of us admire his capacity", zh:"我们都羡慕他的能力（2017）"},
+    {en:"he earns the respect of our entire class", zh:"他赢得全班的尊敬（24英二）"},
+    {en:"his parents have noticed his growing curiosity about nature", zh:"父母注意到他对自然的好奇心日增（26英二）"},
+    {en:"both the residents and their families have felt much more at ease", zh:"老人和家人都安心许多（26英一）"}
+  ],
+  /* ---------- 第三段 ---------- */
+  doSth: [
+    {en:"protect the environment", zh:"保护环境（2011）"},
+    {en:"care for the elderly", zh:"关爱老人（25英二）"},
+    {en:"develop elderly-care robots", zh:"发展养老机器人（26英一）"},
+    {en:"encourage children's outdoor activities", zh:"鼓励儿童户外活动（26英二）"},
+    {en:"inherit traditional culture", zh:"传承传统文化（2023）"},
+    {en:"pursue a healthier lifestyle", zh:"追求更健康的生活方式（23英二）"}
+  ],
+  objectN: [
+    {en:"a more convenient and intelligent lifestyle", zh:"更便捷智能的生活方式（25英一）"},
+    {en:"the protection of the environment", zh:"环境保护（2011）"},
+    {en:"the well-being of senior citizens", zh:"老年人的福祉（25英二）"},
+    {en:"high-quality elderly care", zh:"高质量养老服务（26英一）"},
+    {en:"a healthy lifestyle", zh:"健康的生活方式（2024）"}
+  ],
+  actV: [
+    {en:"protect the environment", zh:"保护环境（2011）"},
+    {en:"ensure the well-being of senior citizens", zh:"保障老年人福祉（25英二）"},
+    {en:"ignore consumers' safety concerns", zh:"忽视消费者的安全关切（26英一）"},
+    {en:"underestimate the profound impact of outdoor activities", zh:"低估户外活动的深远影响（26英二）"},
+    {en:"inherit and develop traditional culture", zh:"传承发展传统文化（2023）"}
+  ],
+  aspectD: [
+    {en:"protecting the environment", zh:"保护环境（动词 -ing，配 in）", g:"动名词"},
+    {en:"regulating the elderly-care robot industry", zh:"监管养老机器人行业（26英一）", g:"动名词"},
+    {en:"gaining public trust", zh:"获得公众信任（26英一）", g:"动名词"},
+    {en:"improving public facilities", zh:"改善公共设施", g:"动名词"},
+    {en:"raising public awareness", zh:"增强公众意识", g:"动名词"},
+    {en:"promoting children's all-round development", zh:"促进儿童全面发展", g:"动名词"}
+  ],
+  measureB: [
+    {en:"the government department concerned", zh:"有关部门（B 主题词的责任方）", g:"实施方"},
+    {en:"the government", zh:"政府（26英一）", g:"实施方"},
+    {en:"enterprises", zh:"企业", g:"实施方"},
+    {en:"new media platforms", zh:"新媒体平台", g:"实施方"},
+    {en:"parents and schools", zh:"家长和学校（26英二）", g:"实施方"},
+    {en:"cultivating citizens' consciousness", zh:"培养公民意识（C 你的观点）", g:"措施"},
+    {en:"technological advancement and strict safety standards", zh:"技术进步与严格安全标准（26英一）", g:"措施"},
+    {en:"family companionship", zh:"家庭陪伴（25英二）", g:"措施"},
+    {en:"raising public awareness", zh:"提高公众意识", g:"措施"},
+    {en:"building more elderly activity centers", zh:"建设更多老年活动中心（25英二）", g:"措施"},
+    {en:"setting rules based on scenic location", zh:"按景区位置制定规则", g:"措施"}
+  ],
+  balA: [
+    {en:"economic development", zh:"经济发展"},{en:"urbanization", zh:"城市化"},
+    {en:"technological innovation", zh:"科技创新"},{en:"physical exercise", zh:"体育锻炼"},
+    {en:"efficiency", zh:"效率"},{en:"children's physical exercise", zh:"儿童体育锻炼（26英二）"}
+  ],
+  balB: [
+    {en:"environmental protection", zh:"环境保护"},{en:"cultural heritage", zh:"文化遗产"},
+    {en:"human well-being", zh:"人类福祉"},{en:"intellectual development", zh:"智力发展（26英二）"},
+    {en:"fairness", zh:"公平"},{en:"personal privacy", zh:"个人隐私"}
+  ],
+  authorView: [
+    {en:"we are perceived as less biased and willing to tell the truth when we show uncertainty in a transparent way", zh:"透明表达不确定性时，我们显得偏见更少、更愿说真话（样题1）"},
+    {en:"we cannot blame the screens because children have lost the right to make sense of the world", zh:"不能怪屏幕，因为孩子失去了认识世界的机会（样题2）"},
+    {en:"failure in expertise can be compensated by higher integrity and benevolence", zh:"专业上的不足可由更高的诚信与善意弥补（样题1）"}
+  ],
+  phenText: [
+    {en:"integrity and benevolence", zh:"诚信与仁慈（样题1主题词）"},
+    {en:"network addiction among children", zh:"儿童网络成瘾（样题2主题词）"},
+    {en:"honesty and transparency", zh:"诚实与坦诚"},
+    {en:"the benefits and drawbacks of technology", zh:"科技的利与弊"},
+    {en:"admitting uncertainty", zh:"承认不确定性"}
+  ],
+  /* ---------- 六大方面（方案三/措施/好处通用） ---------- */
+  aspect: [
+    {en:"social progress", zh:"社会进步", g:"社会方面"},
+    {en:"social development", zh:"社会发展", g:"社会方面"},
+    {en:"social stability", zh:"社会稳定", g:"社会方面"},
+    {en:"sustained and healthy growth", zh:"持续健康发展", g:"社会方面"},
+    {en:"high-quality development", zh:"高质量发展", g:"社会方面"},
+    {en:"rapid economic growth", zh:"快速经济增长", g:"社会方面"},
+    {en:"economic prosperity", zh:"经济繁荣", g:"社会方面"},
+    {en:"disposable income", zh:"可支配收入", g:"社会方面"},
+    {en:"rural revitalization", zh:"农村振兴", g:"社会方面"},
+    {en:"employment promotion", zh:"促进就业", g:"社会方面"},
+    {en:"expanding the market", zh:"开拓市场", g:"社会方面"},
+    {en:"promoting consumption", zh:"促进消费", g:"社会方面"},
+    {en:"people's livelihood", zh:"民生", g:"社会方面"},
+    {en:"public services", zh:"公共服务", g:"社会方面"},
+    {en:"public health security", zh:"公共卫生安全", g:"社会方面"},
+    {en:"infrastructure development", zh:"基础设施建设", g:"社会方面"},
+    {en:"the social security system", zh:"社保体系", g:"社会方面"},
+    {en:"elderly care services", zh:"养老服务（命中26英一）", g:"社会方面"},
+    {en:"basic medical insurance", zh:"基本医疗保险", g:"社会方面"},
+    {en:"bringing convenience to people's daily lives", zh:"给日常生活带来便利", g:"社会方面"},
+    {en:"social harmony", zh:"社会和谐", g:"社会方面"},
+    {en:"the prosperity of the country", zh:"国家富强", g:"社会方面"},
+    {en:"the happiness of the people", zh:"人民幸福", g:"社会方面"},
+    {en:"social cohesion", zh:"社会凝聚力", g:"社会方面"},
+    {en:"social justice", zh:"社会公正", g:"社会方面"},
+    {en:"common prosperity", zh:"共同富裕", g:"社会方面"},
+    {en:"education equity", zh:"教育公平", g:"社会方面"},
+    {en:"a sense of public morality", zh:"公德心", g:"社会方面"},
+
+    {en:"sustainable development", zh:"可持续发展", g:"自然方面"},
+    {en:"green transformation", zh:"绿色转型", g:"自然方面"},
+    {en:"maintaining natural ecological balance", zh:"维持自然生态平衡", g:"自然方面"},
+    {en:"natural resource conservation", zh:"自然资源保护", g:"自然方面"},
+    {en:"environmental awareness", zh:"环保意识", g:"自然方面"},
+    {en:"carbon emissions reduction", zh:"碳减排", g:"自然方面"},
+    {en:"the green economy", zh:"绿色经济", g:"自然方面"},
+    {en:"green transportation", zh:"绿色出行", g:"自然方面"},
+    {en:"waste classification and recycling", zh:"垃圾分类与回收", g:"自然方面"},
+    {en:"improving the ecological environment", zh:"改善生态环境", g:"自然方面"},
+    {en:"preventing pollution", zh:"预防污染", g:"自然方面"},
+    {en:"a beautiful natural environment", zh:"优美的自然环境", g:"自然方面"},
+    {en:"harmony between humanity and nature", zh:"人与自然和谐共生", g:"自然方面"},
+    {en:"connection with nature", zh:"与自然的联结", g:"自然方面"},
+    {en:"a liveable environment", zh:"宜居环境", g:"自然方面"},
+    {en:"ecological balance", zh:"生态平衡", g:"自然方面"},
+    {en:"outdoor recreation", zh:"户外休闲", g:"自然方面"},
+
+    {en:"cultural protection", zh:"文化保护", g:"文化方面"},
+    {en:"digital preservation", zh:"数字化保护", g:"文化方面"},
+    {en:"inheriting and developing traditional culture", zh:"继承和发扬传统文化", g:"文化方面"},
+    {en:"cultural exchange", zh:"文化交流", g:"文化方面"},
+    {en:"people-to-people exchange", zh:"人文交流", g:"文化方面"},
+    {en:"short video platforms", zh:"短视频平台", g:"文化方面"},
+    {en:"influencer marketing", zh:"网红营销", g:"文化方面"},
+    {en:"organizing cultural exchange exhibitions", zh:"组织文化交流展览", g:"文化方面"},
+    {en:"enjoying and learning from historical sites", zh:"享受和学习历史古迹", g:"文化方面"},
+    {en:"understanding and respecting history", zh:"了解与尊重历史", g:"文化方面"},
+    {en:"diversity and inclusion", zh:"多元化与包容性", g:"文化方面"},
+    {en:"an open and inclusive attitude", zh:"开放包容的态度", g:"文化方面"},
+    {en:"tolerance and mutual appreciation", zh:"宽容与相互欣赏", g:"文化方面"},
+    {en:"respecting different customs", zh:"尊重不同风俗", g:"文化方面"},
+    {en:"embracing cultural diversity", zh:"拥抱文化多样性", g:"文化方面"},
+    {en:"the promotion of cultural diversity", zh:"促进文化多样性", g:"文化方面"},
+    {en:"cultural confidence", zh:"文化自信", g:"文化方面"},
+    {en:"cultural identity", zh:"文化认同", g:"文化方面"},
+    {en:"cultural soft power", zh:"文化软实力", g:"文化方面"},
+    {en:"cultural prosperity", zh:"文化繁荣", g:"文化方面"},
+
+    {en:"personal growth", zh:"个人成长（命中26英二）", g:"个人方面"},
+    {en:"youth development", zh:"青年发展", g:"个人方面"},
+    {en:"all-round development", zh:"全面发展", g:"个人方面"},
+    {en:"self-improvement", zh:"自我提升", g:"个人方面"},
+    {en:"physical and mental health", zh:"身心健康", g:"个人方面"},
+    {en:"a healthy lifestyle", zh:"健康生活方式", g:"个人方面"},
+    {en:"quality of life", zh:"生活质量（命中26英一）", g:"个人方面"},
+    {en:"psychological resilience", zh:"心理素质", g:"个人方面"},
+    {en:"self-protection awareness", zh:"自我保护意识", g:"个人方面"},
+    {en:"work-life balance", zh:"工作与生活平衡", g:"个人方面"},
+    {en:"relieving stress", zh:"缓解压力", g:"个人方面"},
+    {en:"alleviating difficulties", zh:"缓解困难", g:"个人方面"},
+    {en:"keeping one's mind sharp", zh:"保持思维敏锐", g:"个人方面"},
+    {en:"fostering a positive mindset", zh:"培养积极心态", g:"个人方面"},
+    {en:"knowledge and skills", zh:"知识与技能", g:"个人方面"},
+    {en:"lifelong education and learning", zh:"终身教育与学习", g:"个人方面"},
+    {en:"observational skills", zh:"观察力", g:"个人方面"},
+    {en:"hands-on ability and practical skills", zh:"动手能力", g:"个人方面"},
+    {en:"curiosity and exploration", zh:"好奇心与探索欲", g:"个人方面"},
+    {en:"expanding our horizons", zh:"开拓眼界（命中26英二）", g:"个人方面"},
+    {en:"enriching our experience", zh:"丰富经验", g:"个人方面"},
+    {en:"acquiring knowledge and skills", zh:"获得知识与技能", g:"个人方面"},
+    {en:"boosting self-confidence", zh:"提升自信", g:"个人方面"},
+    {en:"giving full play to our advantages", zh:"发挥自身优势", g:"个人方面"},
+    {en:"embracing challenges", zh:"迎接挑战", g:"个人方面"},
+    {en:"developing critical thinking", zh:"培养批判性思维", g:"个人方面"},
+    {en:"improving problem-solving ability", zh:"提高解决问题能力", g:"个人方面"},
+    {en:"parent-child interaction", zh:"亲子互动", g:"个人方面"},
+    {en:"family bonding", zh:"家庭纽带", g:"个人方面"},
+    {en:"emotional companionship", zh:"情感陪伴", g:"个人方面"},
+    {en:"personal goals and values", zh:"个人目标与价值", g:"个人方面"},
+    {en:"moral cultivation", zh:"道德修养", g:"个人方面"},
+    {en:"individual well-being", zh:"个人福祉", g:"个人方面"},
+    {en:"self-realization", zh:"自我实现", g:"个人方面"},
+    {en:"a sense of well-being", zh:"幸福感", g:"个人方面"},
+    {en:"a sense of security", zh:"安全感", g:"个人方面"},
+    {en:"a sense of fulfillment", zh:"获得感", g:"个人方面"},
+    {en:"enriching spiritual life", zh:"丰富精神生活", g:"个人方面"},
+    {en:"realizing one's potential", zh:"实现个人潜能", g:"个人方面"},
+    {en:"contributing to society", zh:"回馈社会", g:"个人方面"},
+
+    {en:"effective communication", zh:"有效沟通", g:"交流方面"},
+    {en:"the efficiency of communication", zh:"交流效率", g:"交流方面"},
+    {en:"facilitating effective communication", zh:"促进有效沟通", g:"交流方面"},
+    {en:"promoting the efficiency of communication", zh:"提高交流效率", g:"交流方面"},
+    {en:"information security", zh:"信息安全", g:"交流方面"},
+    {en:"privacy protection", zh:"隐私保护", g:"交流方面"},
+    {en:"bridging communication gaps", zh:"弥合沟通鸿沟", g:"交流方面"},
+    {en:"strengthening interpersonal ties", zh:"加强人际联系", g:"交流方面"},
+    {en:"establishing communication bridges", zh:"建立沟通桥梁", g:"交流方面"},
+    {en:"gathering information", zh:"搜集信息", g:"交流方面"},
+    {en:"narrowing the distance", zh:"缩短距离", g:"交流方面"},
+    {en:"facilitating information sharing", zh:"促进信息共享", g:"交流方面"},
+    {en:"enhancing mutual understanding", zh:"增进相互理解", g:"交流方面"},
+    {en:"building consensus", zh:"建立共识", g:"交流方面"},
+    {en:"collaborating for win-win outcomes", zh:"合作共赢", g:"交流方面"},
+    {en:"deepening friendship and kinship", zh:"增进友谊与亲情", g:"交流方面"},
+    {en:"driving social progress", zh:"推动社会进步", g:"交流方面"},
+    {en:"reducing misunderstanding and prejudice", zh:"减少误解与偏见", g:"交流方面"},
+
+    {en:"technological innovation", zh:"科技创新", g:"科技方面"},
+    {en:"innovation-driven development", zh:"创新驱动发展", g:"科技方面"},
+    {en:"enhancing creativity and innovation", zh:"提升创造力与创新能力", g:"科技方面"},
+    {en:"digital transformation", zh:"数字化转型", g:"科技方面"},
+    {en:"industrial upgrading", zh:"产业升级", g:"科技方面"},
+    {en:"new quality productive forces", zh:"新质生产力", g:"科技方面"},
+    {en:"energy transition", zh:"能源转型", g:"科技方面"},
+    {en:"optimizing the industrial structure", zh:"优化产业结构", g:"科技方面"},
+    {en:"artificial intelligence", zh:"人工智能", g:"科技方面"},
+    {en:"intelligent and smart devices", zh:"智能设备", g:"科技方面"},
+    {en:"high-end manufacturing", zh:"高端制造", g:"科技方面"},
+    {en:"smart city construction", zh:"智慧城市建设", g:"科技方面"}
+  ],
+  agent: [
+    {en:"our government", zh:"我们的政府", g:"机构/主体"},
+    {en:"the government", zh:"政府（26英一）", g:"机构/主体"},
+    {en:"the authorities", zh:"当局", g:"机构/主体"},
+    {en:"the departments concerned", zh:"有关部门（24英一）", g:"机构/主体"},
+    {en:"our universities", zh:"我们的大学（24英二）", g:"机构/主体"},
+    {en:"schools", zh:"学校", g:"机构/主体"},
+    {en:"parents", zh:"家长（26英二）", g:"机构/主体"},
+    {en:"enterprises", zh:"企业", g:"机构/主体"},
+    {en:"new media platforms", zh:"新媒体平台", g:"机构/主体"},
+    {en:"the public", zh:"公众", g:"机构/主体"},
+    {en:"the whole society", zh:"整个社会", g:"机构/主体"},
+    {en:"ourselves", zh:"我们自己", g:"机构/主体"},
+    {en:"individuals", zh:"个人", g:"机构/主体"},
+    {en:"both the government and the public", zh:"政府与公众（2011）", g:"机构/主体"}
+  ],
+  aspectShort: [
+    {en:"our personal development", zh:"我们个人发展", g:"搭配"},
+    {en:"both our daily lives and studies", zh:"我们的生活和学习（2019英一）", g:"搭配"},
+    {en:"industry development", zh:"行业发展", g:"搭配"},
+    {en:"social progress", zh:"社会进步", g:"搭配"},
+    {en:"children's physical and mental development", zh:"儿童身心发展（26英二）", g:"搭配"},
+    {en:"personal growth", zh:"个人成长", g:"搭配"},
+    {en:"the quality of life for the elderly", zh:"老年人生活质量", g:"搭配"}
+  ]
+};
+
+/* ==== data_topic.js ==== */
+/* ================= 主题词库（真题高频） ================= */
+BANKS.topic = [
+  {en:"Chinese residents' health literacy level", zh:"中国居民健康素养水平（23英二）", g:"图表·数据类"},
+  {en:"the ownership of household appliances", zh:"家用电器拥有量（25英一）", g:"图表·数据类"},
+  {en:"the leisure activities of the elderly", zh:"老年人休闲活动（25英二）", g:"图表·数据类"},
+  {en:"the volume of express delivery", zh:"快递业务量（22英二改编）", g:"图表·数据类"},
+  {en:"the ownership of major durable consumer goods", zh:"主要耐用消费品拥有量（25英一）", g:"图表·数据类"},
+  {en:"the participation rate in outdoor activities", zh:"户外活动参与率", g:"图表·数据类"},
+  {en:"graduates' choices", zh:"毕业生的选择（19英二）", g:"图表·选择类"},
+  {en:"students' gains from a labor practice course", zh:"劳动实践课收获（24英二）", g:"图表·态度类"},
+  {en:"consumers' attitudes towards elderly-care robots", zh:"消费者对养老机器人的态度（26英一）", g:"图表·态度类"},
+  {en:"respondents' views on children's outdoor activities", zh:"受访者对儿童户外活动的看法（26英二）", g:"图表·态度类"},
+  {en:"college students' purposes of part-time jobs", zh:"大学生兼职目的（13英二）", g:"图表·选择类"},
+  {en:"employees' satisfaction with their work", zh:"员工工作满意度（2012英二）", g:"图表·态度类"},
+  {en:"the distribution of packaging disposal methods", zh:"包装处理方式分布（22英二改编）", g:"图表·分布类"},
+  {en:"traditional culture", zh:"传统文化（23英一）", g:"图画·抽象类"},
+  {en:"environmental protection", zh:"环境保护（2011英一）", g:"图画·抽象类"},
+  {en:"the spirit of perseverance", zh:"坚持的精神（19英一）", g:"图画·抽象类"},
+  {en:"teamwork and cooperation", zh:"团队合作（2008英一）", g:"图画·抽象类"},
+  {en:"optimism", zh:"乐观（2012英一）", g:"图画·抽象类"},
+  {en:"filial piety", zh:"孝顺（2005英一）", g:"图画·抽象类"},
+  {en:"good habits", zh:"良好习惯（2020英一）", g:"图画·抽象类"},
+  {en:"cultural exchange", zh:"文化交流（2010英一）", g:"图画·抽象类"},
+  {en:"self-discipline", zh:"自律", g:"图画·抽象类"},
+  {en:"innovation", zh:"创新", g:"图画·抽象类"},
+  {en:"mutual trust", zh:"相互信任", g:"图画·抽象类"},
+  {en:"a healthy lifestyle", zh:"健康生活方式（24英一）", g:"混合类"},
+  {en:"infrastructure development", zh:"基础设施建设（24英一）", g:"混合类"},
+  {en:"integrity and benevolence", zh:"诚信与仁慈（文字样题1）", g:"文字·材料类"},
+  {en:"network addiction among children", zh:"儿童网络成瘾（文字样题2）", g:"文字·材料类"},
+  {en:"honesty and transparency", zh:"诚实与坦诚", g:"文字·材料类"},
+  {en:"the benefits and drawbacks of technology", zh:"科技的利与弊", g:"文字·材料类"}
+];
+BANKS.topic2 = BANKS.topic;
+
+/* ==== data_slots.js ==== */
+/* ================= 补充词库 ================= */
+Object.assign(BANKS, {
+  subTopic: [
+    {en:"consumers' attitudes towards elderly-care robots", zh:"消费者对养老机器人的态度（26英一左图）"},
+    {en:"consumers' major concerns about such robots", zh:"消费者对这类机器人的主要担忧（26英一右图）"},
+    {en:"the changes in express delivery volume", zh:"快递业务量的变化（22英二改编左图）"},
+    {en:"the distribution of packaging disposal methods", zh:"包装处理方式的分布（22英二改编右图）"},
+    {en:"students' gains from a labor practice course", zh:"劳动实践课的学生收获（24英二）"},
+    {en:"respondents' views on children's outdoor activities", zh:"受访者对儿童户外活动的看法（26英二）"},
+    {en:"the ownership of major durable consumer goods", zh:"主要耐用消费品拥有量（25英一）"}
+  ],
+  concern: [
+    {en:"safety", zh:"安全（26英一首要关切）"},
+    {en:"price", zh:"价格（26英一）"},
+    {en:"privacy", zh:"隐私"},
+    {en:"reliability", zh:"可靠性"},
+    {en:"ease of use", zh:"易用性"},
+    {en:"after-sales service", zh:"售后服务"}
+  ],
+  nYears: [
+    {en:"three", zh:"三年"},{en:"four", zh:"四年"},{en:"five", zh:"五年（23英二）"},
+    {en:"ten", zh:"十年"},{en:"two", zh:"两年"}
+  ],
+  enablePhrase: [
+    {en:"enables residents to relax and unwind at nearby parks", zh:"使居民能在附近公园放松（24英一）", g:"个人/生活"},
+    {en:"provides residents with convenient public services", zh:"为居民提供便捷公共服务", g:"社会/服务"},
+    {en:"ensures the safety and well-being of the elderly", zh:"保障老年人的安全与安康", g:"社会/服务"},
+    {en:"helps the elderly maintain their independence", zh:"帮助老人保持独立", g:"个人/生活"},
+    {en:"helps him cultivate practical skills and a spirit of cooperation", zh:"培养实践技能与合作精神（24英二）", g:"个人/成长"},
+    {en:"keeps him well informed about current affairs", zh:"让他及时了解时事（25英二）", g:"个人/成长"},
+    {en:"helps reduce the risk of falls and accidents among the elderly", zh:"降低老人跌倒风险（26英一）", g:"社会/服务"},
+    {en:"brings him exceptional writing skills", zh:"带来非凡的写作技巧（2017）", g:"个人/成长"},
+    {en:"makes him fail the final exam", zh:"使他期末考试不及格（2015）", g:"负面"},
+    {en:"helps him develop sharp observation skills and a strong body", zh:"培养敏锐观察力与强壮身体（26英二）", g:"个人/成长"}
+  ],
+  enable3: [
+    {en:"enables them to", zh:"使他们能够"},{en:"helps them", zh:"帮助他们"},
+    {en:"allows them to", zh:"允许他们"},{en:"encourages them to", zh:"鼓励他们"},
+    {en:"deepens their", zh:"加深他们的"},{en:"promotes their", zh:"促进他们的"},
+    {en:"relieves their", zh:"缓解他们的"}
+  ],
+  provideNoTo: [
+    {en:"provide them with great convenience", zh:"为他们提供极大便利（25英一）"},
+    {en:"create more opportunities for them to follow current affairs", zh:"创造更多紧跟时事的机会（25英二）"},
+    {en:"provide the elderly with safer and more convenient care", zh:"为老人提供更安全便捷的照护（26英一）"},
+    {en:"relieve the pressure of aging on families and society", zh:"减轻老龄化压力（26英一）"}
+  ],
+  extraView: [
+    {en:"greater regulation is necessary", zh:"需要更多监管"},
+    {en:"individual efforts matter just as much", zh:"个人努力同样重要"},
+    {en:"the benefits outweigh the drawbacks", zh:"利大于弊"},
+    {en:"more evidence is needed before we draw a conclusion", zh:"下定论前需要更多证据"}
+  ],
+  examples: [
+    {en:"Peking Opera, Kung fu, Shakespeare and so on", zh:"京剧、功夫、莎士比亚等（2010）"},
+    {en:"traditional operas, calligraphy and festivals", zh:"传统戏曲、书法与节日"},
+    {en:"Chinese and Western cultural symbols", zh:"中西文化符号"}
+  ],
+  choiceA: [
+    {en:"work after graduation", zh:"毕业后工作"},{en:"study abroad", zh:"出国留学"},
+    {en:"start a business", zh:"创业"},{en:"use mobile phones in class", zh:"课上用手机"}
+  ],
+  choiceB: [
+    {en:"pursue further study", zh:"继续深造"},{en:"stay at home", zh:"留在国内"},
+    {en:"take a stable job", zh:"找稳定工作"},{en:"concentrate on the lecture", zh:"专心听课"}
+  ],
+  viewA: [
+    {en:"the popularity of the Internet plays a crucial role in communication and information gathering across various areas", zh:"互联网在交流与信息收集中起关键作用（2009）"},
+    {en:"a part-time job improves students' quality of life and strengthens their minds", zh:"兼职提高生活质量并锻炼心智（13英二）"},
+    {en:"using mobile phones to read broadens our horizons", zh:"手机阅读开阔眼界（20英二）"}
+  ],
+  viewB: [
+    {en:"Internet addiction may undermine the mental and physical health of teenagers", zh:"网瘾损害青少年身心健康（2009）"},
+    {en:"the part-time job may have negative influences on the academic record of undergraduates", zh:"兼职影响学业（13英二）"},
+    {en:"fragmented reading makes deep thinking almost impossible", zh:"碎片化阅读破坏深度思考（20英二）"}
+  ]
+});
+
+/* ================= 槽位注册表 ================= */
+var SLOTS = {
+  topic:      {label:"主题词", bank:"topic", hint:"第一段主题词：图表的标题/图例核心词"},
+  topic2:     {label:"主题词②", bank:"topic2", hint:"第二、三段主题词：常比第一段更短（如 养老机器人）"},
+  chart:      {label:"图表", bank:"chart", hint:"line chart / bar chart / pie chart / table"},
+  chartL:     {label:"左图", bank:"chart", hint:"双图表：左侧图的类型"},
+  chartR:     {label:"右图", bank:"chart", hint:"双图表：右侧图的类型"},
+  trendV:     {label:"变化动词", bank:"trendV", hint:"rose steadily 一类动词短语"},
+  trendN:     {label:"变化名词", bank:"trendN", hint:"a steady rise 一类名词短语"},
+  metric:     {label:"指标", bank:"metric", hint:"proportion / percentage / number / level …"},
+  item1:      {label:"图例①", bank:"item", hint:"图例/选项，占比最高项"},
+  itemTop:    {label:"最醒目项", bank:"item", hint:"多方向图中上升最显著的那一支"},
+  item2:      {label:"图例②", bank:"item"},
+  item3:      {label:"图例③", bank:"item"},
+  item4:      {label:"图例④", bank:"item"},
+  item5:      {label:"图例⑤", bank:"item"},
+  verb1:      {label:"动词①", bank:"verb", hint:"increase/rise/decrease…"},
+  verb2:      {label:"动词②", bank:"verb"},
+  verb3:      {label:"动词③", bank:"verb"},
+  speed1:     {label:"程度①", bank:"speed", hint:"sharply / gradually …"},
+  speed2:     {label:"程度②", bank:"speed"},
+  speed3:     {label:"程度③", bank:"speed"},
+  num1:       {label:"数值①", bank:"num"},
+  num2:       {label:"数值②", bank:"num"},
+  num3:       {label:"数值③", bank:"num"},
+  num4:       {label:"数值④", bank:"num"},
+  num5:       {label:"数值⑤", bank:"num"},
+  num6:       {label:"数值⑥", bank:"num"},
+  year1:      {label:"年份①", bank:"year"},
+  year2:      {label:"年份②", bank:"year"},
+  year3:      {label:"年份③", bank:"year"},
+  multiple:   {label:"倍数", bank:"multiple"},
+  unit:       {label:"单位", bank:"unit"},
+  minV:       {label:"最低值", bank:"minmax"},
+  maxV:       {label:"最高值", bank:"minmax"},
+  nYears:     {label:"年数", bank:"nYears"},
+  topicL:     {label:"左图主题", bank:"subTopic"},
+  topicR:     {label:"右图主题", bank:"subTopic"},
+  topicB:     {label:"并列主题", bank:"topic2", hint:"动态·单方向多变量时并列的第二个主题"},
+  group:      {label:"人群", bank:"group", hint:"people 的替换词，越具体越好"},
+  act:        {label:"行为", bank:"act"},
+  cond:       {label:"条件", bank:"cond"},
+  doing:      {label:"动名词", bank:"doing"},
+  concern:    {label:"关注点", bank:"concern"},
+  pic:        {label:"图画", bank:"pic", hint:"picture/drawing/cartoon/photograph"},
+  env:        {label:"环境", bank:"env", hint:"清晰写具体环境，否则用万能环境"},
+  basicV:     {label:"基本动作", bank:"basicV", hint:"站/坐/躺/跑/停留"},
+  subject:    {label:"主体", bank:"subject"},
+  adjPair:    {label:"形容词对", bank:"adjPair", hint:"形容词1 + as well as + 形容词2"},
+  mainAct:    {label:"主要动作", bank:"mainAct"},
+  detail:     {label:"细节", bank:"detail", hint:"表情/心态；想不起来可不写"},
+  evokeV:     {label:"转述动词①", bank:"evokeV"},
+  evokeV2:    {label:"转述动词②", bank:"evokeV"},
+  quote1:     {label:"引语①", bank:"quote"},
+  quote2:     {label:"引语②", bank:"quote"},
+  leftState:  {label:"左图状态", bank:"env"},
+  leftAct:    {label:"左图动作", bank:"mainAct"},
+  leftQuote:  {label:"左图心声", bank:"quote"},
+  rightState: {label:"右图状态", bank:"env"},
+  rightAct:   {label:"右图动作", bank:"mainAct"},
+  rightQuote: {label:"右图心声", bank:"quote"},
+  elements:   {label:"元素", bank:"elements"},
+  container:  {label:"容器", bank:"container"},
+  examples:   {label:"举例", bank:"examples"},
+  caption:    {label:"标题文字", bank:"caption"},
+  importance: {label:"重要", bank:"importance"},
+  problemN:   {label:"问题词", bank:"problemN"},
+  quant:      {label:"数量词", bank:"quant"},
+  reasonN:    {label:"原因词", bank:"reasonN"},
+  explainV:   {label:"解释动词", bank:"explainV"},
+  ideaN:      {label:"观点词", bank:"ideaN"},
+  believeV:   {label:"认为动词", bank:"believeV"},
+  provideVP:  {label:"提供结构", bank:"provideVP"},
+  provideNoTo:{label:"提供结构", bank:"provideNoTo"},
+  benefit:    {label:"好处", bank:"benefit"},
+  result:     {label:"结果从句", bank:"result"},
+  increaseV:  {label:"增加/提升动词", bank:"increaseV"},
+  enableV:    {label:"使能结构", bank:"enableV"},
+  enable3:    {label:"使能结构", bank:"enable3"},
+  enablePhrase:{label:"好处（which 从句）", bank:"enablePhrase", hint:"which 引导的好处，注意用第三人称单数"},
+  smallAsp:   {label:"小方面", bank:"smallAsp"},
+  bigAsp:     {label:"大方面", bank:"bigAsp"},
+  compA:      {label:"对比A（主）", bank:"compA"},
+  compB:      {label:"对比B（次）", bank:"compB"},
+  metaphor:   {label:"比喻", bank:"metaphor"},
+  ignored:    {label:"虚拟前提", bank:"ignored"},
+  catastrophe:{label:"虚拟结果", bank:"catastrophe"},
+  person:     {label:"例子主体", bank:"person"},
+  attV:       {label:"态度动词", bank:"attV"},
+  obj:        {label:"对象", bank:"obj"},
+  timeWord:   {label:"时间过渡", bank:"timeWord"},
+  outcome:    {label:"结果", bank:"outcome"},
+  doSth:      {label:"做某事", bank:"doSth"},
+  objectN:    {label:"名词宾语", bank:"objectN"},
+  actV:       {label:"动作", bank:"actV"},
+  aspectD:    {label:"方面（in + 动名词）", bank:"aspectD"},
+  measureB:   {label:"措施/实施方", bank:"measureB"},
+  measureB2:  {label:"更优措施", bank:"measureB", hint:"“老子说的才是对的”第二句：你认为更合理的做法"},
+  balA:       {label:"平衡A", bank:"balA"},
+  balB:       {label:"平衡B", bank:"balB"},
+  authorView: {label:"作者观点", bank:"authorView"},
+  phenText:   {label:"文字主题", bank:"phenText"},
+  choiceA:    {label:"选择①", bank:"choiceA"},
+  choiceB:    {label:"选择②", bank:"choiceB"},
+  extraView:  {label:"补充观点", bank:"extraView"},
+  viewA:      {label:"观点A", bank:"viewA"},
+  viewB:      {label:"观点B", bank:"viewB"},
+  aspect:     {label:"方面（六大方面）", bank:"aspect", hint:"社会/自然/文化/个人/交流/科技｜万能：社会进步、生活质量、开拓眼界"},
+  aspect2:    {label:"方面②", bank:"aspect"},
+  aspectShort:{label:"方面（简）", bank:"aspectShort"},
+  agent:      {label:"某人/某方", bank:"agent", hint:"政府、机构、个人、民众…"},
+  aimV:       {label:"旨在", bank:"aimV"}
+};
+/* 修正：topic2 与 importance/problemN 依赖的 bank 已在上方 BANKS 中定义 */
+BANKS.topic2 = BANKS.topic;
+BANKS.importance = [
+  {en:"vital", zh:"至关重要的"},{en:"critical", zh:"关键的"},
+  {en:"indispensable", zh:"不可或缺的"},{en:"significant", zh:"重要的"},
+  {en:"irreplaceable", zh:"不可替代的"},{en:"important", zh:"重要的（原句）"}
+];
+BANKS.problemN = [
+  {en:"subject", zh:"主题（原句）"},{en:"phenomenon", zh:"现象"},
+  {en:"situation", zh:"情况"},{en:"issue", zh:"问题"},{en:"scene", zh:"场景"},
+  {en:"circumstance", zh:"情形"},{en:"it", zh:"它"}
+];
+BANKS.aimV = [
+  {en:"is to", zh:"是（原句）", g:"原句"},
+  {en:"aims to", zh:"旨在", g:"替换（删掉 The purpose of）"},
+  {en:"serves to", zh:"起到……作用", g:"替换（删掉 The purpose of）"},
+  {en:"is designed to", zh:"被设计来", g:"替换（删掉 The purpose of）"}
+];
+
+/* ==== data_cards_p1.js ==== */
+/* ================= 句型卡片 ================= */
+var CONN = [
+  {name:"Firstly,", text:"Firstly,", zh:"首先（并列三连）"},
+  {name:"Secondly,", text:"Secondly,", zh:"其次"},
+  {name:"Thirdly,", text:"Thirdly,", zh:"再次"},
+  {name:"To begin with,", text:"To begin with,", zh:"首先（递进起手）"},
+  {name:"What's more,", text:"What's more,", zh:"此外"},
+  {name:"More importantly,", text:"More importantly,", zh:"更重要的是（递进）"},
+  {name:"Most importantly,", text:"Most importantly,", zh:"最重要的是（递进收尾）"},
+  {name:"First and foremost,", text:"First and foremost,", zh:"首要的是（庄重起手）"},
+  {name:"Furthermore,", text:"Furthermore,", zh:"而且（递进）"},
+  {name:"Last but not least,", text:"Last but not least,", zh:"最后同样重要的是"},
+  {name:"For one thing,", text:"For one thing,", zh:"一方面（两句并列）"},
+  {name:"For another,", text:"For another,", zh:"另一方面（两句并列）"},
+  {name:"(不写连接词)", text:"", zh:"不用连接词，直接写原因句"}
+];
+
+var CARDS = [
+/* =========================================================
+   第一段 · 图表：总体描述
+   ========================================================= */
+{
+  id:"dyn1_s1", p:1, no:"1", title:"总体描述", hint:"动态·单方向",
+  variants:[
+    {name:"待选1 · Which 从句",
+     text:"The {chart} above illustrates the changes in {topic} from {year1} to {year2}, during which it {trendV}.",
+     zh:"上方图表展示了年份至年份间主题词的变化，其在这一时期稳步上升。",
+     note:"最通用骨架：主句 + during which 从句。任何动态图都能套，优先背这一句。"},
+    {name:"待选2 · 趋势作宾语",
+     text:"{topic} saw a {trendN} from {year1} to {year2}, as illustrated in the {chart}.",
+     zh:"如该图表所示，主题词在年份至年份间稳步上升。",
+     note:"主题词须为实体（快递业/城市/国家/品牌）。若主题词是数据（水平/率/比例/数量），改用待选 2b。"},
+    {name:"待选2b · 时间作主语",
+     text:"The period from {year1} to {year2} saw a {trendN} in {topic}, as illustrated in the {chart}.",
+     zh:"年份至年份这一时期见证了主题词的稳步上升。",
+     note:"讲义注：主题词是抽象数据时，改由时间作主语，避免 The level saw a rise 这类别扭表达。"},
+    {name:"待选3 · 状语式",
+     text:"According to the data given in the {chart}, the {metric} of {topic} {trendV} from {year1} to {year2}.",
+     zh:"根据图中数据，主题词的（数量/比例/水平）在年份至年份间稳步攀升。",
+     note:"the number of 视情况换为 the level/rate/proportion of；状语前置最像外刊笔法。"}
+  ]
+},
+{
+  id:"dynn_s1", p:1, no:"1", title:"总体描述", hint:"动态·多方向",
+  variants:[
+    {name:"待选1 · Among which 从句",
+     text:"The {chart} above illustrates the changes in {topic} from {year1} to {year2}, among which the rise in {itemTop} was the most striking.",
+     zh:"上方图表展示了年份至年份间主题词的变化，其中单项的上升最为显著。",
+     note:"多变量、走向不一时首选；只点出最醒目的那一支。"},
+    {name:"待选2 · Divergent + with",
+     text:"{topic} experienced divergent trends from {year1} to {year2}, with {itemTop} rising most sharply.",
+     zh:"主题词在年份至年份间经历了分化性的趋势，其中……上升最为剧烈。",
+     note:"divergent trends 概括“走向不一”；with + 宾语 + 现在分词作伴随。"},
+    {name:"待选3 · 状语式 + 对比",
+     text:"As reflected in the {chart}, {topic} moved in opposite directions from {year1} to {year2}, {item1} rising while {item2} falling.",
+     zh:"如图中数据所示，主题词朝不同方向变化，……上升而……下降。",
+     note:"moved in opposite directions 可换为 diverged。三个变量只写对比最鲜明的两个，第三个留给细节句。"},
+    {name:"待选4 · 单方向多变量",
+     text:"The {chart} above illustrates the changes in {topic} and {topicB} from {year1} to {year2}, during which both of them {trendV}.",
+     zh:"上方图表展示了……与……两者在年份至年份间的变化，期间二者同步上升。",
+     note:"讲义注：多个变量走向相同时，把动态·单方向待选句的主题词加 and 即可。"}
+  ]
+},
+{
+  id:"stat_s1", p:1, no:"1", title:"总体描述", hint:"静态图（占比/格局）",
+  variants:[
+    {name:"待选1 · Distribution + with",
+     text:"The {chart} above presents the distribution of {topic} in {year1}, with {item1} accounting for the largest share.",
+     zh:"上方图表呈现了年份主题词的分布，其中……占比最高。",
+     note:"3D 之一 distribution 分布；静态图无年份趋势，用 in 年份而不是 from…to…"},
+    {name:"待选2 · Dominance + with",
+     text:"The {chart} above highlights the dominance of {item1} in {topic}, with it overshadowing all other components.",
+     zh:"上方图表突出了……在主题词中的主导地位，其远超其他各项。",
+     note:"3D 之一 dominance 主导。仅当第一项远高于其他项（断崖式领先）时使用，否则夸张失真。"},
+    {name:"待选3 · Disparity + with",
+     text:"The {chart} above reveals a striking disparity in {topic}, with the proportions ranging from {minV} to {maxV}.",
+     zh:"上方图表揭示了主题词中显著的差距，各项占比从最低值到最高值不等。",
+     note:"3D 之一 disparity 差距。with + 宾语 + 宾补（现在分词/介词短语），最适合“多项差距大”的表。"}
+  ]
+},
+{
+  id:"dual_s1", p:1, no:"1", title:"总体描述", hint:"双图表（静静/动静/动动）",
+  variants:[
+    {name:"待选1 · While 并列",
+     text:"The {chartL} on the left illustrates {topicL}, while the {chartR} on the right presents {topicR}.",
+     zh:"左侧的图展示了……，而右侧的图呈现了……。",
+     note:"双图表首选：一句话交代两幅图，while 天然表对比。"},
+    {name:"待选2 · As for 另起一句",
+     text:"The {chartL} above presents {topicL}. As for the {chartR} on the right, it lists {topicR}.",
+     zh:"上面的图呈现了……。至于右侧的图，它展示了……。",
+     note:"两幅图内容差异大、分句更清楚时用；注意第二句首字母大写。"},
+    {name:"待选3 · 总分结构",
+     text:"The two charts present {topic}: the {chartL} shows {topicL}, while the {chartR} on the right lists {topicR}.",
+     zh:"两幅图呈现了……：左图显示了……，而右侧的图列出了……。",
+     note:"先总后分，最像高分范文；冒号后两个分句要平行。"}
+  ]
+},
+{
+  id:"any_s1", p:1, no:"1", title:"总体描述", hint:"万能场景（没把握/看不懂/时间紧）",
+  variants:[
+    {name:"待选1 · 有变化 ①",
+     text:"Some remarkable changes in {topic} have taken place in the past few years.",
+     zh:"在过去的几年中，主题词发生了一些显著的变化。",
+     note:"万能场景 1-3 用于“有变化”，无需精确读图。"},
+    {name:"待选2 · 有变化 ②",
+     text:"The {chart} above shows the variation in {topic} from {year1} to {year2}.",
+     zh:"上述图表展示了年份至年份间主题词的变化。",
+     note:"万能场景 1-3 用于“有变化”。"},
+    {name:"待选3 · 有变化 ③",
+     text:"The {metric} of {topic} had visible changes during the period from {year1} to {year2}.",
+     zh:"主题词的占比/份额/数量在年份至年份间发生明显变化。",
+     note:"万能场景 1-3 用于“有变化”；抽象、安全、不跑题。"},
+    {name:"待选4 · 有占比 ①",
+     text:"The {chart} shows the distribution of {topic} at a glance, revealing a striking disparity among the options.",
+     zh:"该图一目了然地展示了主题词的分布，揭示了各项之间的巨大差异。",
+     note:"万能场景 4-6 用于“有占比/分布”。"},
+    {name:"待选5 · 有占比 ②",
+     text:"The {chart} above presents {topic}, offering a clear picture of the overall situation.",
+     zh:"上方图表呈现了主题词，清晰地展示了整体情况。",
+     note:"万能场景 4-6 用于“有占比/分布”。"},
+    {name:"待选6 · 有占比 ③",
+     text:"The {chart} above provides information about {topic} from {year1} to {year2}.",
+     zh:"上述图表提供了年份至年份间关于主题词的信息。",
+     note:"25 英一表格可用；也可写 the situation of …。"}
+  ]
+},
+
+/* =========================================================
+   第一段 · 图表：细节描述
+   ========================================================= */
+{
+  id:"chart_s2", p:1, no:"2", title:"细节描述", hint:"动态图公式 1 / 2 / 3",
+  variants:[
+    {name:"公式1 · 双变量对比",
+     text:"To be specific, the {metric} of {item1} {verb1} {speed1} from {num1} to {num2}. Meanwhile, the {metric} of {item2} {verb2} {speed2} from {num3} to {num4} during the same period.",
+     zh:"具体而言，……的占比从……上升至……。与此同时，……的占比从……下降至……。",
+     note:"最常用的动态细节句。三个数据用三种动词和副词（decreased remarkably / climbed significantly / rose slightly）避免句式单调；during the same period 视篇幅可省。"},
+    {name:"公式1b · 三变量对比",
+     text:"To be specific, the {metric} of {item1} {verb1} {speed1} from {num1} to {num2}. However, the {metric} of {item2} {verb2} {speed2} from {num3} to {num4}. Meanwhile, the {metric} of {item3} {verb3} {speed3} from {num5} to {num6}.",
+     zh:"具体而言，……从……降至……。然而，……从……显著攀升至……。与此同时，……从……小幅升至……。",
+     note:"2019 英二三变量写法：However 表反向、Meanwhile 表并行，第三个变量常为小幅变化。"},
+    {name:"公式2 · 首尾对比+增量",
+     text:"To be specific, the {metric} of {item1} was {num1} in {year1}, compared with {num2} in {year2}, showing an increase of {num3} {unit}.",
+     zh:"年份主题词的……为……，而年份为……，增长了……。",
+     note:"句式短、数据感强；增量务必带单位（percentage points / units），这是阅卷人眼里的“会写数据”。"},
+    {name:"公式3 · 倍数关系",
+     text:"To be specific, the {metric} of {item1} in {year2} was {multiple} that in {year1}.",
+     zh:"年份的……是年份的……倍。",
+     note:"2 倍 twice、3 倍 triple、以上 four times；倍数表达三选一：twice that in / twice as high as that in / twice the {year1} figure。"},
+    {name:"公式3b · 同年跨变量",
+     text:"To be specific, the {metric} of {item1} was about {multiple} that of {item2} in {year2}.",
+     zh:"年份……的比例约为……的……倍。",
+     note:"公式 3 稍作改变：同一变量不同年份 → 公式 3；不同变量同一年份 → 本句。"},
+    {name:"分段描述 · 折线图",
+     text:"To be specific, the {metric} of {item1} increased gradually from {num1} in {year1} to {num2} in {year3}. In the next {nYears} years, it climbed remarkably, from {num2} to {num3}.",
+     zh:"……从年份的……逐渐增长到年份的……。在接下来的……年中，它显著攀升，从……升至……。",
+     note:"2023 英二两段式折线写法：先慢后快，用两组动词副词区分速度。"},
+    {name:"峰值/谷值 · 极值句",
+     text:"To be specific, the {metric} of {item1} {peakV} in {year1}, before falling to {num1} in {year2}.",
+     zh:"具体而言，……在年份达到峰值，随后在年份回落至……。",
+     note:"峰值 peak at / reach a peak of / hit a record high / reach an all-time high；谷值 bottom out at / hit a trough / fall to a low。适合“先冲高后回落”的曲线。"},
+    {name:"约数描写 · just over",
+     text:"To be specific, the {metric} of {item1} stood at {approxV} {num1} in {year1}.",
+     zh:"具体而言，……在年份处于……（约）的水平。",
+     note:"约数与修饰：approximately / roughly / nearly / just over / just under。数据读不准时用它，比硬写精确数字安全。"},
+    {name:"对比衔接 · whereas/while",
+     text:"To be specific, the {metric} of {item1} {verb1} {speed1} from {num1} to {num2}, {link} the {metric} of {item2} {verb2} {speed2} from {num3} to {num4}.",
+     zh:"具体而言，……从……变化到……，而……从……变化到……。",
+     note:"对比衔接词：whereas / while / in contrast / by contrast / meanwhile / on the contrary。一句话写完两条线，比分两句更紧凑。"},
+    {name:"持平/波动 · 组合矩阵",
+     text:"To be specific, the {metric} of {item1} remained largely stable at {num1} between {year1} and {year2}.",
+     zh:"该比例在年份至年份间基本持平于……。",
+     note:"动态四方向（增/减/持/波）× 快慢两档 = 8 组合：把 remained largely stable 换为 fluctuated between A and B 即“波动”。"}
+  ]
+},
+{
+  id:"stat_s2", p:1, no:"2", title:"细节描述", hint:"静态图公式（占比并列）",
+  variants:[
+    {name:"公式1 · 占比并列+排名",
+     text:"To be specific, the {metric} of {item1}, {item2}, {item3} and {item4} account for {num1}, {num2}, {num3} and {num4} respectively. Notably, {item1} tops the list, at {num1}, followed by {item2} at {num2}.",
+     zh:"……的比例分别为……。值得注意的是，……居首位，占……；其次是……，占……。",
+     note:"主语是 percentages/proportions，谓语动词用复数 account；A, B, C and D 并列也用复数。排名写两项即可，否则篇幅过大、头重脚轻。"},
+    {name:"公式1简 · 只列占比",
+     text:"To be specific, the {metric} of {item1}, {item2}, {item3} and {item4} account for {num1}, {num2}, {num3} and {num4} respectively.",
+     zh:"……的比例分别为……。",
+     note:"与总体描述句功能重复、或字数过多时，删掉后半句（2026 英二就是这么处理的）。"},
+    {name:"排名式 · 只写两项",
+     text:"To be specific, {item1} tops the list, at {num1}, followed by {item2} at {num2}.",
+     zh:"具体而言，……居首位，占……；其次是……，占……。",
+     note:"总体描述已用 Distribution + with 时，细节只补排名，避免重复。"},
+    {name:"公式2 · 静态倍数",
+     text:"To be specific, the {metric} of {item1} was about {multiple} that of {item2}.",
+     zh:"……的比例约为……的……倍。",
+     note:"静态图倍数 = 同一年份不同变量的对比；与动态公式 3 区分开。"},
+    {name:"例外 · 无趋势表格（2012）",
+     text:"To be specific, half of the employees under 40 and half of those over 50 were uncertain about their satisfaction, while {num1} of those aged 41-50 were dissatisfied.",
+     zh:"40 岁以下员工中有一半、50 岁以上员工中有一半不清楚自己是否满意；而 41 至 50 岁员工中，……表示不满意。",
+     note:"有且仅有 2012 英二不适用上述公式：毫无趋势可言且成分太多，只能选取最具代表性的两个数据。把 num1 改为 64%。"}
+  ]
+},
+{
+  id:"dual_s2", p:1, no:"2", title:"细节描述", hint:"双图表：两幅图各补一句",
+  variants:[
+    {name:"静静 · 占比 + 排名",
+     text:"To be specific, the proportions of {item1}, {item2} and {item3} account for {num1}, {num2} and {num3} respectively. Notably, {item4} tops the list of {topicR}, at {num4}, followed by {item5} at {num5}.",
+     zh:"具体而言，……的受访者比例分别为……。值得注意的是，……在……中居首位，占……；其次是……，占……。",
+     note:"2026 英一静静结合：左图占比并列，右图排名结构，两套公式拼在一句里。"},
+    {name:"动静 · 变化 + 占比",
+     text:"To be specific, the {metric} of {topicL} {verb1} {speed1} from {num1} to {num2}, while the {metric} of {item1} reached {num3}.",
+     zh:"具体而言，左图……从……变化至……，而右图中……达到……。",
+     note:"2022 英二改编（快递量 + 包装处理方式）：左图用动态动词，右图用 reach/account for。"},
+    {name:"动静 · 无指标版",
+     text:"To be specific, {topicL} {verb1} {speed1} from {num1} to {num2}, while the {metric} of {item1} reached {num3}.",
+     zh:"具体而言，左图……从……变化至……，而右图中……的占比达到……。",
+     note:"左图主题已是“the changes in …”这类完整名词短语时用本句，避免 the volume of the changes 这种叠床架屋。"},
+    {name:"两句分述 · 最短",
+     text:"To be specific, the {metric} of {item1} accounts for {num1}. As for the second chart, {item2} tops the list, at {num2}.",
+     zh:"具体而言，……占……。至于第二幅图，……居首位，占……。",
+     note:"时间紧、字数紧时用：每幅图一句，互不纠缠。"}
+  ]
+},
+{
+  id:"social", p:1, no:"3", title:"社会现象", hint:"过渡句 + 现象方案",
+  variants:[
+    {name:"方案1 · 某事变化（发展迅速）",
+     text:"{sub:lead} {topic2} has been developing rapidly in recent years.",
+     zh:"……近年来迅速发展。",
+     note:"实体主题词（industry / economy / cultural tourism industry）搭配 develop；水平/率/数量等抽象主题词改用方案 1b 的 improve/rise/climb。"},
+    {name:"方案1b · 某事变化（水平提升）",
+     text:"{sub:lead} {topic2} has been improving rapidly in recent years.",
+     zh:"……近年来迅速提高。",
+     note:"专治 2023 英二这类“水平/率”主题词：improve / rise / climb，不要用 develop。"},
+    {name:"方案2 · 越来越多人做某事",
+     text:"{sub:lead} the majority of {group} would choose to {act} when {cond}.",
+     zh:"大多数（人群）在（条件）时会选择做某事。",
+     note:"people 是泛指，按题目换 residents / undergraduates / consumers；也可换机构、企业、品牌、国家。25 英二例句即此方案。"},
+    {name:"方案3 · 某事变得普遍",
+     text:"{sub:lead} {doing} is becoming common among {group} nowadays.",
+     zh:"如今……在（人群）中正变得常见。",
+     note:"动名词作主语，最省事；2019 英二“升学越来越流行”即此方案。"},
+    {name:"方案4 · 某事获认同/关注",
+     text:"{sub:lead} {topic2} has drawn growing attention from the public, with {concern} as their top concern.",
+     zh:"……日益受到公众关注，……是他们的首要关切。",
+     note:"态度型图表专用（26 英一养老机器人、26 英二户外活动均考态度），27 考研可能延续。"},
+    {name:"方案5 · 万能（场景/现象）",
+     text:"{sub:lead} this is a common scene in modern society.",
+     zh:"在当今社会，这是一个很常见的场景。",
+     note:"不需要补任何成分的万能方案；也可换 this phenomenon reflects a broader social trend。"}
+  ],
+  subs:[
+    {key:"lead", label:"过渡句", options:[
+      {name:"待选1 · These data lead us to", text:"These data lead us to the conclusion that", zh:"这些数据使我们得出这样的结论"},
+      {name:"待选2 · It is apparent from the statistics", text:"It is apparent from the statistics that", zh:"从统计数据可以明显看出（最稳，写得最多）"},
+      {name:"待选3 · Despite its apparent simplicity", text:"Despite its apparent simplicity, the chart highlights the core information that", zh:"尽管它看似简单，这幅图却突出了核心信息"},
+      {name:"待选4 · clearly communicates", text:"The chart clearly communicates its intended meaning:", zh:"这幅图清楚地传达了它的意图"},
+      {name:"待选5 · a message to the younger generation", text:"The chart appears to convey a message to the younger generation, reminding them that", zh:"这幅图似乎向年轻一代传达了一条信息，提醒他们"},
+      {name:"升级版 · The purpose of the chart aims to remind", text:"The purpose of the chart aims to remind {agent} that", zh:"图表旨在提醒（某人）——升级表写法：be→aims to / serves to，us→the public 等"},
+      {name:"升级版 · convince", text:"The purpose of the chart is to convince {agent} that", zh:"图表意在使（某人）信服——remind 换 convince"},
+      {name:"升级版 · highlight the fact", text:"The chart highlights the fact that", zh:"图表强调这一事实——remind us 换 highlight the fact（删除 us）"}
+    ]}
+  ]
+},
+];
+/* ==== data_vocab.js ==== */
+/* ================= 必背单词表补充（3.1 图表描述词汇） ================= */
+Object.assign(BANKS, {
+  peak: [
+    {en:"peaked at", zh:"达到……的峰值（peak at）", g:"峰值"},
+    {en:"reached a peak of", zh:"达到……的峰值", g:"峰值"},
+    {en:"hit a record high of", zh:"创下……的历史新高", g:"峰值"},
+    {en:"reached an all-time high of", zh:"创下历史最高", g:"峰值"},
+    {en:"bottomed out at", zh:"在……触底（bottom out at）", g:"谷值"},
+    {en:"hit a trough of", zh:"跌至……的低谷", g:"谷值"},
+    {en:"fell to a low of", zh:"跌至……的低点", g:"谷值"}
+  ],
+  approx: [
+    {en:"approximately", zh:"大约（正式）", g:"约数"},
+    {en:"roughly", zh:"大约（常用）", g:"约数"},
+    {en:"nearly", zh:"将近", g:"约数"},
+    {en:"almost", zh:"几乎", g:"约数"},
+    {en:"just over", zh:"略高于", g:"约数"},
+    {en:"just under", zh:"略低于", g:"约数"},
+    {en:"about", zh:"约（最口语）", g:"约数"}
+  ],
+  link: [
+    {en:"whereas", zh:"而（强对比，书面）", g:"对比衔接"},
+    {en:"while", zh:"而（对比/同时）", g:"对比衔接"},
+    {en:"in contrast", zh:"相比之下", g:"对比衔接"},
+    {en:"by contrast", zh:"相比之下（更口语）", g:"对比衔接"},
+    {en:"meanwhile", zh:"与此同时", g:"对比衔接"},
+    {en:"on the contrary", zh:"恰恰相反（反驳用）", g:"对比衔接"}
+  ],
+  rank: [
+    {en:"tops the list", zh:"位居首位（rank first）", g:"排序"},
+    {en:"ranks first", zh:"排名第一", g:"排序"},
+    {en:"follows closely behind", zh:"紧随其后", g:"排序"},
+    {en:"takes the lion's share", zh:"占据最大份额", g:"排序"},
+    {en:"accounts for the largest proportion", zh:"占最大比例", g:"排序"}
+  ]
+});
+SLOTS.peakV = {label:"峰值/谷值动词", bank:"peak", hint:"peaked at / bottomed out at 一类"};
+SLOTS.approxV = {label:"约数", bank:"approx", hint:"approximately / roughly / just over"};
+SLOTS.link = {label:"对比衔接", bank:"link", hint:"whereas / while / in contrast / meanwhile"};
+SLOTS.rankV = {label:"排序结构", bank:"rank", hint:"tops the list / follows closely behind"};
+
+/* ==== data_cards_p2.js ==== */
+/* =========================================================
+   第一段 · 图画 / 文字作文
+   ========================================================= */
+CARDS.push(
+{
+  id:"pic_lead", p:1, no:"1a", title:"图画描述 · 引入句", hint:"升级版 As is shown", open:true,
+  variants:[
+    {name:"升级版 · symbolically depicted",
+     text:"As is symbolically depicted in the {pic} above,",
+     zh:"如上图象征性地描绘的那样，",
+     note:"升级表：shown→illustrated/depicted/portrayed/conveyed/described/presented/indicated/demonstrated/reflected，并加副词 vividly/symbolically/subtly/clearly；picture→drawing/painting/photograph/cartoon。这一句永远可用。"},
+    {name:"待选1 · thought-provoking scene",
+     text:"The {pic} above presents us with a thought-provoking scene:",
+     zh:"上面的漫画向我们呈现了一个发人深省的场景：",
+     note:"冒号后直接接描述，最省连接词。"},
+    {name:"待选2 · Portrayed distinctively",
+     text:"Portrayed distinctively in the {pic} above is a common scene:",
+     zh:"画中清晰地描绘出一个常见的场景：",
+     note:"完全倒装，句子显得高级；主语在后，注意主谓一致。"},
+    {name:"待选3 · What is clearly conveyed",
+     text:"What is clearly conveyed in the {pic} above is that",
+     zh:"图片明确传达出的是",
+     note:"主语从句 + that，后接完整描述句。"},
+    {name:"待选4 · familiar and thought-provoking",
+     text:"Depicted in the {pic} above is a scene that strikes us as both familiar and thought-provoking:",
+     zh:"图中描绘的是一个既熟悉又发人深省的场景：",
+     note:"适合 2018 选课、2020 习惯这类“身边小事”。"},
+    {name:"一图一表 · 图画+图表叠加",
+     text:"As is vividly depicted in the {pic} and clearly shown in the {chart} above,",
+     zh:"如上图生动描绘、下图清晰展示的那样，",
+     note:"2024 英一图画+图表：就是图画描述与图表总体描述的简单叠加，连词用 and。"}
+  ]
+},
+{
+  id:"pic_desc", p:1, no:"1b", title:"图画描述 · 主体", hint:"分类·拆分·组合法",
+  variants:[
+    {name:"单图（非对话）· 完整公式",
+     text:"{env} {basicV} {subject}, {adjPair}, {mainAct}, {detail}.",
+     zh:"在（环境）（基本动作）（主体），（形容词对），（主要动作），（细节）。",
+     note:"公式：环境 + 基本动作 + 主体，形容词对，主要动作，with 细节。主体通常是人或物；细节写表情心态，想不起来可不写。"},
+    {name:"单图（非对话）· 简版",
+     text:"{env} {basicV} {subject}, {mainAct}, {detail}.",
+     zh:"在（环境）（基本动作）（主体），（主要动作），（细节）。",
+     note:"时间紧、图画简单时用；先保证写得出，再追求写得细。"},
+    {name:"单图（对话）· 转述",
+     text:"{env} {basicV} {subject}, {mainAct}. One {evokeV} that {quote1}. {sub:contrast} the other {evokeV2} that {quote2}.",
+     zh:"在（环境）（基本动作）（主体），（主要动作）。其中一人认为……；相比之下，另一人坚持认为……。",
+     note:"推荐转述：人物对话往往十分简洁，直接翻译会显得文章低级。2022 英一听讲座即此写法。"},
+    {name:"单图（对话）· 直述",
+     text:"{env} {basicV} {subject}, {mainAct}. The girl on the left says, \"{quote1}.\" {sub:contrast} the girl on the right answers, \"{quote2}.\"",
+     zh:"……左边的女孩说：“……”相比之下，右边的女孩回答：“……”。",
+     note:"直述要加引号，且对话原文必须与图画一致；能用转述就别用直述。"},
+    {name:"两幅图 · 对照",
+     text:"the girl in the left picture, {leftState}, is fully focused on {leftAct}. {sub:contrast} the boy in the right picture, {rightState}, {rightAct}.",
+     zh:"左边图中的女孩（状态）全神贯注于（动作）。然而右边图中的男孩（状态）（动作）。",
+     note:"两幅图 = 简化后的单图公式重复两次 + 连词：对比用 However/While，相似用 Similarly，同时用 Meanwhile。2020 英一即此写法。"},
+    {name:"一图一表 · 图画+图表",
+     text:"{env} {basicV} {subject}, {mainAct}, {detail}. Referring to the statistics provided in the right {chart}, the {metric} of {topic} {verb1} {speed1} from {num1} in {year1} to {num2} in {year2}.",
+     zh:"（环境）中（主体）（动作），（细节）。而右侧图表的数据显示，主题词的……从年份的……变化到年份的……。",
+     note:"2024 英一：图画描述 + 图表总体描述叠加，各写一句即可，受篇幅限制无需细描。"},
+    {name:"例外 · there be 句型（2010）",
+     text:"there are many {elements} in the {container}, such as {examples}. Below the {container}, a caption reads: \"{caption}\"",
+     zh:"在这个（容器）中有许多（元素），例如……。（容器）下面写着：“……”",
+     note:"2010 文化火锅专用。there be 稍显平淡，可改：The hotpot integrates diverse cultural symbols, such as… / Appearing in the hotpot are…"},
+    {name:"补充 · 只写标题文字",
+     text:"below the {pic}, there is a caption which reads: \"{caption}\"",
+     zh:"图画下方有一句说明文字：“……”",
+     note:"描述困难、首段太短、或标题并非主题词时补；三种句型：Below the drawing, there is a caption which reads / The caption beneath the drawing reads / A profound statement is placed below the picture。"}
+  ],
+  subs:[
+    {key:"contrast", label:"关联词", options:[
+      {name:"By contrast,", text:"By contrast,", zh:"相比之下（对比，原句）"},
+      {name:"However,", text:"However,", zh:"然而（对比）"},
+      {name:"Conversely,", text:"Conversely,", zh:"反之（对比，较正式）"},
+      {name:"On the contrary,", text:"On the contrary,", zh:"恰恰相反（反驳）"},
+      {name:"Meanwhile,", text:"Meanwhile,", zh:"与此同时（同时发生）"},
+      {name:"Similarly,", text:"Similarly,", zh:"同样地（相似）"},
+      {name:"Likewise,", text:"Likewise,", zh:"同样地（相似，较正式）"}
+    ]}
+  ]
+},
+{
+  id:"theme_lead", p:1, no:"2a", title:"主题阐述 · 引入句", hint:"升级版 The purpose of the drawing", open:true,
+  variants:[
+    {name:"升级版 · primary intention",
+     text:"The primary intention of the {pic} is to remind {agent} that",
+     zh:"这幅图的首要意图是提醒（某人）",
+     note:"升级表：is to→aims to / serves to / is designed to（须删除 The purpose of）；us→the public / human beings / children and adults；purpose→message / implication / symbolic meaning；remind→convince / highlight the fact（删除 us）。越具体越好。"},
+    {name:"待选1 · Simple as the drawing is",
+     text:"Simple as the {pic} is, it conveys a truth that",
+     zh:"图画虽然简单，但蕴含真理：",
+     note:"让步倒装，最百搭；后接中心思想句。"},
+    {name:"待选2 · undoubtedly emphasizes",
+     text:"The {pic}, undoubtedly, emphasizes the core idea that",
+     zh:"这幅图，毫无疑问，突出了这样的核心观点：",
+     note:"插入语拉长句子，主谓之间插 undoubtedly。"},
+    {name:"待选3 · What the cartoon mirrors",
+     text:"What the {pic} above mirrors is a thought-provoking phenomenon that",
+     zh:"上图反映的是一个发人深省的现象：",
+     note:"主语从句 + mirrors，适合社会现象类寓意。"},
+    {name:"待选4 · conveys a clear message",
+     text:"The {pic} conveys a clear message:",
+     zh:"这幅图传达了一个明确的信息：",
+     note:"冒号后直接写中心思想，最像真题范文（2005 养老足球赛）。"},
+    {name:"一图一表 · and the chart",
+     text:"Without a doubt, the {pic} and the {chart} emphasize the truth that",
+     zh:"毫无疑问，图和表强调了一个事实：",
+     note:"与 pic_lead 的一图一表句配套使用。"}
+  ]
+},
+{
+  id:"theme_body", p:1, no:"2b", title:"中心思想", hint:"某事很重要 / 引起关注",
+  variants:[
+    {name:"方案1 · 如此重要以至于",
+     text:"{topic2} is so {importance} that the {problemN} deserves the highest level of attention and consideration.",
+     zh:"……如此重要，以至于这个（问题）值得最高程度的关注和考虑。",
+     note:"升级表：important→vital/critical/indispensable/significant/irreplaceable；problem→phenomenon/subject/situation/issue/scene/circumstance/it。主题词要具体到事。"},
+    {name:"方案2 · 给予高度重视",
+     text:"the utmost importance ought to be attached to {topic2} by {agent}.",
+     zh:"（某人）应当给予……高度重视。",
+     note:"2011 环保例句写法；也可换 our government and citizens should give the highest priority to …。“某人”一般指政府、机构、个人、民众。"},
+    {name:"方案2b · 放在首位",
+     text:"{agent} should give the highest priority to {topic2}.",
+     zh:"（某人）应该把……放在首位。",
+     note:"与方案 2 同源，主动语态更简洁。"},
+    {name:"方案3 · 取得重大成就",
+     text:"great accomplishments have been made in {topic2} by {agent}.",
+     zh:"（某人）在……方面取得了巨大成就。",
+     note:"2024 英一公园建设例句写法：great accomplishments / achievements have been made in …。“某人”参考 us 的替换词。"},
+    {name:"方案4 · 双重否定",
+     text:"at no time should {agent} underestimate the significance of {topic2}.",
+     zh:"（某人）任何时候都不应低估……的重要性。",
+     note:"2005 孝顺例句：at no time should the public underestimate the significance of filial piety。"},
+    {name:"方案4b · 重要性被低估",
+     text:"the importance of {topic2} should never be underestimated by {agent}.",
+     zh:"……的重要性绝不应被（某人）低估。",
+     note:"被动版；同类：The importance of … cannot be overstated by …"},
+    {name:"方案5 · 强调句型",
+     text:"it is {topic2} that deserves greater attention.",
+     zh:"正是……值得更多关注。",
+     note:"It is … that 强调句；同类：It is … that must be our top priority / requires our immediate attention。适合创新、选择等抽象主题。"}
+  ]
+},
+{
+  id:"txt_phen", p:1, no:"1", title:"文字改写", hint:"改写现象 + 改写观点",
+  variants:[
+    {name:"改写示范 · 同义替换",
+     text:"Nowadays, gaining trust from others is vital in the workplace. Many people are afraid of damaging their image by appearing unsure.",
+     zh:"如今，在职场中获得他人的信任是至关重要的。许多人害怕表现得不自信会损害自己的形象。",
+     note:"改写思路：同义词/词组替换、主动变被动、被动变主动、高度概括、变换修饰语位置。这是样题 1 的标准改写。"},
+    {name:"不会改写1 · It cannot be denied",
+     text:"It cannot be denied that {topic2} plays a key role in people's work and life.",
+     zh:"不可否认的是，……在人们工作和生活中扮演了重要角色。",
+     note:"实在改写不出来就用“引出主题 + 改写观点”，本句是样题 1 的备用开头。"},
+    {name:"不会改写2 · It is widely accepted",
+     text:"It is widely accepted that {topic2}, a strong and positive life attitude, is the key element for individuals to achieve success.",
+     zh:"人们普遍认为，……作为一种坚强积极的生活态度，是个人取得成功的关键因素。",
+     note:"后面同位语可按主题改：a precious quality / an essential ability。"},
+    {name:"不会改写3 · caused wide concern",
+     text:"Nowadays, it is well-known that the problem of {topic2} has caused wide concern.",
+     zh:"如今，众所周知，……的问题已经引起了广泛关注。",
+     note:"适合负面话题（网瘾、环境恶化）。"},
+    {name:"不会改写4 · has become a common phenomenon",
+     text:"With the rapid advancement of society and technology, {topic2} has become a common phenomenon in our daily lives.",
+     zh:"随着社会和技术的进步，……已经成为我们日常生活中一个普遍的现象。",
+     note:"样题 2（儿童与屏幕）的标准备用开头。"},
+    {name:"不会改写5 · whether to A or B",
+     text:"Currently, whether to {choiceA} or {choiceB} has become a hot topic among people, especially among the young, and heated discussions are on the way.",
+     zh:"目前，是……还是……已经成为人们的热门话题，尤其在年轻人中，激烈的讨论即将到来。",
+     note:"二选一式文字材料专用。"}
+  ],
+  subs:[
+    {key:"pov", label:"改写观点", options:[
+      {name:"The author believes that", text:"The author believes that", zh:"作者认为（最稳）"},
+      {name:"Therefore, the author holds that", text:"Therefore, the author holds that", zh:"因此，作者坚持认为"},
+      {name:"According to the author,", text:"According to the author,", zh:"根据作者的观点，"},
+      {name:"In the opinion of the author,", text:"In the opinion of the author,", zh:"在作者看来，"}
+    ]}
+  ]
+},
+{
+  id:"txt_view", p:1, no:"2", title:"表明态度", hint:"题干硬性要求，必须有",
+  variants:[
+    {name:"强烈同意",
+     text:"I fully agree with the author's viewpoint.",
+     zh:"我完全同意作者的观点。",
+     note:"题干要求“说明是否或在多大程度上同意”，因此这句虽短但绝不能省。样题 1 必须同意。"},
+    {name:"强烈反对",
+     text:"I strongly disagree with the author's opinion.",
+     zh:"我强烈反对作者的观点。",
+     note:"反对时第二、三段的论证方向要跟着改（写危害而非好处）。"},
+    {name:"部分同意",
+     text:"I share the author's view to a large extent, but I also believe that {extraView}.",
+     zh:"我在很大程度上同意作者的观点，但我也认为……。",
+     note:"“在多大程度上”的折中写法，最安全；后面接一个可自圆其说的小补充。"}
+  ]
+}
+);
+
+/* ==== data_cards_p3.js ==== */
+/* =========================================================
+   第二段 · 过渡句 + 原因 ①②③
+   ========================================================= */
+Object.assign(BANKS, {
+  bigAsp: [
+    {en:"expanding their horizons", zh:"开拓眼界（-ing，配 thereby）"},
+    {en:"promoting all-round development", zh:"促进全面发展"},
+    {en:"relieving the burden on families and caregivers", zh:"减轻家庭与照护者负担"},
+    {en:"promoting their physical and mental well-being", zh:"促进身心健康"},
+    {en:"enhancing academic competence", zh:"提高学术能力"},
+    {en:"driving social progress", zh:"推动社会进步"}
+  ]
+});
+
+var REASON_SUBS = [
+  {key:"conn", label:"连接词", options:CONN},
+  {key:"clause", label:"从句（方案三专用）", options:[
+    {name:"It is widely believed that", text:"It is widely believed that", zh:"人们普遍相信"},
+    {name:"It is generally agreed that", text:"It is generally agreed that", zh:"人们普遍认同"},
+    {name:"It is well known that", text:"It is well known that", zh:"众所周知"},
+    {name:"It is commonly known that", text:"It is commonly known that", zh:"众所周知（变体）"},
+    {name:"It is universally known that", text:"It is universally known that", zh:"众所周知（更强）"},
+    {name:"It has been widely accepted that", text:"It has been widely accepted that", zh:"已被广泛接受"},
+    {name:"It has been widely reported that", text:"It has been widely reported that", zh:"已被广泛报道"},
+    {name:"There is no doubt that", text:"There is no doubt that", zh:"毫无疑问"},
+    {name:"Nobody can deny that", text:"Nobody can deny that", zh:"没人能否认"},
+    {name:"An increasing number of people are beginning to realize that", text:"An increasing number of people are beginning to realize that", zh:"越来越多的人开始意识到"},
+    {name:"We must acknowledge the fact that", text:"We must acknowledge the fact that", zh:"我们必须承认"},
+    {name:"We cannot ignore the fact that", text:"We cannot ignore the fact that", zh:"我们不能忽视……的事实"},
+    {name:"Definitely no one can deny the fact that", text:"Definitely no one can deny the fact that", zh:"当然，没有人能否认这个事实"},
+    {name:"A rising number of individuals are coming to the realization that", text:"A rising number of individuals are coming to the realization that", zh:"越来越多的人开始意识到（变体）"},
+    {name:"We are faced with the undeniable fact that", text:"We are faced with the undeniable fact that", zh:"我们面临着不可否认的事实"},
+    {name:"There is a growing recognition that", text:"There is a growing recognition that", zh:"人们越来越认识到"}
+  ]},
+  {key:"phrase", label:"短语（方案三专用）", options:[
+    {name:"play a crucial role in", text:"{topic2} plays a crucial role in {aspect}.", zh:"在……中起关键作用"},
+    {name:"play a vital role in", text:"{topic2} plays a vital role in {aspect}.", zh:"在……中起至关重要的作用"},
+    {name:"play a pivotal role in", text:"{topic2} plays a pivotal role in {aspect}.", zh:"在……中起核心作用"},
+    {name:"play a fundamental role in", text:"{topic2} plays a fundamental role in {aspect}.", zh:"在……中起基础作用"},
+    {name:"play a central role in", text:"{topic2} plays a central role in {aspect}.", zh:"在……中起中心作用"},
+    {name:"lay the foundation of", text:"{topic2} lays the foundation of {aspect}.", zh:"奠定……的基础"},
+    {name:"be a driving force behind", text:"{topic2} is a driving force behind {aspect}.", zh:"是……背后的推动力"},
+    {name:"be the cornerstone of", text:"{topic2} is the cornerstone of {aspect}.", zh:"是……的基石"},
+    {name:"act as a catalyst for", text:"{topic2} acts as a catalyst for {aspect}.", zh:"作为……的催化剂"},
+    {name:"have a beneficial influence on", text:"{topic2} has a beneficial influence on {aspect}.", zh:"对……有积极影响"},
+    {name:"bring advantages in", text:"{topic2} brings advantages in {aspect}.", zh:"在……方面带来优势"},
+    {name:"contribute significantly to", text:"{topic2} contributes significantly to {aspect}.", zh:"对……有重大贡献"},
+    {name:"undermine", text:"{topic2} may undermine {aspect}.", zh:"可能损害……（消极）"},
+    {name:"pose a threat to", text:"{topic2} poses a tremendous threat to {aspect}.", zh:"对……构成巨大威胁（消极）"},
+    {name:"be a double-edged sword for", text:"{topic2} is a double-edged sword for {aspect}.", zh:"对……是双刃剑（争议话题）"},
+    {name:"be strongly dependent on", text:"{aspect} is strongly dependent on {topic2}.", zh:"……高度依赖……（主语调换，注意单复数）"},
+    {name:"be inextricably linked to", text:"{aspect} is inextricably linked to {topic2}.", zh:"……与……密不可分"},
+    {name:"be closely tied to", text:"{aspect} is closely tied to {topic2}.", zh:"……与……紧密相连"}
+  ]}
+];
+
+function mkReason(id,no,title,hint,defConn){
+  return {
+    id:id, p:2, no:no, title:title, hint:hint, defConn:defConn,
+    variants:[
+      {name:"方案一 · 举例论证（个人路线）",
+       text:"{sub:conn} For instance, {person} {attV} {obj}, which {enablePhrase}. {timeWord} {outcome}.",
+       zh:"例如，我的……，……，这使……。在此期间/因此，……。",
+       note:"灵活应变四步组装：①引出例子（For instance / This point can be confirmed by the example of my roommate / To give a common example）②短语写现状 ③which 从句写好处 ④另起一句写心态或结果。放弃背名人事例，专攻身边 2~3 个例子。"},
+      {name:"方案二 · 宾从+定从（群众路线）",
+       text:"{sub:conn} The majority of {group} {believeV} that {topic2} will {provideVP} {benefit}, {result}.",
+       zh:"大多数人认为……会为他们提供一个更广阔的平台去……，这可能会让他们在未来处于有利位置。",
+       note:"believe 可换 maintain / hold the view / are convinced；provide…with a broader platform 可换 present…with a unique chance / create more opportunities for；which 从句逻辑必须与主题匹配（个人发展用 beneficial position，健康用 quality of life）。"},
+      {name:"方案二b · 不带 to 版",
+       text:"{sub:conn} The majority of {group} {believeV} that {topic2} will {provideNoTo}, {result}.",
+       zh:"大多数……相信……会为他们提供极大便利，这在日常生活中不可或缺。",
+       note:"用于“便利/机会”一类好处（2025 英一、2025 英二例句即此写法）。"},
+      {name:"方案三 · 从句 + 六大方面",
+       text:"{sub:conn} {sub:clause} {sub:phrase}",
+       zh:"（从句）……在（六大方面）中起关键作用。",
+       note:"从句只负责拉长句子，重点在省略号后面：善用短语 + 六大方面。加粗部分（主题词 + 某方面）按题换，其余万年不变。这是必须掌握的方案。"},
+      {name:"方案四 · not only…but also 倒装",
+       text:"{sub:conn} Not only does {topic2} {increaseV} {aspect}, but it also {enable3} {benefit}.",
+       zh:"……不仅提升了……，而且使他们能够……。",
+       note:"increase 可换 improve/enhance/promote/boost/cultivate/facilitate/indicate/demonstrate；enable 可换 help/allow/encourage/deepen/promote/relieve。主语是复数时用 do 不用 does，but also 后用 their。"},
+      {name:"方案五 · 虚拟语气（扣帽子）",
+       text:"{sub:conn} If {ignored} {topic2}, {catastrophe}.",
+       zh:"如果我们忽视……的重要性，我们就永远不会成为更好的自己／社会就没有未来。",
+       note:"第一步写主将从现句，第二步 fails→failed、will→would。拿到题目先判断主题落在个人/社会/国家哪一层，再调对应句式，但别扣太狠。建议放在原因三，段尾警醒，适用性极强。"},
+      {name:"方案六 · 对比论证（so as to）",
+       text:"{sub:conn} Compared with {compB}, {compA} can {smallAsp}, thereby {bigAsp}.",
+       zh:"与……相比，……能够……，从而……。",
+       note:"A 是主要内容、B 是次要内容。没有对比就创造对比（24英一用商业项目、26英一用传统人工照护）。so as to 结构也可换 which 引导的定语从句。"},
+      {name:"方案六b · the advantage lies in",
+       text:"{sub:conn} In contrast to {compB}, the advantage of {compA} lies in {aspect}.",
+       zh:"与……相比，……的优势在于……。",
+       note:"名词性收尾，适合方面不好展开时；后接名词或动名词。"},
+      {name:"方案七 · 比喻句",
+       text:"{sub:conn} {topic2} is {metaphor}.",
+       zh:"……是（灯塔/指南针/钥匙/引擎/桥梁/基石）。",
+       note:"按主题词选喻体：意志品质类→engine，心态类→lighthouse，品德类→foundation，思维类→compass，人际合作→bridge。写不出来别硬套；可加插入语拉长：Creativity and innovation, needless to say, are as important as a compass…"}
+    ],
+    subs:REASON_SUBS
+  };
+}
+CARDS.push(
+{
+  id:"p2_trans", p:2, no:"4", title:"过渡句", hint:"第四句 · 引出原因",
+  variants:[
+    {name:"升级表 · There are many reasons",
+     text:"There are {quant} {reasonN} to {explainV} my {ideaN}.",
+     zh:"有很多原因可以解释我的观点。",
+     note:"原句 There are many reasons to explain my idea。必背替换：many→innumerable/countless/abundant/adequate/sufficient/a host of/a variety of/plenty of；reason→factor/cause；explain→contribute to/give rise to/account for；idea→standpoint/perspective/viewpoint/opinion。"},
+    {name:"待选1 · Three key reasons",
+     text:"Three key reasons, from my perspective, account for this phenomenon.",
+     zh:"在我看来，三个关键原因可以解释这一现象。",
+     note:"简洁有力，英一三点原因首选。"},
+    {name:"待选2 · can be summarized as",
+     text:"From my perspective, the causes of {topic2} can be summarized as three main aspects.",
+     zh:"在我看来，……的成因可以归结为三个主要方面。",
+     note:"先把主题词点出来，读者更清楚。"},
+    {name:"待选3 · Several factors",
+     text:"Several factors contribute to this phenomenon.",
+     zh:"几个因素促成了这一现象。",
+     note:"最短最稳，英二两点原因也适用。"},
+    {name:"待选4 · A variety of reasons",
+     text:"A variety of reasons can be cited to account for this phenomenon.",
+     zh:"有很多原因可以用来解释这一现象。",
+     note:"被动 + 情态，句子长一点。"},
+    {name:"待选5 · A combination of factors",
+     text:"A combination of factors has contributed to the tendency reflected in this {chart}.",
+     zh:"多种因素共同促成了这张图表所反映的趋势。",
+     note:"图表作文专用，与第一段衔接最紧。"}
+  ]
+},
+mkReason("r1","5","原因①","第五句 · 原因分析","Firstly,"),
+mkReason("r2","6","原因②","第六句 · 原因分析","What's more,"),
+mkReason("r3","7","原因③","第七句 · 原因分析","Last but not least,"),
+{
+  id:"p2_debate", p:2, no:"4b", title:"争议话题（可选）", hint:"正反论证：换掉过渡句",
+  optional:true,
+  variants:[
+    {name:"过渡 · pros and cons",
+     text:"Every situation has its pros and cons, and this issue is not exempt. {sub:formula}",
+     zh:"每种情况都有其利弊，这个问题也不例外。",
+     note:"争议话题（06偶像崇拜、09网络、13毕业生选择、13兼职、15手机聚会、19英二、20英二手机阅读）需要正反论证时，先用本句替换过渡句。"},
+    {name:"过渡 · remains controversial",
+     text:"In fact, this issue remains controversial. {sub:formula}",
+     zh:"事实上，这个问题仍有争议。",
+     note:"三种争议过渡任选：Every situation has its pros and cons…/ In fact, this issue remains controversial. / When it comes to …, opinions vary widely."},
+    {name:"过渡 · opinions vary widely",
+     text:"When it comes to {topic2}, opinions vary widely. {sub:formula}",
+     zh:"涉及……时，意见分歧很大。",
+     note:"题目里出现“争议/看法不一”信号词时启用。"}
+  ],
+  subs:[
+    {key:"formula", label:"正反公式", options:[
+      {name:"公式1 · On the one hand",
+       text:"On the one hand, some people hold the view that {viewA}. On the other hand, the rest insist that {viewB}. Nevertheless, when we are confronted with {topic2}, we should be sensible enough to discard the dross and select the essence.",
+       zh:"一方面，一些人认为……；另一方面，剩下的人坚持认为……。然而面对……，我们应取其精华去其糟粕。",
+       note:"省略号代表的是七个方案里的句子或部分句子。2009 网络例句即此模板。"},
+      {name:"公式2 · Proponents / critics",
+       text:"Proponents of this trend argue that {viewA}. However, critics are quick to point out its adverse consequences, such as {viewB}. It is, therefore, imperative for us to adopt a discerning attitude, carefully weighing its merits against its demerits.",
+       zh:"该趋势的支持者认为……；然而批评者迅速指出其不利后果，例如……。因此我们必须采取有辨识力的态度，仔细权衡利弊。",
+       note:"更“高级”的争议句式，适合 13 英二兼职、20 英二手机阅读。"},
+      ]}
+  ]
+}
+);
+
+/* =========================================================
+   第三段 · 总结全文 + 具体措施 + 畅想未来
+   ========================================================= */
+CARDS.push(
+{
+  id:"p3_sum", p:3, no:"8", title:"总结全文", hint:"第八句 · 重申中心思想",
+  variants:[
+    {name:"公式1 · 得出结论（关注）",
+     text:"{sub:start} It is not difficult to draw the conclusion that enough attention must be paid to {topic2} by {agent}.",
+     zh:"不难得出结论：（某人）必须对……给予足够的重视。",
+     note:"注意根据情况变换时态：has been paid to（已重视）/ must be paid to（应重视）。24 英一例句用 has been paid to the infrastructure by the departments concerned。"},
+    {name:"公式2 · bear in mind",
+     text:"{sub:start} we should bear in mind that {topic2} is of great importance to {aspectShort}.",
+     zh:"我们应牢记在心的是，……对……很重要。",
+     note:"特别适用于意志品质类（the spirit of perseverance / never giving up / lifelong learning / selfless dedication / cooperation）。"},
+    {name:"公式3 · not an option, but a necessity",
+     text:"{sub:start} the discussion leads us to the realization that {topic2} is not an option, but a necessity.",
+     zh:"讨论使我们认识到，……不是一种选择，而是一种必要。",
+     note:"把主题词换成 cultural inheritance / high-quality lifestyle / elderly care 即可通吃。"},
+    {name:"公式4 · integral part of our lives",
+     text:"{sub:start} we are faced with the undeniable fact that {topic2} has become an integral part of {aspectShort}.",
+     zh:"我们面临着一个不可否认的事实：……已经成为……中不可或缺的一部分。",
+     note:"互联网、手机、户外活动一类“已融入生活”的主题专用。"},
+    {name:"公式4b · increasingly accessible",
+     text:"{sub:start} we are faced with the undeniable fact that {topic2} has become increasingly accessible to {group}.",
+     zh:"我们面临着一个不可否认的事实：……已经越来越为（人群）所接受。",
+     note:"2026 英一例句：have become increasingly popular with the general public。"},
+    {name:"方案二 · 否定倒装（give up）",
+     text:"{sub:start} by no means should we give up our efforts to {doSth}.",
+     zh:"我们决不能放弃在……上的努力。",
+     note:"结构：否定词 + 助动词 + 主谓宾。否定词可换 Never can we / On no account should we / Under no circumstances can we / By no means should we。"},
+    {name:"方案二b · 否定倒装（pursuit）",
+     text:"{sub:start} under no circumstances should we cease our pursuit of {objectN}.",
+     zh:"在任何情况下，我们都不应停止对……的追求。",
+     note:"动词短语变体：give up our efforts to / underestimate the profound impact of / cease our pursuit of / doubt the importance of。"},
+    {name:"方案三 · 万能但不够针对",
+     text:"{sub:start} it is evident that the trend reflected in the {chart} deserves our careful consideration.",
+     zh:"很明显，图表反映的趋势值得我们认真考虑。",
+     note:"万能且无需修改任何内容，应急使用；同类：There is no denying that further attention must be paid to… / Given the above analysis, it is not difficult to understand why…"},
+    {name:"趋势预测1 · continue to increase",
+     text:"Taking into account all the factors discussed above, we may reasonably conclude that, with the passage of time and the advancement of society, the number of {group} who choose to {doSth} will continue to increase in the coming years.",
+     zh:"综合考虑上述所有因素，我们可以合理地得出结论：随着时代变迁和社会进步，未来几年选择……的人数将持续增加。",
+     note:"图表作文第三段补充写法：总结全文 + 趋势预测，最简单；深度不及建议措施，仅应急使用。"},
+    {name:"趋势预测2 · is likely to continue",
+     text:"For the reasons given above, we can predict that an increasing number of {group} will focus on {topic2}, and this trend is likely to continue in the near future.",
+     zh:"基于上述原因，我们可以预测，将有越来越多的人关注……，这一趋势在不久的将来很可能会持续。",
+     note:"预测 + 延续，两句合一。"},
+    {name:"趋势预测3 · witness larger-scale development",
+     text:"Given the arguments above, the next few years will also witness larger-scale, faster-paced, and higher-quality development in {topic2}.",
+     zh:"鉴于上述论点，未来几年……也将迎来更大规模、更快速度和更高水平的发展。",
+     note:"三形容词并列，句式漂亮，适合发展类主题。"},
+    {name:"趋势预测4 · bound to continue",
+     text:"In conclusion, the phenomenon reflected in the chart is bound to continue, and it will keep exerting a positive influence on {aspect}.",
+     zh:"总之，图表所反映的现象必将持续下去，并将继续对……带来积极影响。",
+     note:"静态图应急用；若主题偏中性会略显生硬。"},
+    {name:"趋势预测5 · gain greater significance",
+     text:"In a word, as society keeps moving forward, {topic2} is likely to gain even greater significance in the days to come.",
+     zh:"总之，随着社会不断前进，……在未来很可能变得更加重要。",
+     note:"2026 英一双图表例句写法。"}
+  ],
+  subs:[
+    {key:"start", label:"句首标志", options:[
+      {name:"All in all,", text:"All in all,", zh:"总而言之（原书推荐）"},
+      {name:"To sum up,", text:"To sum up,", zh:"总结来说"},
+      {name:"In general,", text:"In general,", zh:"总的来说"},
+      {name:"Generally speaking,", text:"Generally speaking,", zh:"一般而言"},
+      {name:"On the whole,", text:"On the whole,", zh:"总体上"},
+      {name:"（不加标志）", text:"", zh:"直接进入总结句"}
+    ]}
+  ]
+},
+{
+  id:"p3_measure", p:3, no:"9·10", title:"具体措施", hint:"第九、十句 · 一句一个角度",
+  variants:[
+    {name:"方案一 · 两句并列（五角度）",
+     text:"{sub:m1} {sub:angle1}. {sub:m2} {sub:angle2}.",
+     zh:"一方面，……。另一方面，……。",
+     note:"五个角度：政府作为、公民意识、个人行为、媒体呼吁、家庭教育。任选三个角度掌握，肯定命中两个。可单独使用也可用连接词相连。"},
+    {name:"方案二 · 老子说的才是对的①",
+     text:"When it comes to concrete solutions, some people hold that {measureB} must take responsibility for {topic2}. In fact, it is {aspectD} that plays a crucial role in {aspectD2}.",
+     zh:"当涉及具体解决方案时，一些人认为……必须对……负责。事实上，……在……中起着至关重要的作用。",
+     note:"第一句抛出大多数人的做法，In fact 转折给出自己的看法。A=别人认为的实施方，C=你认为的实施方（培养公民意识一类），D 不要和 B 一模一样。主题词、实施方、措施都短时才用，否则字数太多。"},
+    {name:"方案二 · 老子说的才是对的②",
+     text:"On the surface, {measureB} seems to be a sound solution, but on careful consideration, we find that {measureB2} is a more reasonable and effective approach.",
+     zh:"表面上，……似乎是一个合理的解决方案，但仔细考虑后，我们发现……才是更合理、更有效的方法。",
+     note:"On the surface 让步 + but 转折，观点鲜明；26 英一英二都不太适合本方案（字数太多），适合措施短小的题目。"}
+  ]
+},
+{
+  id:"p3_future", p:3, no:"11", title:"畅想未来", hint:"第十一句 · 万能句",
+  variants:[
+    {name:"待选1 · harmonious balance",
+     text:"If these proposed measures are implemented, a harmonious balance between {balA} and {balB} will be within our reach.",
+     zh:"如果这些提议的措施得以实施，……与……之间的平衡触手可及。",
+     note:"需按主题改 A、B 两个词；26 英二例句用 children's physical exercise 与 intellectual development。"},
+    {name:"待选2 · Only through joint efforts",
+     text:"Only through the joint efforts of {agent} can we effectively {doSth}.",
+     zh:"只有通过（各方）的共同努力，我们才能有效……。",
+     note:"部分倒装；26 英一例句：the government, enterprises and the public … promote the healthy development of elderly-care robots。"},
+    {name:"待选3 · brighter future",
+     text:"In this way, hopefully, we may embrace a brighter and more promising future.",
+     zh:"这样，我们才有希望拥抱一个更光明、更有希望的未来。",
+     note:"不需要改任何词，纯套话；时间紧、字数不够时用。"},
+    {name:"待选4 · no better time than now",
+     text:"There is no better time than now for us to take collective and decisive action to address this pressing issue.",
+     zh:"现在是我们采取集体和果断行动解决这一紧迫问题的最佳时机。",
+     note:"不需改动，语气强；同样属于应急套话。"}
+  ]
+}
+);
+
+/* ==== data_modes.js ==== */
+/* ================= 措施角度（补充） ================= */
+var ANGLE_OPTS = [
+  {name:"政府 · 制定法律", text:"it is imperative for the authorities to make strict laws to {doSth}", zh:"当局必须制定严格法律来……（2011）"},
+  {name:"政府 · 制定政策", text:"it is imperative for the authorities to formulate policies to {doSth}", zh:"当局必须制定政策来……"},
+  {name:"政府 · 拨付资金", text:"it is imperative for the authorities to allocate more funds to {doSth}", zh:"当局必须拨付更多资金来……（25英二）"},
+  {name:"政府 · 公共倡议", text:"it is imperative for the authorities to launch public initiatives to {doSth}", zh:"当局必须发起公共倡议来……"},
+  {name:"政府 · 严格监管", text:"it is imperative for the authorities to formulate strict regulations to ensure the safety of {topic2}", zh:"当局必须制定严格法规确保……的安全（26英一）"},
+  {name:"政府 · 完善设施", text:"it is imperative for the authorities to improve public facilities to provide a safer and more friendly environment for {topic2}", zh:"当局必须完善公共设施，为……提供更安全友好的环境（26英二）"},
+  {name:"政府 · 增加投入", text:"it is imperative for the authorities to increase investment continuously", zh:"当局必须不断增加投资（24英一）"},
+  {name:"企业 · 提升质量", text:"enterprises ought to spare no pains to improve product quality and reduce commodity prices", zh:"企业应不遗余力提高质量、降低价格（25英一）"},
+  {name:"高校 · 课程设置", text:"universities should integrate more practical courses into the curriculum", zh:"大学应把更多实践课纳入课程体系（24英二）"},
+  {name:"家长学校 · 创造机会", text:"parents and schools should create more opportunities for children to participate in outdoor activities", zh:"家长和学校应为孩子创造更多户外活动机会（26英二）"},
+  {name:"公民意识 · 提高认识", text:"we should also raise public awareness of {topic2}", zh:"我们还应该增强公众对……的认识（2011）"},
+  {name:"公民意识 · 提高觉悟", text:"it is high time that we raised public consciousness of {topic2}", zh:"是时候增强公众对……的意识了"},
+  {name:"个人行为 · 不遗余力", text:"we should spare no pains to {doSth}", zh:"我们应该不遗余力地……（2011）"},
+  {name:"个人行为 · 职责所在", text:"it is our duty to {doSth}", zh:"……是我们的职责（We should 的替换）"},
+  {name:"个人行为 · 具体行动", text:"we are obliged to take concrete steps to {doSth}", zh:"我们有义务采取具体措施来……"},
+  {name:"媒体 · 新媒体呼吁", text:"new media platforms, ranging from short video apps to social media, should appeal to users to {doSth}", zh:"新媒体平台应呼吁用户……（24英一）"},
+  {name:"媒体 · 社交平台", text:"social media platforms should play a pivotal role in raising public awareness of {topic2}", zh:"社交平台应在提高公众对……的认识上发挥关键作用"},
+  {name:"家庭 · 以身作则", text:"parents and teachers should set a good example for children in {topic2} through their own behavior", zh:"家长和老师应在……方面为孩子树立榜样"},
+  {name:"家庭 · 榜样作用", text:"parents can serve as role models for their children by {doing} in daily lives", zh:"家长可以通过日常生活中的……为孩子树立榜样"}
+];
+CARDS.forEach(function(c){
+  if(c.id === "p3_measure"){
+    c.subs = [
+      {key:"m1", label:"连接①", options:[
+        {name:"For one thing,", text:"For one thing,", zh:"一方面（两句并列）"},
+        {name:"Firstly,", text:"Firstly,", zh:"首先"},
+        {name:"To begin with,", text:"To begin with,", zh:"首先"}
+      ]},
+      {key:"m2", label:"连接②", options:[
+        {name:"For another,", text:"For another,", zh:"另一方面（两句并列）"},
+        {name:"Secondly,", text:"Secondly,", zh:"其次"},
+        {name:"What's more,", text:"What's more,", zh:"此外"}
+      ]},
+      {key:"angle1", label:"措施①", options:ANGLE_OPTS},
+      {key:"angle2", label:"措施②", options:ANGLE_OPTS}
+    ];
+  }
+});
+/* 补：方案二需要第二个“措施”槽 */
+SLOTS.aspectD2 = {label:"方面（in + 动名词）", bank:"aspectD"};
+
+/* ================= 题型（组合卡片） ================= */
+var MODES = [
+  {id:"dyn1", name:"图表·动态单方向", tag:"图表", desc:"一条曲线/一组柱，一个方向：升或降（23英二、25英一）",
+   cards:["dyn1_s1","chart_s2","social"]},
+  {id:"dynN", name:"图表·动态多方向", tag:"图表", desc:"多变量走向不一：就业降、深造升、创业微升（19英二）",
+   cards:["dynn_s1","chart_s2","social"]},
+  {id:"stat", name:"图表·静态图", tag:"图表", desc:"只给同一年份的占比/分布，没有趋势（24英二、26英二）",
+   cards:["stat_s1","stat_s2","social"]},
+  {id:"dual", name:"图表·双图表", tag:"图表", desc:"两幅图并置：静静/动静/动动，骨架不换只换词（26英一）",
+   cards:["dual_s1","dual_s2","social"]},
+  {id:"any", name:"图表·万能场景", tag:"图表", desc:"读不懂、时间紧时的保底写法：有变化 / 有占比",
+   cards:["any_s1","chart_s2",{id:"stat_s2",on:false,excl:"detail"},"social"]},
+  {id:"picture", name:"图画作文", tag:"图画", desc:"透过图画看寓意：描述 + 主题阐述（19/20/22/23英一）",
+   cards:["pic_lead","pic_desc","theme_lead","theme_body"]},
+  {id:"mixed", name:"图画+图表", tag:"图画", desc:"24英一：图画描述与图表总体描述简单叠加",
+   cards:["pic_lead","pic_desc","theme_lead","theme_body"]},
+  {id:"text", name:"文字作文", tag:"文字", desc:"文字改写 + 表明态度，二三段与图画图表相同",
+   cards:["txt_phen","txt_view"]}
+];
+var P2P3 = ["p2_trans",{id:"p2_debate",on:false},"r1","r2","r3","p3_sum","p3_measure","p3_future"];
+MODES.forEach(function(m){
+  if(m.id === "any"){ m.cards[1] = {id:"chart_s2", excl:"detail"}; }
+  m.all = m.cards.concat(P2P3);
+});
+
+/* ==== data_presets.js ==== */
+/* ================= 真题预设 ================= */
+var PRESETS = [
+{
+  id:"p23y2", name:"2023 英二 · 居民健康素养（动态单方向）", mode:"dyn1",
+  cards:{
+    dyn1_s1:{v:"待选1"}, chart_s2:{v:"分段描述"}, social:{v:"方案1b", subs:{lead:"待选2"}},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"There is no doubt that", phrase:"play a crucial role in"}},
+    r2:{v:"方案五", subs:{conn:"What's more,"}},
+    r3:{v:"方案一", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式1", subs:{start:"All in all,"}},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定政策", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    chart:"line chart", topic:"Chinese residents' health literacy level", year1:"2012", year2:"2021", year3:"2016",
+    trendV:"rose steadily", metric:"health literacy level", item1:"Chinese residents",
+    num1:"8.8%", num2:"11.58%", num3:"25.40%", nYears:"five",
+    topic2:"residents' health literacy level", aspect:"public health security",
+    group:"residents", doing:"pursuing a healthy lifestyle", act:"choose a healthy lifestyle", cond:"they are able",
+    person:"my grandfather", attV:"is committed to", obj:"morning exercise in the park",
+    enablePhrase:"keeps him physically and mentally healthy", timeWord:"During this period,", outcome:"his health has improved noticeably",
+    ignored:"we ignored the importance of", catastrophe:"we would never become a better version of ourselves",
+    agent:"the authorities", doSth:"pursue a healthier lifestyle"
+  }
+},
+{
+  id:"p19y2", name:"2019 英二 · 毕业生去向（动态多方向）", mode:"dynN",
+  cards:{
+    dynn_s1:{v:"待选1"}, chart_s2:{v:"公式1b"}, social:{v:"方案3", subs:{lead:"待选2"}},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案二", subs:{conn:"Firstly,"}},
+    r2:{v:"方案六", subs:{conn:"What's more,"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式1"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 拨付资金", angle2:"媒体 · 社交平台"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    chart:"bar chart", topic:"graduates' choices", year1:"2013", year2:"2018",
+    itemTop:"the proportion pursuing further study",
+    item1:"graduates who choose to enter the workforce", item2:"graduates who pursue further study", item3:"graduates who start a business",
+    metric:"percentage", verb1:"decreased", speed1:"remarkably", num1:"68.1%", num2:"60.7%",
+    verb2:"climbed", speed2:"significantly", num3:"26.3%", num4:"34.0%",
+    verb3:"rose", speed3:"slightly", num5:"1.3%", num6:"2.6%",
+    doing:"pursuing further education", group:"undergraduates",
+    topic2:"pursuing a higher degree", believeV:"hold", provideVP:"provide them with a broader platform to", benefit:"develop themselves",
+    result:"which may put them in a beneficial position in the future",
+    compB:"employment", compA:"pursuing further education", smallAsp:"expand their horizons", bigAsp:"promoting all-round development",
+    ignored:"we ignored the importance of", catastrophe:"we would never become a better version of ourselves",
+    agent:"the authorities", doSth:"improve the quality of higher education", objectN:"a higher degree"
+  }
+},
+{
+  id:"p24y2", name:"2024 英二 · 劳动实践课（静态图）", mode:"stat",
+  cards:{
+    stat_s1:{v:"待选1"}, stat_s2:{v:"公式1"}, social:{on:false},
+    p2_trans:{v:"待选4"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"Definitely no one can deny the fact that", phrase:"play a crucial role in"}},
+    r2:{v:"方案一", subs:{conn:"What's more,"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"高校 · 课程设置", angle2:"个人行为 · 不遗余力"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    chart:"bar chart", metric:"percentages", topic:"students' gains from a university's labor practice course", year1:"2024",
+    item1:"acquiring relevant knowledge", item2:"improving practical skills", item3:"feeling comfortable", item4:"enhancing cooperation capacity",
+    num1:"91.3%", num2:"84.8%", num3:"54.4%", num4:"32.6%",
+    topic2:"participating in labor practice classes", aspect:"personal growth", group:"undergraduates",
+    person:"my roommate, Kevin,", attV:"is enthusiastic about", obj:"attending labor practice classes",
+    enablePhrase:"helps him cultivate practical skills and a spirit of cooperation", timeWord:"Consequently,", outcome:"he earns the respect of our entire class",
+    metaphor:"the engine that propels students' personal growth and all-round development",
+    aspectShort:"our personal development", doSth:"attend labor practice classes"
+  }
+},
+{
+  id:"p26y1", name:"2026 英一 · 养老机器人（双图表·静静）", mode:"dual",
+  cards:{
+    dual_s1:{v:"待选1"}, dual_s2:{v:"静静"}, social:{v:"方案4", subs:{lead:"待选2"}},
+    p2_trans:{v:"待选3"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"Definitely no one can deny the fact that", phrase:"play a crucial role in"}},
+    r2:{v:"方案二b", subs:{conn:"What's more,"}},
+    r3:{v:"方案六", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式1"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 严格监管", angle2:"企业 · 提升质量"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    chartL:"pie chart", chartR:"bar chart", chart:"chart", metric:"percentages",
+    topicL:"consumers' attitudes towards elderly-care robots", topicR:"their major concerns about such robots",
+    topic:"consumers' perceptions of elderly-care robots",
+    item1:"fully accepting them", item2:"partially accepting them", item3:"rejecting them", item4:"safety", item5:"price",
+    num1:"39.3%", num2:"32.8%", num3:"27.9%", num4:"46.3%", num5:"24.9%",
+    topic2:"elderly-care robots", concern:"safety", aspect:"improving the quality of life for the elderly",
+    group:"citizens", believeV:"believe", provideNoTo:"provide the elderly with safer and more convenient care",
+    result:"which may relieve the pressure of aging on families and society",
+    compB:"traditional human care", compA:"elderly-care robots", smallAsp:"provide 24-hour assistance",
+    bigAsp:"relieving the burden on families and caregivers", agent:"the government", doSth:"develop elderly-care robots"
+  }
+},
+{
+  id:"p26y2", name:"2026 英二 · 儿童户外活动（静态图）", mode:"stat",
+  cards:{
+    stat_s1:{v:"待选1"}, stat_s2:{v:"公式1简"}, social:{v:"方案4", subs:{lead:"待选3"}},
+    p2_trans:{v:"待选3"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"Definitely no one can deny the fact that", phrase:"play a crucial role in"}},
+    r2:{v:"方案二", subs:{conn:"What's more,"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 完善设施", angle2:"家长学校 · 创造机会"}},
+    p3_future:{v:"待选1"}
+  },
+  slots:{
+    chart:"bar chart", metric:"percentages", topic:"respondents' views on children's outdoor activities", year1:"2026",
+    item1:"satisfying curiosity", item2:"developing observational skills", item3:"strengthening physical fitness", item4:"enhancing parent-child interaction",
+    num1:"54.6%", num2:"54.5%", num3:"37.2%", num4:"33.2%",
+    topic2:"outdoor activities", concern:"developing children's curiosity", aspect:"children's physical and mental development",
+    group:"parents", believeV:"believe", provideVP:"create more opportunities for them to", benefit:"satisfy their curiosity and interact with nature",
+    result:"which is indispensable to their healthy growth",
+    metaphor:"the bridge between children and the natural world",
+    aspectShort:"children's physical and mental development",
+    balA:"children's physical exercise", balB:"intellectual development"
+  }
+},
+{
+  id:"p25y1", name:"2025 英一 · 家用电器表格（万能场景）", mode:"any",
+  cards:{
+    any_s1:{v:"待选6"}, chart_s2:{v:"公式1"}, social:{v:"方案4", subs:{lead:"待选1"}},
+    p2_trans:{v:"待选5"},
+    r1:{v:"方案二b", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"There is no doubt that", phrase:"contribute significantly to"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"趋势预测1"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"企业 · 提升质量", angle2:"媒体 · 社交平台"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    chart:"table", topic:"the average ownership of major durable consumer goods per 100 households in China",
+    year1:"2014", year2:"2023",
+    metric:"ownership", item1:"air conditioners", verb1:"increased", speed1:"dramatically",
+    num1:"75.2 units in 2014", num2:"145.9 units in 2023",
+    item2:"refrigerators", verb2:"increased", speed2:"modestly", num3:"85.5 units", num4:"103.4 units",
+    topic2:"household appliances", concern:"convenience", group:"residents", believeV:"believe",
+    provideNoTo:"provide them with great convenience", result:"which is indispensable in their daily lives",
+    aspect:"a convenient and comfortable modern life",
+    metaphor:"the foundation of a convenient and comfortable modern life",
+    doSth:"buy smart home appliances", agent:"the authorities and enterprises"
+  }
+},
+{
+  id:"p22y2", name:"2022 英二改编 · 快递与包装（双图表·动静）", mode:"dual",
+  cards:{
+    dual_s1:{v:"待选1"}, dual_s2:{v:"动静 · 无指标"}, social:{v:"方案3", subs:{lead:"待选2"}},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案七", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"There is no doubt that", phrase:"pose a threat to"}},
+    r3:{v:"方案六", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式3"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定法律", angle2:"公民意识 · 提高认识"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    chartL:"line chart", chartR:"pie chart", metric:"share",
+    topicL:"the changes in express delivery volume", topicR:"the distribution of packaging disposal methods",
+    topic:"the rapid growth of online shopping",
+    verb1:"rose", speed1:"dramatically", num1:"2018", num2:"2020",
+    item1:"packaging disposed of by recycling", num3:"45%",
+    doing:"shopping online", group:"consumers",
+    topic2:"online shopping", aspect:"environmental protection",
+    metaphor:"the bridge between consumers and a more convenient life",
+    ignored:"we ignored the importance of", catastrophe:"our society would be confronted with an unpromising and fruitless future",
+    compB:"over-packaging", compA:"recycling", smallAsp:"reduce waste", bigAsp:"promoting sustainable development",
+    agent:"the government and the public", doSth:"sort and recycle waste packaging"
+  }
+},
+{
+  id:"p25y2", name:"2025 英二 · 老人休闲活动（静态图）", mode:"stat",
+  cards:{
+    stat_s1:{v:"待选1"}, stat_s2:{v:"公式1"}, social:{v:"方案2", subs:{lead:"待选2"}},
+    p2_trans:{v:"待选3"},
+    r1:{v:"方案一", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"There is no doubt that", phrase:"play a crucial role in"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 拨付资金", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    chart:"bar chart", metric:"percentages", topic:"the leisure activities of the elderly in a certain community", year1:"2025",
+    item1:"watching TV", item2:"walking", item3:"gardening", item4:"reading",
+    num1:"90.8%", num2:"68.3%", num3:"34.7%", num4:"31.8%",
+    topic2:"walking and gardening", group:"elderly residents",
+    act:"engage in accessible and low-intensity leisure activities", cond:"they have free time",
+    person:"my grandfather", attV:"is passionate about", obj:"watching television and reading newspapers",
+    enablePhrase:"keeps him well informed about current affairs", timeWord:"During this period,", outcome:"he has become more open-minded",
+    aspect:"the physical and mental health of the elderly",
+    metaphor:"the bridge between the elderly and an active, socially connected later life",
+    aspectShort:"the physical and mental health of the elderly",
+    agent:"the authorities", doSth:"care for the elderly"
+  }
+},
+{
+  id:"p12y2", name:"2012 英二 · 员工满意度（例外表格）", mode:"stat",
+  cards:{
+    stat_s1:{v:"待选1"}, stat_s2:{v:"例外 · 无趋势表格（2012）"}, social:{on:false},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"It is widely believed that", phrase:"play a vital role in"}},
+    r2:{v:"方案六", subs:{conn:"What's more,"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"企业 · 提升质量", angle2:"政府 · 制定政策"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    chart:"table", metric:"percentage", topic:"employees' satisfaction with their work", year1:"2012",
+    item1:"employees under 40", item2:"employees over 50", item3:"employees aged 41-50", item4:"employees in general",
+    num1:"64%", num2:"50%", num3:"30%", num4:"20%",
+    topic2:"employees' satisfaction", aspect:"work efficiency",
+    compB:"a higher salary", compA:"a better working environment", smallAsp:"improve employees' mood", bigAsp:"promoting work efficiency",
+    ignored:"employers ignored the importance of", catastrophe:"our society would be confronted with an unpromising and fruitless future",
+    aspectShort:"the efficiency of our companies", doSth:"care about employees' feelings"
+  }
+},
+{
+  id:"p24y1", name:"2024 英一 · 公园建设（图画+图表）", mode:"mixed",
+  cards:{
+    pic_lead:{v:"一图一表"}, pic_desc:{v:"一图一表"}, theme_lead:{v:"一图一表"}, theme_body:{v:"方案3"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案一", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"A rising number of individuals are coming to the realization that", phrase:"be strongly dependent on"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式1"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 增加投入", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    pic:"drawing", chart:"chart", env:"in a park", basicV:"stand", subject:"several urban residents",
+    mainAct:"doing morning exercise", detail:"with an excited expression on their faces",
+    metric:"number", topic:"parks in a certain city", verb1:"increased", speed1:"remarkably",
+    num1:"406", year1:"2020", num2:"670", year2:"2022",
+    topic2:"infrastructure development", agent:"the government",
+    aspect:"a healthy lifestyle",
+    person:"my hometown, a livable city,", attV:"places a high priority on", obj:"infrastructure construction",
+    enablePhrase:"enables residents to relax and unwind at nearby parks", timeWord:"During this period,", outcome:"citizen satisfaction has improved",
+    ignored:"the government ignored the importance of",
+    catastrophe:"our cities would be confronted with an unpromising and fruitless future",
+    doSth:"support the construction of parks and public facilities"
+  }
+},
+{
+  id:"p23y1", name:"2023 英一 · 龙舟与传统文化（单图画）", mode:"picture",
+  cards:{
+    pic_lead:{v:"升级版"}, pic_desc:{v:"单图（非对话）· 简版"}, theme_lead:{v:"待选1"}, theme_body:{v:"方案1"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"Definitely no one can deny the fact that", phrase:"play a crucial role in"}},
+    r2:{v:"方案七", subs:{conn:"What's more,"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式3", subs:{start:"All in all,"}},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"媒体 · 新媒体呼吁", angle2:"家庭 · 以身作则"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    pic:"drawing", env:"on the stage", basicV:"stands", subject:"a group of youngsters",
+    mainAct:"rowing a dragon boat", detail:"with excitement on their faces",
+    topic2:"traditional culture", importance:"indispensable", problemN:"subject",
+    aspect:"cultural identity", metaphor:"the bridge between the past and the future",
+    ignored:"we ignored the importance of",
+    catastrophe:"our nation would permanently lag behind in the new era of rapid development",
+    agent:"the whole society", doSth:"inherit and develop traditional culture"
+  }
+},
+{
+  id:"p22y1", name:"2022 英一 · 听讲座（对话型图画）", mode:"picture",
+  cards:{
+    pic_lead:{v:"升级版"}, pic_desc:{v:"单图（对话）· 转述"}, theme_lead:{v:"升级版"}, theme_body:{v:"方案2"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案四", subs:{conn:"Firstly,"}},
+    r2:{v:"方案七", subs:{conn:"What's more,"}},
+    r3:{v:"方案六", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式4"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定政策", angle2:"个人行为 · 职责所在"}},
+    p3_future:{v:"待选1"}
+  },
+  slots:{
+    pic:"picture", env:"in front of the board", basicV:"stand", subject:"two girls", mainAct:"talking about campus lectures",
+    evokeV:"argues", quote1:"the lecture is not related to our major, which is a waste of time",
+    evokeV2:"maintains", quote2:"it will be beneficial nonetheless",
+    topic2:"attending lectures", agent:"undergraduates",
+    metaphor:"the bridge between students and a broader academic world",
+    increaseV:"increase", aspect:"undergraduates' academic knowledge", enable3:"enables them to", benefit:"broaden their horizons",
+    compB:"skipping classes", compA:"attending campus lectures", smallAsp:"expand their horizons", bigAsp:"promoting all-round development",
+    aspectShort:"both our daily lives and studies", balA:"study", balB:"practice", doSth:"provide more high-quality elective lectures"
+  }
+},
+{
+  id:"p20y1", name:"2020 英一 · 拖到最后一刻（双图画）", mode:"picture",
+  cards:{
+    pic_lead:{v:"待选1"}, pic_desc:{v:"两幅图 · 对照"}, theme_lead:{v:"待选3"}, theme_body:{v:"方案1"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案五", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"There is no doubt that", phrase:"play a crucial role in"}},
+    r3:{v:"方案六", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"家庭 · 榜样作用", angle2:"个人行为 · 具体行动"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    pic:"cartoons", leftState:"at the desk", leftAct:"her homework",
+    rightState:"on the sofa", rightAct:"tells himself that he will not start until the deadline",
+    topic2:"forming good habits", importance:"significant", problemN:"phenomenon",
+    aspect:"personal growth", aspectShort:"our personal development",
+    ignored:"we ignored the importance of", catastrophe:"we would never become a better version of ourselves",
+    compB:"putting things off", compA:"starting early", smallAsp:"reduce unnecessary anxiety", bigAsp:"promoting all-round development",
+    doing:"finishing tasks ahead of schedule", doSth:"develop good study habits"
+  }
+},
+{
+  id:"p10y1", name:"2010 英一 · 文化火锅（例外 there be）", mode:"picture",
+  cards:{
+    pic_lead:{v:"待选1"}, pic_desc:{v:"例外 · there be 句型（2010）"}, theme_lead:{v:"待选1"}, theme_body:{v:"方案3"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"It is universally known that", phrase:"contribute significantly to"}},
+    r2:{v:"方案六", subs:{conn:"What's more,"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式3"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"媒体 · 新媒体呼吁", angle2:"政府 · 公共倡议"}},
+    p3_future:{v:"待选1"}
+  },
+  slots:{
+    pic:"cartoon", elements:"cultural elements", container:"hotpot",
+    examples:"Peking Opera, Kung fu, Shakespeare and so on",
+    caption:"Cultural hot pot, nutritious and delicious",
+    topic2:"cultural exchange", agent:"the government and the public",
+    aspect:"cultural diversity", metaphor:"the bridge between different cultures",
+    compB:"cultural isolation", compA:"cultural exchange", smallAsp:"enrich our spiritual life", bigAsp:"promoting cultural diversity",
+    balA:"cultural tradition", balB:"cultural innovation", doSth:"promote cultural exchange"
+  }
+},
+{
+  id:"p11y1", name:"2011 英一 · 保护环境（单图画）", mode:"picture",
+  cards:{
+    pic_lead:{v:"升级版"}, pic_desc:{v:"单图（非对话）· 完整公式"}, theme_lead:{v:"待选1"}, theme_body:{v:"方案2"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"There is no doubt that", phrase:"play a crucial role in"}},
+    r2:{v:"方案五", subs:{conn:"What's more,"}},
+    r3:{v:"方案六", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式3"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定法律", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选1"}
+  },
+  slots:{
+    pic:"picture", env:"in front of us", basicV:"stands", subject:"a young man",
+    adjPair:"confident as well as optimistic", mainAct:"cleaning up the river bank", detail:"with determination in his eyes",
+    topic2:"environmental protection", agent:"both the government and the public",
+    aspect:"sustainable development",
+    ignored:"we ignored the importance of", catastrophe:"our society would be confronted with an unpromising and fruitless future",
+    compB:"economic growth at any cost", compA:"environmental protection",
+    smallAsp:"improve the ecological environment", bigAsp:"promoting sustainable development",
+    balA:"economic development", balB:"environmental protection", doSth:"protect the environment"
+  }
+},
+{
+  id:"p01y1", name:"2001 英一 · 爱心之灯（单图画）", mode:"picture",
+  cards:{
+    pic_lead:{v:"升级版"}, pic_desc:{v:"单图（非对话）· 完整公式"}, theme_lead:{v:"待选4"}, theme_body:{v:"方案4"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案一", subs:{conn:"Firstly,"}},
+    r2:{v:"方案三", subs:{conn:"What's more,", clause:"It has been widely accepted that", phrase:"lay the foundation of"}},
+    r3:{v:"方案七", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"个人行为 · 不遗余力", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选2"}
+  },
+  slots:{
+    pic:"picture", env:"in front of us", basicV:"stays", subject:"an oil lamp",
+    adjPair:"lovely as well as cute", mainAct:"lighting up the darkness", detail:"with a sweet smile on its face",
+    topic2:"selfless dedication", agent:"the public", aspect:"social harmony",
+    metaphor:"the lighthouse that guides us through the darkest nights",
+    person:"my roommate, Kevin,", attV:"is committed to", obj:"helping others in need",
+    enablePhrase:"earns him the friendship of everyone around", timeWord:"Gradually,", outcome:"he has become the warmest person I know",
+    aspectShort:"our personal development", doSth:"lend a hand to those in need"
+  }
+},
+{
+  id:"ptext1", name:"大纲样题 1 · 诚信与不确定性（文字作文）", mode:"text",
+  cards:{
+    txt_phen:{v:"改写示范", subs:{pov:"The author believes that"}}, txt_view:{v:"强烈同意"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"Definitely no one can deny the fact that", phrase:"play a crucial role in"}},
+    r2:{v:"方案一", subs:{conn:"What's more,"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定政策", angle2:"媒体 · 新媒体呼吁"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    topic2:"integrity and benevolence",
+    aspectShort:"the trust between people and institutions",
+    authorView:"we are perceived as less biased and willing to tell the truth when we show uncertainty in a transparent way",
+    aspect:"effective communication",
+    person:"my roommate, Kevin,", attV:"is committed to", obj:"telling the truth even when it is inconvenient",
+    enablePhrase:"earns him the trust of everyone around", timeWord:"Gradually,", outcome:"he has become the most reliable member of our team",
+    ignored:"we ignored the importance of", catastrophe:"we would never become a better version of ourselves",
+    agent:"the whole society", doSth:"encourage honesty and transparency",
+    extraView:"greater transparency builds trust"
+  }
+},
+{
+  id:"ptext2", name:"大纲样题 2 · 儿童与屏幕（文字作文）", mode:"text",
+  cards:{
+    txt_phen:{v:"不会改写4", subs:{pov:"The author believes that"}}, txt_view:{v:"强烈同意"},
+    p2_trans:{v:"待选1"},
+    r1:{v:"方案三", subs:{conn:"Firstly,", clause:"There is no doubt that", phrase:"pose a threat to"}},
+    r2:{v:"方案六", subs:{conn:"What's more,"}},
+    r3:{v:"方案五", subs:{conn:"Last but not least,"}},
+    p3_sum:{v:"公式1"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"政府 · 制定政策", angle2:"家长学校 · 创造机会"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    topic2:"network addiction among children",
+    authorView:"we cannot blame the screens because children have lost the right to make sense of the world",
+    aspect:"children's healthy growth",
+    compB:"indoor screen time", compA:"outdoor activities", smallAsp:"satisfy children's curiosity", bigAsp:"promoting all-round development",
+    ignored:"we failed to prevent", catastrophe:"our society would be confronted with an unpromising and fruitless future",
+    doSth:"promote children's outdoor activities",
+    agent:"parents and schools", doSth:"create more chances for children to play outdoors",
+    extraView:"parents should set clearer rules on screen time"
+  }
+},
+{
+  id:"p09y1", name:"2009 英一 · 网络的近与远（争议话题）", mode:"picture",
+  cards:{
+    pic_lead:{v:"升级版"}, pic_desc:{v:"单图（非对话）· 简版"}, theme_lead:{v:"待选3"}, theme_body:{v:"方案4"},
+    p2_trans:{on:false},
+    r1:{on:false}, r2:{on:false}, r3:{on:false},
+    p2_debate:{on:true, v:"过渡 · pros and cons", subs:{formula:"公式1 · On the one hand"}},
+    p3_sum:{v:"公式4"},
+    p3_measure:{v:"方案二 · 老子说的才是对的①", subs:{}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    pic:"picture", env:"in front of us", basicV:"stand", subject:"a group of youngsters",
+    mainAct:"staring at their mobile phones", detail:"with a worried look on their faces",
+    topic2:"the Internet", aspect:"effective communication",
+    viewA:"the popularity of the Internet plays a crucial role in communication and information gathering across various areas",
+    viewB:"Internet addiction may undermine the mental and physical health of teenagers",
+    aspectShort:"effective communication",
+    agent:"the public", doSth:"use the Internet in a sensible way",
+    measureB:"the government department concerned", responsA:"the Internet",
+    actC:"cultivating citizens' consciousness", aspectD:"cultivating citizens' consciousness", aspectD2:"effective communication",
+    extraView:"we should use it with a clear purpose"
+  }
+},
+{
+  id:"p13y2", name:"2013 英二 · 大学生兼职（争议话题）", mode:"stat",
+  cards:{
+    stat_s1:{v:"待选1"}, stat_s2:{v:"公式1简"}, social:{v:"方案3", subs:{lead:"待选2"}},
+    p2_trans:{on:false}, r1:{on:false}, r2:{on:false}, r3:{on:false},
+    p2_debate:{on:true, v:"过渡 · remains controversial", subs:{formula:"公式2 · Proponents / critics"}},
+    p3_sum:{v:"公式2"},
+    p3_measure:{v:"方案一", subs:{m1:"For one thing,", m2:"For another,", angle1:"高校 · 课程设置", angle2:"个人行为 · 具体行动"}},
+    p3_future:{v:"待选3"}
+  },
+  slots:{
+    chart:"pie chart", metric:"percentages", topic:"college students' purposes of taking part-time jobs", year1:"2013",
+    item1:"earning money", item2:"gaining experience", item3:"killing time", item4:"making friends",
+    num1:"45.6%", num2:"32.4%", num3:"12.8%", num4:"9.2%",
+    doing:"working part-time", group:"undergraduates",
+    topic2:"part-time jobs",
+    viewA:"a part-time job improves students' quality of life and strengthens their minds",
+    viewB:"the negative influence on undergraduates' academic record",
+    aspectShort:"our personal development", doSth:"take part-time jobs wisely",
+    compB:"working part-time", compA:"studying full-time",
+    extraView:"a part-time job should never come at the cost of study"
+  }
+}
+];
+
+(function(){
+"use strict";
+
+/* ---------------- 工具 ---------------- */
+function $(s,r){ return (r||document).querySelector(s); }
+function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function norm(s){ return String(s==null?"":s).replace(/\s+/g," ").trim(); }
+function cardById(id){ for(var i=0;i<CARDS.length;i++){ if(CARDS[i].id===id) return CARDS[i]; } return null; }
+function modeById(id){ for(var i=0;i<MODES.length;i++){ if(MODES[i].id===id) return MODES[i]; } return MODES[0]; }
+function slotDef(id){ return SLOTS[id] || {label:id, bank:null, hint:""}; }
+function bankOf(id){ var d=slotDef(id); return (d.bank && BANKS[d.bank]) ? BANKS[d.bank] : []; }
+
+function matchIdx(list, key){
+  if(typeof key === "number") return key >= 0 && key < list.length ? key : 0;
+  if(key == null) return 0;
+  var k = String(key).trim();
+  for(var i=0;i<list.length;i++){ if(list[i].name === k) return i; }
+  for(var j=0;j<list.length;j++){ if(list[j].name.indexOf(k) === 0) return j; }
+  for(var t=0;t<list.length;t++){ if(list[t].name.indexOf(k) >= 0) return t; }
+  return 0;
+}
+function modeCardList(m){
+  var out=[];
+  (m.cards||[]).forEach(function(c){
+    if(typeof c === "string") out.push({id:c,on:true});
+    else out.push({id:c.id,on:c.on!==false,excl:c.excl||null});
+  });
+  return out;
+}
+function allCardIds(m){
+  var out=[], seen={};
+  modeCardList(m).concat(m.all.slice(m.cards.length).map(function(c){ return typeof c==="string"?{id:c,on:true}:{id:c.id,on:c.on!==false}; }))
+   .forEach(function(c){ if(!seen[c.id]){ seen[c.id]=1; out.push(c.id); } });
+  return out;
+}
+
+/* ---------------- 英文自动细节 ---------------- */
+var PLURAL_IRR = {people:1,children:1,men:1,women:1,police:1,staff:1,youth:1,elderly:1,data:1,media:1,offspring:1,descendants:1,parents:1,residents:1,undergraduates:1,consumers:1,teenagers:1,youngsters:1,citizens:1,individuals:1,employees:1,graduates:1,families:1,activities:1};
+var MASS = {health:1,progress:1,development:1,life:1,income:1,security:1,communication:1,education:1,care:1,knowledge:1,information:1,awareness:1,balance:1,justice:1,harmony:1,peace:1,money:1,time:1,water:1,energy:1,consumption:1,production:1,growth:1,demand:1,supply:1,quality:1,safety:1,well:1,freedom:1,happiness:1,equipment:1,software:1,research:1,advice:1,evidence:1,curiosity:1,literacy:1,culture:1,protection:1,pollution:1,conservation:1,cooperation:1,competition:1,infrastructure:1,transportation:1,fitness:1,exercise:1,behaviour:1,behavior:1,attitude:1};
+var SINGULAR_S = {this:1,his:1,its:1,is:1,was:1,has:1,does:1,business:1,series:1,species:1,analysis:1,physics:1,mathematics:1,economics:1,status:1,campus:1,news:1,means:1,always:1,towards:1,as:1,us:1,plus:1,thus:1,perhaps:1,less:1,unless:1,across:1,process:1,access:1,success:1,progress:1,stress:1,class:1,grass:1,basis:1,crisis:1,thesis:1,emphasis:1,consensus:1,chaos:1,ethics:1,statistics:1,politics:1};
+var PROPER = {china:1,chinese:1,america:1,american:1,english:1,internet:1,shakespeare:1,peking:1,kung:1,fu:1,confucius:1,asian:1,african:1,european:1,monday:1,tuesday:1,wednesday:1,thursday:1,friday:1,saturday:1,sunday:1,january:1,february:1,march:1,april:1,may:1,june:1,july:1,august:1,september:1,october:1,november:1,december:1};
+
+var VERB_PAIRS = {
+  is:"are", are:"is", was:"were", were:"was", has:"have", have:"has", does:"do", do:"does",
+  plays:"play", play:"plays", shows:"show", show:"shows", illustrates:"illustrate", illustrate:"illustrates",
+  presents:"present", present:"presents", reveals:"reveal", reveal:"reveals", highlights:"highlight", highlight:"highlights",
+  tops:"top", top:"tops", accounts:"account", account:"accounts", contributes:"contribute", contribute:"contributes",
+  remains:"remain", remain:"remains", stays:"stay", stay:"stays", provides:"provide", provide:"provides",
+  lists:"list", list:"lists", enables:"enable", enable:"enables", helps:"help", help:"helps",
+  improves:"improve", improve:"improves", increases:"increase", increase:"increases", rises:"rise", rise:"rises",
+  falls:"fall", fall:"falls", deserves:"deserve", deserve:"deserves", emphasizes:"emphasize", emphasize:"emphasizes",
+  conveys:"convey", convey:"conveys", mirrors:"mirror", mirror:"mirrors", aims:"aim", aim:"aims",
+  serves:"serve", serve:"serves", acts:"act", act:"acts", lays:"lay", lay:"lays", constitutes:"constitute", constitute:"constitutes",
+  poses:"pose", pose:"poses", brings:"bring", bring:"brings", makes:"make", make:"makes", leads:"lead", lead:"leads",
+  depends:"depend", depend:"depends", requires:"require", require:"requires", ensures:"ensure", ensure:"ensures",
+  allows:"allow", allow:"allows", encourages:"encourage", encourage:"encourages", deepens:"deepen", deepen:"deepens",
+  promotes:"promote", promote:"promotes", relieves:"relieve", relieve:"relieves", undermines:"undermine", undermine:"undermines",
+  draws:"draw", draw:"draws", becomes:"become", become:"becomes", exists:"exist", exist:"exists", appears:"appear", appear:"appears",
+  contains:"contain", contain:"contains", integrates:"integrate", integrate:"integrates", holds:"hold", hold:"holds",
+  insists:"insist", insist:"insists", argues:"argue", argue:"argues", maintains:"maintain", maintain:"maintains",
+  believes:"believe", believe:"believes", stands:"stand", stand:"stands", sits:"sit", sit:"sits", runs:"run", run:"runs"
+};
+var SING_SET = {}, PLUR_SET = {};
+Object.keys(VERB_PAIRS).forEach(function(k){
+  var v = VERB_PAIRS[k];
+  /* 以 -s 结尾的一侧视为单数形式，另一侧为复数 */
+  if(/s$/.test(k) && !/ss$/.test(k)){ SING_SET[k]=1; PLUR_SET[v]=1; }
+  else if(/s$/.test(v) && !/ss$/.test(v)){ SING_SET[v]=1; PLUR_SET[k]=1; }
+});
+
+var PREPS = /\b(of|from|in|for|with|at|on|to|among|about|towards|toward|during|by|between|within|into|over|under|as)\b/i;
+function isPlural(val){
+  var v = norm(val).replace(/[.!,;:]+$/,"");
+  if(!v) return false;
+  /* 中心名词：第一个介词短语之前的部分（the number of X 的中心词是 number） */
+  var cut = v.search(PREPS);
+  var headChunk = cut > 0 ? v.slice(0, cut) : v;
+  var words = headChunk.split(/\s+/).filter(Boolean);
+  if(!words.length) return false;
+  var head = words[words.length-1].replace(/[^A-Za-z'-]/g,"").toLowerCase();
+  if(!head) return false;
+  if(/\band\b/i.test(headChunk) && words.length >= 2 && !MASS[head]) return true;
+  var firstW = words[0].replace(/[^A-Za-z'-]/g,"").toLowerCase();
+  if(/ing$/.test(firstW) && firstW.length > 4) return false;  /* 动名词短语作主语：单数 */
+  if(/ing$/.test(head) && head.length > 4) return false;   /* 动名词作中心词：单数 */
+  if(PLURAL_IRR[head]) return true;
+  if(MASS[head]) return false;
+  if(/s$/.test(head) && !SINGULAR_S[head] && !/ss$/.test(head)) return true;
+  return false;
+}
+function lowerFirst(w){
+  if(!w) return w;
+  var m = w.match(/^([^A-Za-z]*)([A-Za-z])([\s\S]*)$/);
+  if(!m) return w;
+  var c = m[2];
+  var wm = w.match(/[A-Za-z']+/);
+  if(wm && PROPER[wm[0].toLowerCase()]) return w;
+  if(c === "I" && !/[a-zA-Z]/.test(m[3])) return w;
+  if(PROPER[m[2].toLowerCase()] && c === c.toUpperCase()) {
+    /* 专有名词即使小写化也不动；但若原本就是句中小写则保持 */
+    return w;
+  }
+  return m[1] + c.toLowerCase() + m[3];
+}
+function upperFirst(w){
+  if(!w) return w;
+  var m = w.match(/^([^A-Za-z]*)([A-Za-z])([\s\S]*)$/);
+  if(!m) return w;
+  return m[1] + m[2].toUpperCase() + m[3];
+}
+function fixInner(s){
+  s = s.replace(/([,;:]\s+)([A-Za-z])/g, function(m,pre,ch,off,whole){
+    var rest = whole.slice(off + pre.length);
+    var wm = rest.match(/^[A-Za-z']+/);
+    var word = wm ? wm[0] : ch;
+    var next = rest.charAt(1);
+    if((ch === "I" && !/[A-Za-z]/.test(next)) || PROPER[word.toLowerCase()]) return m;
+    return pre + ch.toLowerCase();
+  });
+  s = s.replace(/([.!?]\s+)([a-z])/g, function(m,pre,ch){ return pre + ch.toUpperCase(); });
+  s = s.replace(/(\b(?:that|because|although|while|whereas)\s+)([A-Z])([a-z])+/g, function(m,pre,ch){
+    var word = m.slice(pre.length);
+    if(PROPER[word.toLowerCase()]) return m;
+    return pre + ch.toLowerCase();
+  });
+  return s;
+}
+function firstWord(s){
+  var m = s.match(/^([\s]*)([A-Za-z][A-Za-z'-]*)/);
+  return m ? m[2] : "";
+}
+
+/* ---------------- 状态 ---------------- */
+var STORE_KEY = "dzw_tpl_27_v1";
+var state = null;
+var snapshots = [];
+var MAX_SNAP = 30;
+
+function defaultCardState(card){
+  var st = { v:0, on:!card.optional, subs:{} };
+  (card.subs||[]).forEach(function(s){ st.subs[s.key] = 0; });
+  if(card.defConn){
+    for(var i=0;i<CONN.length;i++){ if(CONN[i].name === card.defConn){ st.subs.conn = i; break; } }
+  }
+  return st;
+}
+function freshState(modeId){
+  var m = modeById(modeId);
+  var st = { mode:m.id, cards:{}, slots:{}, flags:{zh:true, exam:false, polish:true, note:true, tag:false} };
+  allCardIds(m).forEach(function(cid){ var c = cardById(cid); if(c) st.cards[cid] = defaultCardState(c); });
+  modeCardList(m).forEach(function(c){
+    if(st.cards[c.id]) st.cards[c.id].on = c.on !== false;
+  });
+  return st;
+}
+function ensureState(modeId){
+  var m = modeById(modeId);
+  if(!state) state = freshState(modeId);
+  state.mode = m.id;
+  var ids = allCardIds(m);
+  var seen = {};
+  var modeOn = {};
+  modeCardList(m).forEach(function(c){ modeOn[c.id] = c.on !== false; });
+  ids.forEach(function(cid){
+    seen[cid]=1;
+    if(!state.cards[cid]){ var c=cardById(cid); if(c){ state.cards[cid]=defaultCardState(c); if(modeOn[cid]===false) state.cards[cid].on=false; } }
+  });
+  Object.keys(state.cards).forEach(function(cid){ if(!seen[cid]) delete state.cards[cid]; });
+  return state;
+}
+function activeCardIds(){
+  var m = modeById(state.mode);
+  var list = [];
+  modeCardList(m).forEach(function(c){ list.push(c.id); });
+  m.all.slice(m.cards.length).forEach(function(c){ list.push(typeof c==="string"?c:c.id); });
+  return list;
+}
+
+/* ---------------- 组装 ---------------- */
+function variantOf(card, st){
+  var i = Math.min(Math.max(st.v|0,0), card.variants.length-1);
+  return card.variants[i];
+}
+function hasSub(text, key){ return text.indexOf("{sub:"+key+"}") >= 0; }
+function rawText(card, st){
+  var v = variantOf(card, st);
+  var t = v.text;
+  t = t.replace(/\{sub:([A-Za-z0-9_]+)\}/g, function(m,key){
+    var sd = null;
+    (card.subs||[]).forEach(function(s){ if(s.key===key) sd=s; });
+    if(!sd) return "";
+    var idx = st.subs[key];
+    if(typeof idx !== "number" || !sd.options[idx]) idx = 0;
+    return sd.options[idx] ? sd.options[idx].text : "";
+  });
+  return t;
+}
+function slotValue(id){
+  var v = state.slots[id];
+  if(v == null) return "";
+  return String(v);
+}
+function piecesOf(card, st){
+  var t = rawText(card, st);
+  var parts = t.split(/(\{[A-Za-z0-9_]+\})/);
+  var out = [];
+  for(var i=0;i<parts.length;i++){
+    var p = parts[i];
+    if(!p) continue;
+    var m = p.match(/^\{([A-Za-z0-9_]+)\}$/);
+    if(m){ out.push({type:"slot", id:m[1], val:slotValue(m[1])}); }
+    else out.push({type:"t", s:p});
+  }
+  return out;
+}
+function polishPieces(pieces, enabled){
+  var prev = "";
+  for(var i=0;i<pieces.length;i++){
+    var pc = pieces[i];
+    var isSlot = pc.type === "slot";
+    var text = isSlot ? pc.val : pc.s;
+    if(text){
+      if(enabled){
+        if(/(^|[.!?]\s+)$/.test(prev) || prev === ""){
+          text = upperFirst(text);
+        } else if(/,\s$/.test(prev)){
+          text = lowerFirst(text);
+        } else if(/\b(that|because|although|while|whereas)\s$/i.test(prev)){
+          text = lowerFirst(text);
+        }
+      }
+      if(!isSlot && enabled) text = fixInner(text);
+      /* 主谓一致：文本片段紧跟槽位，且以动词开头 */
+      if(!isSlot && i > 0 && pieces[i-1].type === "slot" && enabled){
+        var lead = text.match(/^(\s*(?:(?:above|below|also|then|still|closely|now|today)\s+)?)([A-Za-z']+)/);
+        if(lead){
+          var w = lead[2].toLowerCase(), subj = pieces[i-1].val;
+          var listCtx = i >= 2 && pieces[i-2].type === "t" && /(,\s+and\s+|\band\b(\s+the)?\s*$)/.test(pieces[i-2].s);
+          var plural = listCtx ? true : isPlural(subj);
+          if(SUBJ_OVERRIDE[pieces[i-1].id] !== undefined && !listCtx) plural = SUBJ_OVERRIDE[pieces[i-1].id];
+          if(w in VERB_PAIRS){
+            var want = plural ? (PLUR_SET[w] ? w : VERB_PAIRS[w]) : (SING_SET[w] ? w : VERB_PAIRS[w]);
+            text = lead[1] + want + text.slice(lead[0].length);
+          }
+        }
+      }
+      if(isSlot) pc.display = text; else pc.display = text;
+      prev = (prev + text).slice(-24);
+    }
+    pc.display = text;
+  }
+  return pieces;
+}
+var SUBJ_OVERRIDE = {};
+
+function textOfPieces(pcs, card){
+  var s = "";
+  pcs.forEach(function(pc){
+    if(pc.type === "slot"){ s += (pc.display && pc.display.trim()) ? pc.display : ("【"+slotDef(pc.id).label+"】"); }
+    else s += pc.display;
+  });
+  s = s.replace(/\s+/g," ").replace(/\s+([,.;:!?])/g,"$1").replace(/,\s*,/g,",").trim();
+  if(s && !(card && card.open) && !/[.,!?:;]$/.test(s)) s += ".";
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+function htmlOfPieces(pcs, clickable){
+  var html = "";
+  pcs.forEach(function(pc){
+    if(pc.type === "slot"){
+      var val = (pc.display||"").trim();
+      var d = slotDef(pc.id);
+      if(clickable){
+        html += '<button class="slot '+(val?"on":"empty")+'" data-slot="'+pc.id+'" title="'+(esc(d.hint||d.label))+'">'+
+                (val ? esc(val) : "【"+esc(d.label)+"】") + '</button>';
+      }else{
+        html += '<span class="ph">'+(val?esc(val):"【"+esc(d.label)+"】")+'</span>';
+      }
+    } else {
+      html += esc(pc.display);
+    }
+  });
+  return html.replace(/\s+/g," ").replace(/\s+([,.;:!?])/g,"$1").trim();
+}
+function sentenceText(card, st){
+  return textOfPieces(polishPieces(piecesOf(card, st), !!state.flags.polish), card);
+}
+function sentenceHTML(card, st, clickable){
+  return htmlOfPieces(polishPieces(piecesOf(card, st), !!state.flags.polish), clickable);
+}
+function sentencePlainForCopy(card, st){
+  var s = textOfPieces(polishPieces(piecesOf(card, st), !!state.flags.polish), null);
+  return s;
+}
+
+/* ---------------- 渲染：建造区 ---------------- */
+function filledCount(card, st){
+  var total = 0, filled = 0, seen = {};
+  piecesOf(card, st).forEach(function(pc){
+    if(pc.type==="slot" && !seen[pc.id]){ seen[pc.id]=1; total++; if(slotValue(pc.id).trim()) filled++; }
+  });
+  return filled + "/" + total;
+}
+function cardHTML(cid, card, st){
+  var v = variantOf(card, st);
+  var off = !st.on;
+  var h = '<div class="card '+(off?"off":"")+'" data-cid="'+cid+'">';
+  h += '<div class="card-h"><span class="no">'+esc(card.no||"")+'</span>';
+  h += '<span class="ttl">'+esc(card.title)+'</span>';
+  h += '<span class="hint">'+esc(card.hint||"")+'</span>';
+  h += '<span class="spacer"></span><span class="count">'+filledCount(card,st)+'</span>';
+  h += '<button class="mini" data-act="toggle">'+(off?"加入":"移除")+'</button></div>';
+  h += '<div class="card-b">';
+  h += '<div class="ctl"><span class="lab">方案</span><select data-sel="v">';
+  card.variants.forEach(function(op,i){ h += '<option value="'+i+'"'+(i===st.v?" selected":"")+'>'+esc(op.name)+'</option>'; });
+  h += '</select>';
+  (card.subs||[]).forEach(function(sd){
+    var show = hasSub(rawText(card, st), sd.key);
+    h += '<span class="lab" style="'+(show?"":"display:none")+'"><span style="display:inline-block">'+esc(sd.label)+'</span> <select data-sub="'+sd.key+'">';
+    sd.options.forEach(function(op,i){ h += '<option value="'+i+'"'+((st.subs[sd.key]|0)===i?" selected":"")+'>'+esc(op.name)+'</option>'; });
+    h += '</select></span>';
+  });
+  h += '</div>';
+  h += '<div class="sent">'+sentenceHTML(card, st, true)+'</div>';
+  h += '<div class="note">'+esc(v.note||"")+'</div>';
+  h += '<div class="zh-line">'+esc(v.zh||"")+'</div>';
+  h += '</div></div>';
+  return h;
+}
+function paraTitle(p){
+  if(p===1) return ["第一段","图表/图画/文字三种引入方式，只此一段不同"];
+  if(p===2) return ["第二段","过渡句 + 原因①②③（七大方案任选，英一写三点、英二两点）"];
+  return ["第三段","总结全文 + 具体措施 + 畅想未来"];
+}
+function renderBuilder(){
+  var m = modeById(state.mode);
+  var order = [];
+  modeCardList(m).forEach(function(c){ order.push(c.id); });
+  m.all.slice(m.cards.length).forEach(function(c){ order.push(typeof c==="string"?c:c.id); });
+  var html = "";
+  var lastP = 0;
+  order.forEach(function(cid){
+    var card = cardById(cid); if(!card) return;
+    var st = state.cards[cid]; if(!st) return;
+    if(card.p !== lastP){
+      lastP = card.p;
+      var t = paraTitle(card.p);
+      html += '<div class="para-h"><span class="pill">'+t[0]+'</span><span class="tip">'+esc(t[1])+'</span></div>';
+    }
+    html += cardHTML(cid, card, st);
+  });
+  $("#builder").innerHTML = html;
+  $("#modeDesc").textContent = m.desc || "";
+}
+function refreshCard(cid){
+  var card = cardById(cid), st = state.cards[cid];
+  var node = document.querySelector('.card[data-cid="'+cid+'"]');
+  if(!card || !st || !node) return;
+  var v = variantOf(card, st);
+  node.classList.toggle("off", !st.on);
+  var s = node.querySelector(".sent"); if(s) s.innerHTML = sentenceHTML(card, st, true);
+  var n = node.querySelector(".note"); if(n) n.textContent = v.note||"";
+  var z = node.querySelector(".zh-line"); if(z) z.textContent = v.zh||"";
+  var c = node.querySelector(".count"); if(c) c.textContent = filledCount(card,st);
+  var tg = node.querySelector('[data-act="toggle"]'); if(tg) tg.textContent = st.on?"移除":"加入";
+  (card.subs||[]).forEach(function(sd){
+    var sel = node.querySelector('select[data-sub="'+sd.key+'"]');
+    if(sel && sel.parentElement) sel.parentElement.style.display = hasSub(rawText(card, st), sd.key) ? "" : "none";
+  });
+}
+
+/* ---------------- 渲染：预览 ---------------- */
+function collect(){
+  var m = modeById(state.mode);
+  var order = [];
+  modeCardList(m).forEach(function(c){ order.push(c.id); });
+  m.all.slice(m.cards.length).forEach(function(c){ order.push(typeof c==="string"?c:c.id); });
+  var rows = [], buf = null, bufZh = "", bufCard = null;
+  order.forEach(function(cid){
+    var card = cardById(cid), st = state.cards[cid];
+    if(!card || !st || !st.on) return;
+    var pcs = piecesOf(card, st);
+    if(card.open){
+      buf = buf ? buf.concat([{type:"t", s:" "}], pcs) : pcs;
+      bufZh += (variantOf(card, st).zh || "");
+      bufCard = bufCard || card;
+      return;
+    }
+    var whole = buf ? buf.concat([{type:"t", s:" "}], pcs) : pcs;
+    var zh = bufZh + (variantOf(card, st).zh || "");
+    var pol = polishPieces(whole, !!state.flags.polish);
+    var en = textOfPieces(pol, card).trim();
+    buf = null; bufZh = ""; bufCard = null;
+    if(!en) return;
+    rows.push({p:card.p, card:card, st:st, en:en, zh:zh, html:htmlOfPieces(pol, false)});
+  });
+  if(buf){
+    var p0 = polishPieces(buf, !!state.flags.polish);
+    var e0 = textOfPieces(p0, null).trim();
+    if(e0) rows.push({p:bufCard.p, card:bufCard, st:state.cards[bufCard.id], en:e0, zh:bufZh, html:htmlOfPieces(p0, false)});
+  }
+  return rows;
+}
+function countWords(rows){
+  var s = rows.map(function(r){ return r.en; }).join(" ");
+  s = s.replace(/【[^】]*】/g," ");
+  var w = s.split(/\s+/).filter(function(x){ return /[A-Za-z0-9%]/.test(x); });
+  return w.length;
+}
+function renderPreview(){
+  var rows = collect();
+  var html = "";
+  if(!rows.length){ html = '<div class="empty-tip">还没有可预览的句子</div>'; }
+  [1,2,3].forEach(function(p){
+    var rs = rows.filter(function(r){ return r.p === p; });
+    if(!rs.length) return;
+    html += '<div class="para"><div class="para-t"><span>第'+["一","二","三"][p-1]+'段</span><span class="spacer"></span><span class="wc">'+countWords(rs)+' 词</span></div>';
+    rs.forEach(function(r){
+      html += '<div class="en">'+r.html+'</div>';
+      if(state.flags.tag){ html += '<div class="tagline">套用标注：'+esc(r.card.no)+' '+esc(r.card.title)+' · '+esc(variantOf(r.card,r.st).name)+'</div>'; }
+      if(state.flags.zh && r.zh){ html += '<div class="zh">'+esc(r.zh)+'</div>'; }
+    });
+    html += '</div>';
+  });
+  $("#paper").innerHTML = html;
+  $("#wc").textContent = countWords(rows) + " 词";
+  var total = 0, filled = 0;
+  var seen = {};
+  rows.forEach(function(r){
+    piecesOf(r.card, r.st).forEach(function(pc){ if(pc.type==="slot" && !seen[pc.id]){ seen[pc.id]=1; total++; if(slotValue(pc.id).trim()) filled++; } });
+  });
+  $("#stat").textContent = "已填槽位 " + filled + "/" + total + " · 全文 " + countWords(rows) + " 词";
+}
+function renderAll(){ renderBuilder(); renderPreview(); }
+
+/* ---------------- 槽位面板 ---------------- */
+var popTarget = null, popList = [], popSel = -1;
+function openSlot(id, anchor){
+  popTarget = id;
+  var d = slotDef(id);
+  $("#popTitle").textContent = "【" + d.label + "】词库";
+  $("#popHint").textContent = d.hint || "";
+  $("#popInput").value = slotValue(id);
+  popSel = -1;
+  drawPopList("");
+  var pop = $("#pop");
+  pop.classList.add("on"); $("#mask").classList.add("on");
+  var r = anchor.getBoundingClientRect();
+  var w = 420, h = Math.min(window.innerHeight*0.7, 560);
+  var left = Math.min(Math.max(12, r.left), window.innerWidth - w - 12);
+  var top = r.bottom + 8;
+  if(top + h > window.innerHeight - 12) top = Math.max(12, r.top - h - 8);
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+  setTimeout(function(){ $("#popInput").focus(); $("#popInput").select(); }, 10);
+}
+function drawPopList(q){
+  var bank = bankOf(popTarget);
+  q = (q||"").trim().toLowerCase();
+  var items = bank.filter(function(o){
+    if(!q) return true;
+    return (o.en+" "+o.zh).toLowerCase().indexOf(q) >= 0;
+  });
+  popList = items;
+  var cur = slotValue(popTarget).trim();
+  var html = "";
+  var lastG = null;
+  if(!items.length) html += '<div style="padding:14px 10px;color:#9aa5b1;font-size:12.5px">词库中没有匹配项，可直接在上方输入自定义内容。</div>';
+  items.forEach(function(o,i){
+    if(o.g && o.g !== lastG){ lastG = o.g; html += '<div class="pop-g">'+esc(o.g)+'</div>'; }
+    html += '<button class="opt'+(cur===o.en?" sel":"")+'" data-i="'+i+'"><span class="e">'+esc(o.en)+'</span><span class="z">'+esc(o.zh||"")+'</span></button>';
+  });
+  $("#popList").innerHTML = html;
+}
+function closePop(){
+  $("#pop").classList.remove("on"); $("#mask").classList.remove("on");
+  popTarget = null;
+}
+function setSlot(id, val){
+  pushSnap();
+  state.slots[id] = val;
+  save();
+  refreshSlotsEverywhere(id);
+  renderPreview();
+}
+function refreshSlotsEverywhere(id){
+  var ids = activeCardIds();
+  ids.forEach(function(cid){
+    var card = cardById(cid), st = state.cards[cid];
+    if(!card || !st || !st.on) return;
+    var raw = rawText(card, st);
+    if(raw.indexOf("{"+id+"}") >= 0){
+      var node = document.querySelector('.card[data-cid="'+cid+'"] .sent');
+      if(node) node.innerHTML = sentenceHTML(card, st, true);
+      var c = document.querySelector('.card[data-cid="'+cid+'"] .count');
+      if(c) c.textContent = filledCount(card, st);
+    }
+  });
+}
+
+/* ---------------- 快照 / 存储 ---------------- */
+function pushSnap(){
+  snapshots.push(JSON.stringify(state));
+  if(snapshots.length > MAX_SNAP) snapshots.shift();
+  $("#undo").disabled = snapshots.length === 0;
+}
+function undo(){
+  if(!snapshots.length) return;
+  var s = snapshots.pop();
+  state = JSON.parse(s);
+  ensureState(state.mode);
+  $("#undo").disabled = snapshots.length === 0;
+  syncControls();
+  save(); renderAll();
+  toast("已撤销一步");
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify({s:state, t:Date.now()})); }catch(e){}
+}
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return false;
+    var o = JSON.parse(raw);
+    if(!o || !o.s || !o.s.mode) return false;
+    if(!modeById(o.s.mode)) return false;
+    state = o.s;
+    state.flags = state.flags || {zh:true,exam:false,polish:true,note:true,tag:false};
+    ensureState(state.mode);
+    return true;
+  }catch(e){ return false; }
+}
+var toastTimer = null;
+function toast(msg){
+  var t = $("#toast");
+  t.textContent = msg; t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove("on"); }, 1600);
+}
+
+/* ---------------- 预设 / 题型 ---------------- */
+function applyPreset(pid){
+  var p = null;
+  PRESETS.forEach(function(x){ if(x.id===pid) p=x; });
+  if(!p) return;
+  pushSnap();
+  state = freshState(p.mode);
+  Object.keys(p.cards||{}).forEach(function(cid){
+    var card = cardById(cid); if(!card) return;
+    var cfg = p.cards[cid];
+    if(!state.cards[cid]) state.cards[cid] = defaultCardState(card);
+    var st = state.cards[cid];
+    if(cfg.on === false) st.on = false;
+    else if(cfg.on === true) st.on = true;
+    if(cfg.v != null) st.v = matchIdx(card.variants, cfg.v);
+    Object.keys(cfg.subs||{}).forEach(function(k){
+      var sd = null; (card.subs||[]).forEach(function(s){ if(s.key===k) sd=s; });
+      if(sd) st.subs[k] = matchIdx(sd.options, cfg.subs[k]);
+    });
+  });
+  state.slots = {};
+  Object.keys(p.slots||{}).forEach(function(k){ state.slots[k] = p.slots[k]; });
+  ensureState(p.mode);
+  $("#preset").value = p.id;
+  syncControls();
+  save(); renderAll();
+  toast("已载入：" + p.name);
+}
+function switchMode(id){
+  if(state.mode === id) return;
+  pushSnap();
+  state.mode = id;
+  state.cards = {};
+  ensureState(id);
+  save(); syncControls(); renderAll();
+}
+
+/* ---------------- 控件 ---------------- */
+function syncControls(){
+  $$("#modes .mode-btn").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-mode")===state.mode); });
+  $("#tZh").checked = !!state.flags.zh;
+  $("#tExam").checked = !!state.flags.exam;
+  $("#tPolish").checked = !!state.flags.polish;
+  $("#tNote").checked = !!state.flags.note;
+  $("#tTag").checked = !!state.flags.tag;
+  document.body.classList.toggle("exam", !!state.flags.exam);
+  $$(".card .note").forEach(function(n){ n.style.display = state.flags.note ? "" : "none"; });
+  $("#undo").disabled = snapshots.length === 0;
+}
+function buildModes(){
+  var html = "";
+  MODES.forEach(function(m){
+    html += '<button class="mode-btn" data-mode="'+m.id+'"><span class="tag">'+esc(m.tag)+'</span>'+esc(m.name)+'</button>';
+  });
+  $("#modes").innerHTML = html;
+}
+function buildPresets(){
+  var html = '<option value="">— 选择真题预设 —</option>';
+  PRESETS.forEach(function(p){ html += '<option value="'+p.id+'">'+esc(p.name)+'</option>'; });
+  $("#preset").innerHTML = html;
+}
+
+/* ---------------- 讲义要点 ---------------- */
+var HELP_HTML = ''
++ '<div class="h-sec"><h3>一、大纲要点（英一 / 英二 写作完全相同，仅分数与字数不同）</h3>'
++ '<p>A 节：约 100 词应用文（书信、通知、告示、纪要），10 分。B 节（大作文）：英一 160–200 词 / 20 分，英二约 150 词 / 15 分；<b>提示信息的形式为文字、图画、图表等</b>——所以图画、图表、文字三种都要准备。</p>'
++ '<p>本质：三种题型都是议论文。图画是透过图画看寓意，图表是透过图表看现象，文字是阅读文字提主题；<b>只有第一段不同，第二、三段几乎相同</b>。</p></div>'
++ '<div class="h-sec"><h3>二、精力分配（100 分精力，非押题）</h3>'
++ '<table><tr><th>题型</th><th>图表</th><th>双图表</th><th>图画+图表</th><th>图画</th><th>文字</th></tr>'
++ '<tr><td>英一</td><td>20</td><td>40</td><td>20</td><td>10</td><td>10</td></tr>'
++ '<tr><td>英二</td><td>40</td><td>30</td><td>10</td><td>10</td><td>10</td></tr></table>'
++ '<p>25 考研英一考图表（表格），26 考研英一考双图表，早已打破“英一考图画、英二考图表”的传统。</p></div>'
++ '<div class="h-sec"><h3>三、考场节奏</h3>'
++ '<p>大作文 25 分钟默写完（约 200 词、18–20 行）：<b>5 分钟审题 + 在题目旁搭框架</b>，其余时间默写。先用本工具把 10 句定下来，考场只做“换词”这一件事。</p></div>'
++ '<div class="h-sec"><h3>四、高分准则</h3>'
++ '<ul><li>卷面整洁：每天 10 分钟字帖。</li><li>结构清晰：看见题目就能定框架（本模板已代劳）。</li>'
++ '<li>语言丰富：看见题目就能定句型（本模板已代劳）。</li><li>拼写正确：模板词 + 主题词都要会拼（空调、冰箱、机器人、洗碗机都是易错点）。</li>'
++ '<li>契合主题：内容与主题相关、不牵强即可。</li></ul></div>'
++ '<div class="h-sec"><h3>五、学习路径与练习顺序</h3>'
++ '<p>学习路径：图表作文第一段 → 通用第二段 → 通用第三段 → 图画作文第一段 → 文字作文第一段。</p>'
++ '<p>练习顺序：26 英二（静态图）→ 23 英二（动态图）→ 26 英一（双图表）→ 24 英一（图画+图表）→ 23 英一（单图画）→ 20 英一（双图画）→ 文字作文大纲样题。</p>'
++ '<p>每周套用 1–2 篇，考前 20 天每天 1 篇；把偏好的词句抄在一张纸上，形成自己的模板。</p></div>'
++ '<div class="h-sec"><h3>六、第二段七个方案怎么选</h3>'
++ '<p>英一写 3 点原因，英二写 2–3 点。考场上七选三，重复概率几乎为零。建议至少掌握五个：<b>方案一（举例）、方案三（从句 + 六大方面）、方案五（虚拟语气）必掌握</b>，再用方案六（对比）、方案七（比喻）补位。方案五放在原因三，段尾警醒。</p>'
++ '<p>争议话题（06 偶像崇拜、09 网络、13 毕业生选择、13 英二兼职、15 手机聚会、19 英二、20 英二手机阅读）：可正反论证，也可单方面论证重要性；需要正反时打开“争议话题”卡片。</p></div>'
++ '<div class="h-sec"><h3>七、常见失分点</h3>'
++ '<p>① 静态图硬套 from…to… 年份；② 三句都用同一个动词副词；③ 增量忘记带单位（percentage points / units）；'
++ '<p>④ 个人例子写成“马云、爱迪生”；⑤ 好处与 which 从句逻辑不匹配（健康用 quality of life，个人发展用 beneficial position）；⑥ 图画作文把 there be 当万能句。</p></div>';
+
+/* ---------------- 事件 ---------------- */
+function bind(){
+  $("#modes").addEventListener("click", function(e){
+    var b = e.target.closest(".mode-btn");
+    if(b) switchMode(b.getAttribute("data-mode"));
+  });
+  $("#preset").addEventListener("change", function(e){
+    if(e.target.value) applyPreset(e.target.value);
+  });
+  $("#builder").addEventListener("change", function(e){
+    var node = e.target.closest(".card"); if(!node) return;
+    var cid = node.getAttribute("data-cid");
+    var card = cardById(cid), st = state.cards[cid];
+    if(!card || !st) return;
+    if(e.target.getAttribute("data-sel") === "v"){
+      pushSnap(); st.v = parseInt(e.target.value,10)||0; save(); refreshCard(cid); renderPreview();
+    } else if(e.target.getAttribute("data-sub")){
+      pushSnap(); st.subs[e.target.getAttribute("data-sub")] = parseInt(e.target.value,10)||0;
+      save(); refreshCard(cid); renderPreview();
+    }
+  });
+  $("#builder").addEventListener("click", function(e){
+    var slot = e.target.closest(".slot");
+    if(slot){ e.preventDefault(); openSlot(slot.getAttribute("data-slot"), slot); return; }
+    var tg = e.target.closest('[data-act="toggle"]');
+    if(tg){
+      var node = tg.closest(".card"); var cid = node.getAttribute("data-cid");
+      var st = state.cards[cid]; if(!st) return;
+      pushSnap(); st.on = !st.on;
+      var m = modeById(state.mode);
+      var def = null;
+      m.cards.forEach(function(c){ if(typeof c==="object" && c.id===cid) def=c; });
+      if(st.on && def && def.excl){
+        Object.keys(state.cards).forEach(function(other){
+          if(other!==cid){
+            var oc = cardById(other); var od = null;
+            m.cards.forEach(function(c){ if(typeof c==="object" && c.id===other) od=c; });
+            if(od && od.excl === def.excl) state.cards[other].on = false;
+          }
+        });
+        renderBuilder();
+      }
+      save(); refreshCard(cid); syncControls(); renderPreview();
+    }
+  });
+  $("#help").addEventListener("click", function(){
+    $("#helpBody").innerHTML = HELP_HTML;
+    $("#helpPop").classList.add("on"); $("#mask").classList.add("on");
+  });
+  $("#helpX").addEventListener("click", function(){ $("#helpPop").classList.remove("on"); $("#mask").classList.remove("on"); });
+  $("#mask").addEventListener("click", function(){ $("#helpPop").classList.remove("on"); closePop(); });
+  $("#popX").addEventListener("click", closePop);
+  $("#popList").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || !popTarget) return;
+    var i = parseInt(b.getAttribute("data-i"),10);
+    var o = popList[i]; if(!o) return;
+    setSlot(popTarget, o.en);
+    closePop();
+    toast("已填入：" + o.en);
+  });
+  $("#popSet").addEventListener("click", function(){
+    if(!popTarget) return;
+    setSlot(popTarget, $("#popInput").value.trim());
+    closePop();
+  });
+  $("#popInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); $("#popSet").click(); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); e.stopPropagation(); var f=$("#popList .opt"); if(f) f.focus(); }
+  });
+  $("#popList").addEventListener("keydown", function(e){
+    var items = $$("#popList .opt");
+    var cur = document.activeElement;
+    var idx = items.indexOf(cur);
+    if(e.key === "ArrowDown"){ e.preventDefault(); if(items[idx+1]) items[idx+1].focus(); }
+    if(e.key === "ArrowUp"){ e.preventDefault(); if(items[idx-1]) items[idx-1].focus(); }
+    if(e.key === "Enter" && cur && cur.classList.contains("opt")){ e.preventDefault(); cur.click(); }
+  });
+  $("#popClear").addEventListener("click", function(){
+    if(!popTarget) return;
+    setSlot(popTarget, "");
+    closePop();
+    toast("已清空该槽位");
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){ closePop(); $("#helpPop").classList.remove("on"); }
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="z"){ e.preventDefault(); undo(); }
+  });
+  ["tZh","tExam","tPolish","tNote","tTag"].forEach(function(id){
+    $("#"+id).addEventListener("change", function(e){
+      var map = {tZh:"zh",tExam:"exam",tPolish:"polish",tNote:"note",tTag:"tag"};
+      state.flags[map[id]] = e.target.checked;
+      document.body.classList.toggle("exam", !!state.flags.exam);
+      $$(".card .note").forEach(function(n){ n.style.display = state.flags.note ? "" : "none"; });
+      save();
+      if(id === "tPolish"){ renderBuilder(); }
+      renderPreview();
+    });
+  });
+  $("#undo").addEventListener("click", undo);
+  $("#clear").addEventListener("click", function(){
+    pushSnap();
+    state.slots = {};
+    save(); renderAll();
+    toast("已清空全部槽位（可撤销）");
+  });
+  $("#copy").addEventListener("click", copyAll);
+  $("#copy2").addEventListener("click", copyAll);
+  function copyAll(){
+    var rows = collect();
+    var txt = "";
+    [1,2,3].forEach(function(p){
+      var rs = rows.filter(function(r){ return r.p===p; });
+      if(!rs.length) return;
+      txt += ["第一段","第二段","第三段"][p-1] + "\n";
+      rs.forEach(function(r){ txt += sentencePlainForCopy(r.card, r.st) + "\n"; });
+      txt += "\n";
+    });
+    txt = txt.trim();
+    if(!txt){ toast("还没有内容可复制"); return; }
+    var done = function(){ toast("已复制全文（" + countWords(rows) + " 词）"); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt); done(); });
+    } else { fallback(txt); done(); }
+  }
+  function fallback(txt){
+    var ta = document.createElement("textarea");
+    ta.value = txt; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta);
+  }
+}
+
+/* ---------------- 启动 ---------------- */
+function syncOffset(){
+  var h = document.querySelector(".top");
+  if(h && h.offsetHeight > 0) document.documentElement.style.setProperty("--topH", h.offsetHeight + "px");
+}
+function init(){
+  buildModes(); buildPresets();
+  var ok = load();
+  if(!ok){ state = freshState("dyn1"); applyPreset("p23y2"); snapshots.length = 0; }
+  else {
+    var found = false;
+    PRESETS.forEach(function(p){ if(p.mode === state.mode) found = true; });
+    $("#preset").value = "";
+  }
+  ensureState(state.mode);
+  syncControls();
+  renderAll();
+  bind();
+  syncOffset();
+  window.addEventListener("resize", syncOffset);
+}
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();
+
+window.__DZW__ = {
+  getState:function(){ return state; },
+  setMode:function(id){ switchMode(id); },
+  applyPreset:function(id){ applyPreset(id); },
+  cards:function(){ return activeCardIds(); },
+  setSlot:function(id,v){ state.slots[id]=v; save(); renderAll(); },
+  undo:undo,
+  snapCount:function(){ return snapshots.length; },
+  polish:sentenceText
+};
+})();
+
+</script>
+</body>
+</html>
